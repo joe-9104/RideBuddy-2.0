@@ -1,3 +1,187 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+body {
+    /*background-color: #f0f8f7;  Light background color */
+    background-image: url("/assets/background.png");
+    background-repeat: repeat;
+}
+
+header {
+    background-color: #38a89d; /* Main color for header */
+}
+
+.header-logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #00796b !important; /* Hover effect for links */
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Lift effect on hover */
+}
+
+.card-img-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    object-fit: cover;
+    height: 200px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn-primary {
+    background-color: #38a89d;
+    border-color: #38a89d;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #00796b;
+    border-color: #00796b;
+}
+
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(38, 177, 152, 0.25);
+}
+
+.footer {
+    background-color: #38a89d;
+    color: white;
+    padding: 15px;
+}
+
+.footer p {
+    margin-bottom: 0;
+}
+
+.footer-link {
+    color: white;
+    font-weight: bold;
+}
+
+.footer-link:hover {
+    color: #00796b;
+    text-decoration: none;
+}
+
+.stat-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-box h5 {
+    font-weight: bold;
+}
+
+.stat-box p {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.stat-box:last-child {
+    margin-bottom: 0;
+}
+.hover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1;
+    /*background: rgba(0, 0, 0, 0.3);  Optional dark overlay for better contrast */
+}
+
+.hover-img img {
+    max-height: 100%;
+    max-width: 100%;
+    opacity: 0.2; /* Faint image effect */
+    filter: brightness(70%); /* Additional dimming for better text visibility */
+}
+
+.card:hover .hover-img {
+    opacity: 1; /* Show the image when hovering */
+}
+
+.card-body {
+    z-index: 2; /* Ensure text is above the dimmed image */
+    position: relative;
+}
+/* Bouncing animation */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Pulsing animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Swinging animation */
+@keyframes swing {
+    20% {
+        transform: rotate(15deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    60% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(0);
+    }
+}
