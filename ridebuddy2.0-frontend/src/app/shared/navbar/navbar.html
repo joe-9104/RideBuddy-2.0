@@ -1,0 +1,98 @@
+<nav class="navbar navbar-expand-lg py-3" style="background-color: #96e4dc;">
+  <div class="container-fluid px-5">
+    <!-- Brand -->
+    <a
+      class="navbar-brand d-flex align-items-center"
+      routerLink="/"
+      style="color: #38a89d; font-weight: bold; font-size: 1.5rem;"
+    >
+      <img
+        src="assets/ridebuddy.png"
+        alt="RideBuddy Logo"
+        style="height: 40px; margin-right: 10px;"
+      />
+      RideBuddy
+    </a>
+
+    <!-- Menu (always visible on desktop and mobile) -->
+    <div class="d-flex flex-column flex-lg-row align-items-center ms-auto">
+      <!-- Left Links -->
+      <ul class="navbar-nav d-flex flex-row me-lg-auto mb-2 mb-lg-0">
+        <li class="nav-item me-3">
+          <a routerLink="/" class="nav-link" style="color: #38a89d; font-weight: bold;">Home</a>
+        </li>
+        <li class="nav-item me-3">
+          <a routerLink="/contact" class="nav-link" style="color: #38a89d; font-weight: bold;">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Guest Buttons -->
+      <div *ngIf="!isAuthenticated" class="d-flex align-items-center">
+        <a
+          routerLink="/register"
+          class="btn me-2"
+          style="color: #fff; background-color: #38a89d; font-weight: bold; border-radius: 20px;"
+        >
+          Register
+        </a>
+        <a
+          routerLink="/login"
+          class="btn"
+          style="color: #38a89d; border: 2px solid #38a89d; font-weight: bold; border-radius: 20px;"
+        >
+          Login
+        </a>
+      </div>
+
+      <!-- Logged-in User Dropdown -->
+      <div *ngIf="isAuthenticated" class="dropdown ms-3">
+        <a
+          class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          href="#"
+          id="userMenu"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          style="color: #38a89d; font-weight: bold;"
+        >
+          <img
+            [src]="user.profilePic"
+            alt="Profile"
+            class="rounded-circle me-2"
+            style="width: 40px; height: 40px; border: 2px solid #38a89d;"
+          />
+          <span>{{ user.firstName }} {{ user.lastName }}</span>
+        </a>
+
+        <ul
+          class="dropdown-menu dropdown-menu-end shadow"
+          aria-labelledby="userMenu"
+          style="border-radius: 10px;"
+        >
+          <li>
+            <span class="dropdown-item disabled" style="color: #38a89d; font-weight: bold;">
+              Role: {{ user.role }}
+            </span>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" routerLink="/profile">
+              <i class="bi bi-person me-2"></i> Profile
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" routerLink="/settings">
+              <i class="bi bi-gear me-2"></i> Settings
+            </a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <button class="dropdown-item" (click)="logout()">
+              <i class="bi bi-box-arrow-left me-2"></i> Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

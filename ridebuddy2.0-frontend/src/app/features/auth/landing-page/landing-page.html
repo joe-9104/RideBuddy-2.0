@@ -1,152 +1,153 @@
-<div class="bg-light py-5" xmlns:th="http://www.w3.org/1999/xhtml">
-        <div class="container text-center">
-            <!-- Welcome Section -->
-            <div class="mb-5 text-center">
-                <h1 class="display-4 fw-bold" style="color: #38a89d;">Welcome to RideBuddy</h1>
-                <p class="lead text-muted">Your trusted carpooling platform for seamless, affordable, and eco-friendly travel.</p>
-            </div>
+<app-navbar></app-navbar>
+<div class="py-5">
+  <div class="container text-center">
+    <!-- Welcome Section -->
+    <div class="mb-5 text-center">
+        <h1 class="display-4 fw-bold" style="color: #38a89d;">Welcome to RideBuddy</h1>
+        <p class="lead text-muted">Your trusted carpooling platform for seamless, affordable, and eco-friendly travel.</p>
+    </div>
 
-            <!-- Hero Image -->
-            <div class="mb-5">
-                <img src="assets/ridebuddy.png"
-                     alt="Carpooling"
-                     class="img-fluid rounded shadow"
-                     style="max-width: 80%; height: auto;"
-                />
-            </div>
+    <!-- Hero Image -->
+    <div class="mb-5 justify-center flex">
+        <img src="assets/ridebuddy.png"
+             alt="Carpooling"
+             class="img-fluid rounded shadow"
+             style="max-width: 80%; height: auto;"
+        />
+    </div>
 
-            <!-- Benefits Section -->
-            <div class="row gy-4">
-                <!-- Left Column -->
-                <div class="col-lg-4">
-                    <div class="card h-100 shadow position-relative overflow-hidden">
-                        <div class="card-body position-relative">
-                            <div class="text-center mb-3">
-                                <i class="bi bi-person-circle text-primary" style="font-size: 3rem;"></i>
-                            </div>
-                            <h5 class="card-title fw-bold text-primary">For Passengers</h5>
-                            <p class="text-muted">Find rides with trusted drivers and travel cost-effectively.</p>
-                        </div>
-                        <!-- Hover Image -->
-                        <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
-                            <img src="/assets/passenger.svg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                        </div>
+    <!-- Benefits Section -->
+    <div class="row gy-4">
+        <!-- Left Column -->
+        <div class="col-lg-4">
+            <div class="card h-100 shadow position-relative overflow-hidden">
+                <div class="card-body position-relative">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-person-circle text-primary" style="font-size: 3rem;"></i>
                     </div>
+                    <h5 class="card-title fw-bold text-primary">For Passengers</h5>
+                    <p class="text-muted">Find rides with trusted drivers and travel cost-effectively.</p>
                 </div>
-
-                <!-- Center Column -->
-                <div class="col-lg-4">
-                    <div class="card h-100 shadow position-relative overflow-hidden">
-                        <div class="card-body position-relative">
-                            <div class="text-center mb-3">
-                                <i class="bi bi-car-front-fill text-success" style="font-size: 3rem;"></i>
-                            </div>
-                            <h5 class="card-title fw-bold text-success">For Drivers</h5>
-                            <p class="text-muted">Offer seats in your car and earn while sharing your ride.</p>
-                        </div>
-                        <!-- Hover Image -->
-                        <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
-                            <img src="/assets/driver-2.svg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="col-lg-4">
-                    <div class="card h-100 shadow position-relative overflow-hidden">
-                        <div class="card-body position-relative">
-                            <div class="text-center mb-3">
-                                <i class="bi bi-globe-europe-africa text-warning" style="font-size: 3rem;"></i>
-                            </div>
-                            <h5 class="card-title fw-bold text-warning">For the Planet</h5>
-                            <p class="text-muted">Reduce your carbon footprint by carpooling and sharing rides.</p>
-                        </div>
-                        <!-- Hover Image -->
-                        <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
-                            <img src="/assets/world.jpg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
-                        </div>
-                    </div>
-                </div>
-            <div>
-                <!-- Stats -->
-                <div class="row-gy-4 mt-5 pt-5">
-                    <h2 class="fw-bold text-center mb-4" style="color: #00796b">Statistics 📊</h2>
-                    <div class="container my-5">
-                        <div class="row text-center">
-                            <div class="col-lg-4">
-                                <div class="d-flex justify-content-center align-items-center mb-3">
-                                    <i class="bi bi-people text-primary" style="font-size: 3rem; animation: bounce 1.5s infinite;"></i>
-                                </div>
-                                <h3 class="fw-bold text-primary">10,000+</h3>
-                                <p class="text-muted">Rides Shared</p>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="d-flex justify-content-center align-items-center mb-3">
-                                    <i class="bi bi-person-circle text-success" style="font-size: 3rem; animation: pulse 2s infinite;"></i>
-                                </div>
-                                <h3 class="fw-bold text-success">5,000+</h3>
-                                <p class="text-muted">Active Users</p>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="d-flex justify-content-center align-items-center mb-3">
-                                    <i class="bi bi-fuel-pump text-warning" style="font-size: 3rem; animation: swing 1.5s infinite;"></i>
-                                </div>
-                                <h3 class="fw-bold text-warning">2 Tons</h3>
-                                <p class="text-muted">CO₂ Emissions Saved</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <!-- Testimonials Section -->
-            <div class="mt-5 pt-5 bg-white">
-                <h2 class="fw-bold text-center mb-4" style="color: #00796b">What Our Users Say</h2>
-                <div class="row gy-4">
-                    <!-- Testimonial 1 -->
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow h-100">
-                            <div class="card-body">
-                                <blockquote class="blockquote">
-                                    <p>"RideBuddy made my daily commute so much easier. An absolute lifesaver!"</p>
-                                </blockquote>
-                                <footer class="blockquote-footer">Youssef, Passenger</footer>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow h-100">
-                            <div class="card-body">
-                                <blockquote class="blockquote">
-                                    <p>"I saved a lot on fuel costs while meeting amazing people. Highly recommended!"</p>
-                                </blockquote>
-                                <footer class="blockquote-footer">Idris, Driver</footer>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="col-md-4">
-                        <div class="card border-0 shadow h-100">
-                            <div class="card-body">
-                                <blockquote class="blockquote">
-                                    <p>"A small step for me, a big step for reducing pollution. RideBuddy rocks!"</p>
-                                </blockquote>
-                                <footer class="blockquote-footer">Tasnime, Eco-Warrior</footer>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Hover Image -->
+                <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
+                    <img src="/assets/passenger.svg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
                 </div>
             </div>
+        </div>
 
-            <!-- Call to Action -->
-            <div class="mt-5 pt-5">
-                <p class="lead fw-bold">Ready to join the carpooling revolution?</p>
-                <a href="/register" class="btn btn-primary btn-lg me-2">Sign Up Now</a>
-                <a href="/login" class="btn btn-secondary btn-lg me-2">Log In</a>
+        <!-- Center Column -->
+        <div class="col-lg-4">
+            <div class="card h-100 shadow position-relative overflow-hidden">
+                <div class="card-body position-relative">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-car-front-fill text-success" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title fw-bold text-success">For Drivers</h5>
+                    <p class="text-muted">Offer seats in your car and earn while sharing your ride.</p>
+                </div>
+                <!-- Hover Image -->
+                <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
+                    <img src="/assets/driver-2.svg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-lg-4">
+            <div class="card h-100 shadow position-relative overflow-hidden">
+                <div class="card-body position-relative">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-globe-europe-africa text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    <h5 class="card-title fw-bold text-warning">For the Planet</h5>
+                    <p class="text-muted">Reduce your carbon footprint by carpooling and sharing rides.</p>
+                </div>
+                <!-- Hover Image -->
+                <div class="hover-img position-absolute w-100 h-100 top-0 start-0">
+                    <img src="/assets/world.jpg" alt="Eco-Friendly" class="img-fluid w-100 h-100" style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    <div>
+    <!-- Stats -->
+    <div class="row-gy-4 mt-5 pt-5">
+        <h2 class="fw-bold text-center mb-4" style="color: #00796b">Statistics 📊</h2>
+        <div class="container my-5">
+            <div class="row text-center">
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <i class="bi bi-people text-primary" style="font-size: 3rem; animation: bounce 1.5s infinite;"></i>
+                    </div>
+                    <h3 class="fw-bold text-primary">10,000+</h3>
+                    <p class="text-muted">Rides Shared</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <i class="bi bi-person-circle text-success" style="font-size: 3rem; animation: pulse 2s infinite;"></i>
+                    </div>
+                    <h3 class="fw-bold text-success">5,000+</h3>
+                    <p class="text-muted">Active Users</p>
+                </div>
+                <div class="col-lg-4">
+                    <div class="d-flex justify-content-center align-items-center mb-3">
+                        <i class="bi bi-fuel-pump text-warning" style="font-size: 3rem; animation: swing 1.5s infinite;"></i>
+                    </div>
+                    <h3 class="fw-bold text-warning">2 Tons</h3>
+                    <p class="text-muted">CO₂ Emissions Saved</p>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Testimonials Section -->
+    <div class="mt-5 pt-5 bg-white">
+      <h2 class="fw-bold text-center mb-4" style="color: #00796b">What Our Users Say</h2>
+      <div class="row gy-4">
+          <!-- Testimonial 1 -->
+          <div class="col-md-4">
+              <div class="card border-0 shadow h-100">
+                  <div class="card-body">
+                      <blockquote class="blockquote">
+                          <p>"RideBuddy made my daily commute so much easier. An absolute lifesaver!"</p>
+                      </blockquote>
+                      <footer class="blockquote-footer mt-2">Youssef, Passenger</footer>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="col-md-4">
+              <div class="card border-0 shadow h-100">
+                  <div class="card-body">
+                      <blockquote class="blockquote">
+                          <p>"I saved a lot on fuel costs while meeting amazing people. Highly recommended!"</p>
+                      </blockquote>
+                      <footer class="blockquote-footer mt-2">Idris, Driver</footer>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="col-md-4">
+              <div class="card border-0 shadow h-100">
+                  <div class="card-body">
+                      <blockquote class="blockquote">
+                          <p>"A small step for me, a big step for reducing pollution. RideBuddy rocks!"</p>
+                      </blockquote>
+                      <footer class="blockquote-footer mt-2">Tasnime, Eco-Warrior</footer>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-5 pt-5">
+        <p class="lead fw-bold">Ready to join the carpooling revolution?</p>
+        <a href="/register" class="btn btn-primary btn-lg me-2">Sign Up Now</a>
+        <a href="/login" class="btn btn-secondary btn-lg me-2">Log In</a>
+    </div>
   </div>
+</div>
+</div>
 </div>
