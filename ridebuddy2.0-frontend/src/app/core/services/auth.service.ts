@@ -4,7 +4,7 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
+  signOut, updateProfile,
   user,
   User
 } from '@angular/fire/auth';
@@ -17,8 +17,12 @@ export class AuthService {
   // user$ : Observable<User | null>
   user$ = user(this.auth);
 
-  register(email: string, password: string): Observable<any> {
-    return from(createUserWithEmailAndPassword(this.auth, email, password));
+  async register(email: string, password: string, profile: any) {
+    const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+    await updateProfile(userCredential.user, {
+      displayName: `${profile.firstName} ${profile.lastName}`
+    });
+    return userCredential;
   }
 
   login(email: string, password: string): Observable<any> {

@@ -1,1 +1,63 @@
-<p>register works!</p>
+<div class="container py-5 mt-5">
+  <div class="row">
+    <div class="col-lg-6 mx-auto rounded border p-4 bg-white">
+      <h2 class="text-center mb-4 register-header">Register</h2>
+      <hr />
+
+      <!-- Success -->
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show mt-2">
+        <strong>{{ successMessage }}</strong>
+        <button type="button" class="btn-close" (click)="successMessage=''"></button>
+      </div>
+
+      <!-- Error -->
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mt-2">
+        <strong>{{ errorMessage }}</strong>
+        <button type="button" class="btn-close" (click)="errorMessage=''"></button>
+      </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="text-muted">First Name *</label>
+          <input class="form-control" formControlName="firstName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted">Last Name *</label>
+          <input class="form-control" formControlName="lastName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted">Email *</label>
+          <input class="form-control" type="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted">Password *</label>
+          <input class="form-control" type="password" formControlName="password" />
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted">Confirm Password *</label>
+          <input class="form-control" type="password" formControlName="confirmPassword" />
+        </div>
+
+        <div class="mb-3">
+          <label class="text-muted">Role *</label>
+          <select class="form-select" formControlName="role">
+            <option value="">Select role</option>
+            <option value="CONDUCTOR">Conductor</option>
+            <option value="PASSENGER">Passenger</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary w-100" type="submit" [disabled]="loading">
+          {{ loading ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+    </div>
+    <div class="text-center mt-3">
+        <p>Already a member? <a routerLink="/login" class="footer-link">Login</a></p>
+      </div>
+  </div>
+</div>

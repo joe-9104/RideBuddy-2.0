@@ -1,0 +1,33 @@
+/* reuse same style as register page to keep consistent look */
+.login-header {
+  color: #38a89d;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.form-control {
+  border-radius: 20px;
+  border: 1px solid #38a89d;
+  box-shadow: none;
+}
+
+.form-control:focus {
+  border-color: #00796b;
+  box-shadow: 0 0 0 0.2rem rgba(38, 177, 152, 0.25);
+}
+
+.btn-primary {
+  background-color: #38a89d;
+  border-color: #38a89d;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #00796b;
+  border-color: #00796b;
+}
+
+a {
+  color: #38a89d;
+}
