@@ -1,26 +1,50 @@
-// src/app/core/services/auth.service.ts
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword,
+  createUserWithEmailAndPassword, onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut, updateProfile,
-  user,
-  User
 } from '@angular/fire/auth';
-import { Observable, from, of } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import {Observable, from, BehaviorSubject} from 'rxjs';
+import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
+import {User} from '../../app.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private auth = inject(Auth);
-  // user$ : Observable<User | null>
-  user$ = user(this.auth);
+  user$ = new BehaviorSubject<User | null>(null);
+
+  constructor(private auth: Auth, private firestore: Firestore) {
+    onAuthStateChanged(this.auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const ref = doc(this.firestore, `users/${firebaseUser.uid}`);
+        const snap = await getDoc(ref);
+        const userData = snap.exists() ? snap.data() as User : null;
+
+        this.user$.next({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email!,
+          displayName: firebaseUser.displayName ?? '',
+          role: userData?.role ?? 'PASSENGER' // fallback
+        });
+      } else {
+        this.user$.next(null);
+      }
+    });
+  }
 
   async register(email: string, password: string, profile: any) {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+    const user = userCredential.user;
     await updateProfile(userCredential.user, {
       displayName: `${profile.firstName} ${profile.lastName}`
+    });
+    await setDoc(doc(this.firestore, 'users', user.uid), {
+      uid: user.uid,
+      email: user.email,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      role: profile.role,
+      createdAt: new Date().toISOString()
     });
     return userCredential;
   }
@@ -31,13 +55,5 @@ export class AuthService {
 
   logout(): Observable<void> {
     return from(signOut(this.auth));
-  }
-
-  // utility: get current idToken as Observable<string|null>
-  getIdToken$(): Observable<string | null> {
-    return this.user$.pipe(
-      take(1),
-      switchMap(u => (u ? from(u.getIdToken()) : of(null)))
-    );
   }
 }
