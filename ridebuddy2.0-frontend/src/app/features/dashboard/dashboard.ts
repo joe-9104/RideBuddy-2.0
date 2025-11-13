@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {AsyncPipe, CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+import {User} from '../../app.models';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +18,8 @@ import {AsyncPipe, CommonModule, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault} 
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
+  user$: BehaviorSubject<User | null>;
   constructor(public auth: AuthService) {
-    console.log(auth);
+    this.user$ = this.auth.user$;
   }
 }
