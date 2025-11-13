@@ -15,19 +15,33 @@ export class AuthService {
 
   constructor(private auth: Auth, private firestore: Firestore) {
     onAuthStateChanged(this.auth, async (firebaseUser) => {
-      if (firebaseUser) {
-        const ref = doc(this.firestore, `users/${firebaseUser.uid}`);
-        const snap = await getDoc(ref);
-        const userData = snap.exists() ? snap.data() as User : null;
+      if (!firebaseUser) {
+        this.user$.next(null);
+        return;
+      }
 
+      const ref = doc(this.firestore, `users/${firebaseUser.uid}`);
+      const snap = await getDoc(ref);
+
+      if (snap.exists()) {
+        const data = snap.data() as Partial<User>;
         this.user$.next({
           uid: firebaseUser.uid,
           email: firebaseUser.email!,
           displayName: firebaseUser.displayName ?? '',
-          role: userData?.role ?? 'PASSENGER' // fallback
+          role: (data.role as 'CONDUCTOR' | 'PASSENGER') || 'PASSENGER',
+          completedRides: data.completedRides || 0,
+          averageRating: data.averageRating || 0,
+          totalEarnings: data.totalEarnings || 0
         });
       } else {
-        this.user$.next(null);
+        // fallback si le document n'existe pas
+        this.user$.next({
+          uid: firebaseUser.uid,
+          email: firebaseUser.email!,
+          displayName: firebaseUser.displayName ?? '',
+          role: 'PASSENGER'
+        });
       }
     });
   }

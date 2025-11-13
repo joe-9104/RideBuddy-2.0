@@ -1,1 +1,23 @@
-<p>dashboard works!</p>
+    <ng-container *ngIf="auth.user$ | async as user; else guest">
+      <div class="text-center py-4">
+        <ng-container [ngSwitch]="user.role">
+          <div *ngSwitchCase="'CONDUCTOR'" class="alert alert-success">
+            You're a <strong>Conductor</strong> — you can offer rides and manage them.
+          </div>
+
+          <div *ngSwitchCase="'PASSENGER'" class="alert alert-info">
+            You're a <strong>Passenger</strong> — you can search and book rides.
+          </div>
+
+          <div *ngSwitchDefault class="alert alert-secondary">
+            Your role is not set. Please complete your profile.
+          </div>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-template #guest>
+      <div class="text-center py-4">
+        <div class="alert alert-warning">You are not logged in.</div>
+      </div>
+    </ng-template>
