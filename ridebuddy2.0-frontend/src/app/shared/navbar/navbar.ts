@@ -1,27 +1,27 @@
 import { Component } from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {NgIf} from '@angular/common';
+import {AsyncPipe, NgIf} from '@angular/common';
+import {BehaviorSubject} from 'rxjs';
+import {User} from '../../app.models';
+import {AuthService} from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   imports: [
     RouterLink,
-    NgIf
+    NgIf,
+    AsyncPipe
   ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
 export class Navbar {
-  isAuthenticated = false; // TODO: link later to the auth service
-  user = {
-    firstName: 'John',
-    lastName: 'Doe',
-    role: 'Passenger',
-    profilePic: 'assets/passenger.svg'
-  };
+  user$: BehaviorSubject<User | null>;
+  constructor(public auth: AuthService) {
+    this.user$ = this.auth.user$;
+  }
 
   logout(): void {
-    // TODO: replace with the auth service logic
-    console.log('Logging out...');
+    this.auth.logout();
   }
 }

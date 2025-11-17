@@ -27,7 +27,7 @@
       </ul>
 
       <!-- Guest Buttons -->
-      <div *ngIf="!isAuthenticated" class="d-flex align-items-center">
+      <div *ngIf="!(user$ | async)" class="d-flex align-items-center">
         <a
           routerLink="/register"
           class="btn me-2"
@@ -45,7 +45,7 @@
       </div>
 
       <!-- Logged-in User Dropdown -->
-      <div *ngIf="isAuthenticated" class="dropdown ms-3">
+      <div *ngIf="user$ | async as user" class="dropdown ms-3">
         <a
           class="d-flex align-items-center text-decoration-none dropdown-toggle"
           href="#"
@@ -56,12 +56,12 @@
           style="color: #38a89d; font-weight: bold;"
         >
           <img
-            [src]="user.profilePic"
+            src="/assets/driver-2.svg"
             alt="Profile"
             class="rounded-circle me-2"
             style="width: 40px; height: 40px; border: 2px solid #38a89d;"
           />
-          <span>{{ user.firstName }} {{ user.lastName }}</span>
+          <span>{{ user.displayName }}</span>
         </a>
 
         <ul

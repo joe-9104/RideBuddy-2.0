@@ -10,6 +10,12 @@ import {getAuth, provideAuth} from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 
+if (typeof window !== 'undefined') {
+  import('bootstrap/dist/js/bootstrap.bundle.min.js')
+    .then((m: any) => {})
+    .catch(err => console.error(err));
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
