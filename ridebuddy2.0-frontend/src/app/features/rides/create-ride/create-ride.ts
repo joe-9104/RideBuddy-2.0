@@ -5,6 +5,7 @@ import {addDoc, collection, Firestore} from '@angular/fire/firestore';
 import {NgForOf} from '@angular/common';
 import * as L from 'leaflet';
 import {Router} from '@angular/router';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-create-ride',
@@ -32,6 +33,7 @@ export class CreateRide implements OnInit, AfterViewInit {
     private mapService: MapService,
     private firestore: Firestore,
     private router: Router,
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +48,8 @@ export class CreateRide implements OnInit, AfterViewInit {
       pricePerSeat: [0, Validators.required],
       comments: [''],
       startCoordinate: [''],
-      endCoordinate: ['']
+      endCoordinate: [''],
+      conductorId: [this.auth.userSubject.value?.uid, Validators.required],
     });
 
     // Synchronisation carte -> formulaire
