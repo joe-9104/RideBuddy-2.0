@@ -18,7 +18,7 @@ import {AuthService} from '../../core/services/auth.service';
 export class Navbar {
   user$: BehaviorSubject<User | null>;
   constructor(public auth: AuthService) {
-    this.user$ = this.auth.user$;
+    this.user$ = this.auth.userSubject;
   }
 
   logout(): void {

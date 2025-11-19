@@ -19,6 +19,6 @@ import {Navbar} from '../../shared/navbar/navbar';
 export class Dashboard {
   user$: BehaviorSubject<User | null>;
   constructor(public auth: AuthService) {
-    this.user$ = this.auth.user$;
+    this.user$ = this.auth.userSubject;
   }
 }

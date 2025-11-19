@@ -11,12 +11,17 @@ import {User} from '../../app.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user$ = new BehaviorSubject<User | null>(null);
+  userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+
+  private initializedSubject = new BehaviorSubject<boolean>(false);
+  authReady$ = this.initializedSubject.asObservable();
 
   constructor(private auth: Auth, private firestore: Firestore) {
     onAuthStateChanged(this.auth, async (firebaseUser) => {
       if (!firebaseUser) {
-        this.user$.next(null);
+        this.userSubject.next(null);
+        this.initializedSubject.next(true);
         return;
       }
 
@@ -25,7 +30,7 @@ export class AuthService {
 
       if (snap.exists()) {
         const data = snap.data() as Partial<User>;
-        this.user$.next({
+        this.userSubject.next({
           uid: firebaseUser.uid,
           email: firebaseUser.email!,
           displayName: firebaseUser.displayName ?? '',
@@ -36,13 +41,14 @@ export class AuthService {
         });
       } else {
         // fallback si le document n'existe pas
-        this.user$.next({
+        this.userSubject.next({
           uid: firebaseUser.uid,
           email: firebaseUser.email!,
           displayName: firebaseUser.displayName ?? '',
           role: 'PASSENGER'
         });
       }
+      this.initializedSubject.next(true);
     });
   }
 
@@ -70,4 +76,10 @@ export class AuthService {
   logout(): Observable<void> {
     return from(signOut(this.auth));
   }
+
+  isAuthenticated(): boolean {
+    console.log(this.userSubject.value);
+    return this.userSubject.value !== null;
+  }
+
 }
