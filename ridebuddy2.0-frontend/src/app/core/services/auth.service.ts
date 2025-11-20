@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut, updateProfile,
 } from '@angular/fire/auth';
-import {Observable, from, BehaviorSubject} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
 import {User} from '../../app.models';
 
@@ -69,17 +69,11 @@ export class AuthService {
     return userCredential;
   }
 
-  login(email: string, password: string): Observable<any> {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+  login(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  logout(): Observable<void> {
-    return from(signOut(this.auth));
+  logout() {
+    return signOut(this.auth).then(() => this.userSubject.next(null));
   }
-
-  isAuthenticated(): boolean {
-    console.log(this.userSubject.value);
-    return this.userSubject.value !== null;
-  }
-
 }

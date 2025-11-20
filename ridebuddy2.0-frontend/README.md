@@ -1,59 +1,82 @@
-# Ridebuddy20Frontend
+# Cahier des Charges – Projet RideBuddy 2.0
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.4.
+## Titre du projet
 
-## Development server
+*RideBuddy – Plateforme de Gestion de Covoiturage en Temps Réel*
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Objectif général
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Développer une palteforme web basée sur *Angular + Firebase*, permettant aux utilisateurs de créer, rechercher, réserver et gérer des trajets de covoiturage.
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Technologies
 
-```bash
-ng generate component component-name
-```
+* Angular 20
+* TypeScript
+* Firebase (Authentication, Firestore, Storage)
+* Vite
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Description fonctionnelle
 
-## Building
+### 1\. Authentification
 
-To build the project run:
+* Inscription avec email + mot de passe
+* Connexion via Firebase Auth
+* Réinitialisation du mot de passe
+* Persistance de la session
+* Gestion des erreurs Firebase
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 2\. Gestion des chauffeurs (Drivers)
 
-## Running unit tests
+* Création et édition d’un chauffeur
+* Suppression
+* Page détails
+* Association du chauffeur à un utilisateur
+* Validation du profil (CIN, permis)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+### 3\. Gestion des trajets (Rides)
 
-## Running end-to-end tests
+* Création d’un trajet (ville départ, ville arrivée, prix, date/heure, places)
+* Recherche dynamique (ville, date, driver)
+* Filtres : prix, disponibilité, distance
+* Affichage de la liste des trajets
+* Page détails
+* Réservation de places
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+### 4\. Réservations
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+* Réservation d’une place par utilisateur
+* Gestion des places disponibles
+* Annulation de réservation
+* Historique de l’utilisateur
+* Règles métiers (pas d’annulation après l’heure du trajet, etc.)
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### 5\. Dashboard administratif
+
+* Nombre total d’utilisateurs
+* Total chauffeurs
+* Total trajets
+* Trajets actifs / expirés
+* Statistiques dynamiques
+* Graphiques et indicateurs
+
+---
+
+## Exigences UI/UX
+
+* Messages d’erreur et validation clairs
+* UX fluide
+* Mode sombre (optionnel)

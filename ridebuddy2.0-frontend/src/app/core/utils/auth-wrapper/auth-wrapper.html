@@ -1,9 +1,0 @@
-<ng-container *ngIf="auth.userSubject | async as user; else loading">
-  <ng-content></ng-content>
-</ng-container>
-
-<ng-template #loading>
-  <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
-    <div class="spinner-border text-primary" role="status"></div>
-  </div>
-</ng-template>
