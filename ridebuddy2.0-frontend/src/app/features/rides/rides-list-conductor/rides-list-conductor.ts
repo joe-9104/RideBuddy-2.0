@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, inject } from '@angular/core';
+import { Observable, BehaviorSubject, switchMap, of } from 'rxjs';
 import { Ride } from '../../../app.models';
 import { Firestore, collection, collectionData, doc, updateDoc, query, where } from '@angular/fire/firestore';
 import { Auth, user } from '@angular/fire/auth';
-import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
-import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-rides-list-conductor',
@@ -21,27 +21,73 @@ import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
   ],
   standalone: true
 })
-export class RidesListConductor implements OnInit {
-
+export class RidesListConductor {
   protected filterColumn: string = '';
   protected filterValue: string = '';
 
+  private firestore = inject(Firestore);
+  private auth = inject(Auth);
 
-  rides$: Observable<Ride[]> | undefined;
+  currentUser$ = user(this.auth);
 
-  constructor(private firestore: Firestore, private auth: Auth) {}
+  private allRidesSubject = new BehaviorSubject<Ride[]>([]);
+  rides$: Observable<Ride[]> = this.allRidesSubject.asObservable();
 
-  ngOnInit() {
-    user(this.auth).subscribe(currentUser => {
-      if (!currentUser) return;
+  constructor() {
+    this.currentUser$.pipe(
+      switchMap(currentUser => {
+        if (!currentUser) return of([]);
+        const ridesQuery = query(
+          collection(this.firestore, 'rides'),
+          where('conductorId', '==', currentUser.uid)
+        );
+        return collectionData(ridesQuery, { idField: 'id' }) as Observable<Ride[]>;
+      })
+    ).subscribe(rides => this.allRidesSubject.next(rides));
+  }
 
-      const ridesQuery = query(
-        collection(this.firestore, 'rides'),
-        where('conductorId', '==', currentUser.uid)
-      );
+  applyFilter() {
+    const column = this.filterColumn;
+    const value = this.filterValue.toLowerCase();
 
-      this.rides$ = collectionData(ridesQuery, { idField: 'id' }) as Observable<Ride[]>;
+    if (!column || !value) {
+      // si aucun filtre, on réaffiche tout
+      this.currentUser$.pipe(
+        switchMap(currentUser => {
+          if (!currentUser) return of([]);
+          const ridesQuery = query(
+            collection(this.firestore, 'rides'),
+            where('conductorId', '==', currentUser.uid)
+          );
+          return collectionData(ridesQuery, { idField: 'id' }) as Observable<Ride[]>;
+        })
+      ).subscribe(rides => this.allRidesSubject.next(rides));
+      return;
+    }
+
+    const filtered = this.allRidesSubject.value.filter(ride => {
+      const rideValue = (ride as any)[column];
+      if (rideValue === undefined || rideValue === null) return false;
+      return rideValue.toString().toLowerCase().includes(value);
     });
+
+    this.allRidesSubject.next(filtered);
+  }
+
+  resetFilter() {
+    this.filterColumn = '';
+    this.filterValue = '';
+    // recharge toutes les rides
+    this.currentUser$.pipe(
+      switchMap(currentUser => {
+        if (!currentUser) return of([]);
+        const ridesQuery = query(
+          collection(this.firestore, 'rides'),
+          where('conductorId', '==', currentUser.uid)
+        );
+        return collectionData(ridesQuery, { idField: 'id' }) as Observable<Ride[]>;
+      })
+    ).subscribe(rides => this.allRidesSubject.next(rides));
   }
 
   async cancelRide(ride: Ride) {
@@ -52,14 +98,5 @@ export class RidesListConductor implements OnInit {
   async markAsOver(ride: Ride) {
     if (!ride.id) return;
     await updateDoc(doc(this.firestore, `rides/${ride.id}`), { status: 'over' });
-  }
-
-  applyFilter() {
-    // filtrage côté template via *ngFor + pipe
-  }
-
-  resetFilter() {
-    this.filterColumn = '';
-    this.filterValue = '';
   }
 }

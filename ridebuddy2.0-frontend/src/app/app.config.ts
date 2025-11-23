@@ -6,11 +6,10 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
-import {getApp, initializeApp, provideFirebaseApp} from '@angular/fire/app';
+import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
 import {environment} from '../environment';
-import {initializeAuth, provideAuth, indexedDBLocalPersistence} from '@angular/fire/auth';
+import {provideAuth, getAuth} from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 
@@ -24,19 +23,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
 
     // Firebase (AngularFire) providers — tree-shakable, recommended pattern.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
 
-    provideAuth(() => {
-      const app = getApp(); // get the already created app
-      return initializeAuth(app, {
-        persistence: indexedDBLocalPersistence
-      });
-    }),
-
+    provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ]
