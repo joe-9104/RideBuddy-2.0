@@ -1,0 +1,52 @@
+<div class="filter-ui mb-3">
+  <select [(ngModel)]="filterColumn" class="form-select w-auto d-inline-block me-2">
+    <option value="">-- Choose Column --</option>
+    <option value="departureLocation">Departure Location</option>
+    <option value="destination">Destination</option>
+    <option value="departureTime">Departure Time</option>
+    <option value="availablePlaces">Available Places</option>
+    <option value="pricePerSeat">Price per Seat</option>
+    <option value="status">Status</option>
+  </select>
+
+  <input [(ngModel)]="filterValue" type="text" class="form-control w-auto d-inline-block me-2" placeholder="Filter value" />
+
+  <button class="btn btn-primary me-2" (click)="applyFilter()">Apply Filter</button>
+  <button class="btn btn-secondary" (click)="resetFilter()">Reset</button>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Departure Location</th>
+      <th>Destination</th>
+      <th>Departure Time</th>
+      <th>Available Places</th>
+      <th>Price per Seat</th>
+      <th>Status</th>
+      <th>Visualize the Ride</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ride of rides$ | async; let i = index" [ngClass]="ride.status === 'over' ? 'table-success' : ride.status === 'canceled' ? 'table-secondary' : ''">
+      <td>{{ i + 1 }}</td>
+      <td>{{ ride.departureLocation }}</td>
+      <td>{{ ride.destination }}</td>
+      <td>{{ ride.departureDate }} {{ ride.departureTime }}</td>
+      <td>{{ ride.availablePlaces }}</td>
+      <td>{{ ride.pricePerSeat }} TND</td>
+      <td>{{ ride.status || 'in-progress' }}</td>
+      <td class="text-center">
+        <a [routerLink]="['/rides/ride-visualize', ride.id]" class="btn btn-outline-primary btn-sm">
+          <i class="bi bi-geo-alt-fill"></i>
+        </a>
+      </td>
+      <td>
+        <button *ngIf="ride.status !== 'over' && ride.status !== 'canceled'" class="btn btn-warning btn-sm me-1" (click)="markAsOver(ride)">Mark as Over</button>
+        <button *ngIf="ride.status !== 'over' && ride.status !== 'canceled'" class="btn btn-danger btn-sm" (click)="cancelRide(ride)">Cancel</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
