@@ -50,6 +50,7 @@ export class CreateRide implements OnInit, AfterViewInit {
       startCoordinate: [''],
       endCoordinate: [''],
       conductorId: [this.auth.userSubject.value?.uid, Validators.required],
+      status: ['in-progress', Validators.required],
     });
 
     // Synchronisation carte -> formulaire
