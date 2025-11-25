@@ -99,7 +99,8 @@ private firestore = inject(Firestore);
       rideId: ride.id,
       userId: currentUser.uid,
       reservedPlaces: places,
-      createdAt: new Date()
+      createdAt: new Date(),
+      status: 'PENDING'
     });
   }
 }
