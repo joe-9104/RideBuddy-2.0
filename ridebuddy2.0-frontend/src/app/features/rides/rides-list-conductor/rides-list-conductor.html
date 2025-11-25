@@ -39,7 +39,7 @@
       <td>{{ ride.pricePerSeat }} TND</td>
       <td>{{ ride.status || 'in-progress' }}</td>
       <td class="text-center">
-        <a [routerLink]="['/rides/ride-visualize', ride.id]" class="btn btn-outline-primary btn-sm">
+        <a [routerLink]="['/rides/ride-visualize', ride.id]" [state]="{ ride: ride }" class="btn btn-outline-primary btn-sm">
           <i class="bi bi-geo-alt-fill"></i>
         </a>
       </td>
