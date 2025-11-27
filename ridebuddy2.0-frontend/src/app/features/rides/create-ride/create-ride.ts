@@ -50,10 +50,10 @@ export class CreateRide implements OnInit, AfterViewInit {
 
     this.mapService.startCoordinates$.pipe(
       filter(coords => coords !== null)
-    ).subscribe(coord => {
-      this.mapService.getLocationInfo(coord).then(location => {
+    ).subscribe(coordinates => {
+      this.mapService.getLocationInfo(coordinates).subscribe(location => {
         this.rideForm.patchValue({
-          startCoordinate: `${coord.lng},${coord.lat}`,
+          startCoordinate: `${coordinates.lng},${coordinates.lat}`,
           startGovernorate: location.governorate,
           departureLocation: location.name.split(',')[0],
         });
@@ -62,10 +62,10 @@ export class CreateRide implements OnInit, AfterViewInit {
 
     this.mapService.endCoordinates$.pipe(
       filter(coords => coords !== null)
-    ).subscribe(coord => {
-      this.mapService.getLocationInfo(coord).then(location => {
+    ).subscribe(coordinates => {
+      this.mapService.getLocationInfo(coordinates).subscribe(location => {
         this.rideForm.patchValue({
-          startCoordinate: `${coord.lng},${coord.lat}`,
+          startCoordinate: `${coordinates.lng},${coordinates.lat}`,
           endGovernorate: location.governorate,
           destination: location.name.split(',')[0],
         });

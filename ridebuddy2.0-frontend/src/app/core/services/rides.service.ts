@@ -13,13 +13,13 @@ export class RidesService {
     return collectionData(col, { idField: 'id' }) as Observable<Ride[]>;
   }
 
-  // create new ride
+  // create a new ride
   createRide(ride: Ride) {
     const col = collection(this.firestore, 'rides');
     return addDoc(col, { ...ride, createdAt: new Date() });
   }
 
-  // get single ride
+  // get a single ride
   getRide(id: string) {
     const docRef = doc(this.firestore, `rides/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<Ride | undefined>;
