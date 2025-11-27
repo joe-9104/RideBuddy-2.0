@@ -20,7 +20,6 @@ export class RideVisualize implements OnInit, AfterViewInit {
   ride: Ride | null = null;
 
   async ngOnInit() {
-    // 1️⃣ Récupérer le ride depuis le state du router si disponible
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state?.['ride']) {
       this.ride = navigation.extras.state['ride'];
