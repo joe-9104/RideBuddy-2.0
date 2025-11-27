@@ -6,6 +6,7 @@ import * as L from 'leaflet';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {filter} from 'rxjs';
+import {Governorate} from '../../../app.models';
 
 @Component({
   selector: 'app-create-ride',
@@ -20,12 +21,7 @@ export class CreateRide implements OnInit, AfterViewInit {
   instructions = 'Click on the map to select your start location.';
   currentStep: 'start' | 'end' = 'start';
 
-  governorates: string[] = [
-    'Tunis', 'Ariana', 'Ben Arous', 'Manouba', 'Nabeul', 'Zaghouan', 'Bizerte',
-    'Béja', 'Jendouba', 'Le Kef', 'Siliana', 'Sousse', 'Monastir', 'Mahdia',
-    'Sfax', 'Kairouan', 'Kasserine', 'Sidi Bouzid', 'Gabès', 'Médenine',
-    'Tataouine', 'Gafsa', 'Tozeur', 'Kebili'
-  ];
+  governorates = Object.values(Governorate);
 
   constructor(
     private fb: FormBuilder,

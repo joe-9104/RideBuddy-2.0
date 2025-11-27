@@ -24,3 +24,30 @@ export interface User {
   averageRating?: number;
   totalEarnings?: number;
 }
+
+export enum Governorate {
+  Tunis = 'Tunis',
+  Ariana = 'Ariana',
+  BenArous = 'Ben Arous',
+  Manouba = 'Manouba',
+  Nabeul = 'Nabeul',
+  Zaghouan = 'Zaghouan',
+  Bizerte = 'Bizerte',
+  Beja = 'Béja',
+  Jendouba = 'Jendouba',
+  LeKef = 'Le Kef',
+  Siliana = 'Siliana',
+  Sousse = 'Sousse',
+  Monastir = 'Monastir',
+  Mahdia = 'Mahdia',
+  Sfax = 'Sfax',
+  Kairouan = 'Kairouan',
+  Kasserine = 'Kasserine',
+  SidiBouzid = 'Sidi Bouzid',
+  Gabes = 'Gabès',
+  Medenine = 'Médenine',
+  Tataouine = 'Tataouine',
+  Gafsa = 'Gafsa',
+  Tozeur = 'Tozeur',
+  Kebili = 'Kebili'
+}
