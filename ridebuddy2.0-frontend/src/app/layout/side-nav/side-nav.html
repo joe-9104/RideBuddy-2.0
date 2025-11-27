@@ -1,0 +1,15 @@
+<div class="d-flex flex-column vh-100 p-3 shadow-sm" style="width: 250px; background-color: #b6f3ee;">
+  <h5 class="text-success fw-bold mb-4">Menu</h5>
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item mb-2">
+      <a class="nav-link text-dark" href="/dashboard">Dashboard</a>
+    </li>
+    @for( item of navItems; track item){
+      @if((role$ | async) == item.role){
+        <li class="nav-item mb-2">
+          <a class="nav-link text-dark" [href]="item.link">{{item.title}}</a>
+        </li>
+      }
+    }
+  </ul>
+</div>

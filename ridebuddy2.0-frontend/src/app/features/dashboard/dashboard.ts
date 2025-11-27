@@ -3,14 +3,12 @@ import {AuthService} from '../../core/services/auth.service';
 import {AsyncPipe, CommonModule} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../../app.models';
-import {Navbar} from '../../shared/navbar/navbar';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     AsyncPipe,
     CommonModule,
-    Navbar,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',

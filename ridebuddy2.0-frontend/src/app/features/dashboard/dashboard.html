@@ -1,8 +1,7 @@
-<app-navbar></app-navbar>
 <div>
   <!-- Conductor Section -->
   @if((user$ | async)?.role === 'CONDUCTOR'){
-    <div style="width: 96vw; margin-left: 2vw;">
+    <div>
       <div class="row g-4 mt-1">
         <div class="col-md-4">
           <div class="card">
@@ -10,7 +9,7 @@
             <div class="card-body">
               <h5 class="card-title">Offer a Ride</h5>
               <p class="card-text">Share your ride and earn money while helping others travel.</p>
-              <a href="/rides/create" class="btn btn-primary">Offer a Ride</a>
+              <a href="/dashboard/rides/create" class="btn btn-primary">Offer a Ride</a>
             </div>
           </div>
         </div>
@@ -21,7 +20,7 @@
             <div class="card-body">
               <h5 class="card-title">Rides Management Dashboard</h5>
               <p class="card-text">Easily view, update, and organize your created rides in one place.</p>
-              <a href="/rides/myRides" class="btn btn-primary">Go to Rides Dashboard</a>
+              <a href="/dashboard/rides/myRides" class="btn btn-primary">Go to Rides Dashboard</a>
             </div>
           </div>
         </div>
@@ -32,7 +31,7 @@
             <div class="card-body">
               <h5 class="card-title">Manage Reservations</h5>
               <p class="card-text">View and manage passenger reservations for your rides.</p>
-              <a href="/reservations/manage" class="btn btn-primary">Manage Passenger Reservations</a>
+              <a href="/dashboard/reservations/manage" class="btn btn-primary">Manage Passenger Reservations</a>
             </div>
           </div>
         </div>
@@ -109,7 +108,7 @@
       </div>
     </div>
   } @else if ((user$ | async)?.role === 'PASSENGER'){
-    <div style="width: 96vw; margin-left: 2vw;">
+    <div>
       <div class="row g-4 mt-1">
         <div class="col-md-4">
           <div class="card">
@@ -117,7 +116,7 @@
             <div class="card-body">
               <h5 class="card-title">Find a Ride</h5>
               <p class="card-text">Discover rides tailored to your schedule and needs.</p>
-              <a href="/rides/all-rides" class="btn btn-primary">Find Rides</a>
+              <a href="/dashboard/rides/all-rides" class="btn btn-primary">Find Rides</a>
             </div>
           </div>
         </div>
@@ -128,7 +127,7 @@
             <div class="card-body">
               <h5 class="card-title">Find a Nearby Ride</h5>
               <p class="card-text">Easily locate rides near your current location for quick and convenient travel.</p>
-              <a href="/rides/rides-near-me" class="btn btn-primary">Nearby Rides</a>
+              <a href="/dashboard/rides/rides-near-me" class="btn btn-primary">Nearby Rides</a>
             </div>
           </div>
         </div>
@@ -139,7 +138,7 @@
             <div class="card-body">
               <h5 class="card-title">Manage Bookings</h5>
               <p class="card-text">View, manage, and cancel your ride bookings, ensuring convenience for your travel plans.</p>
-              <a href="/reservations/history" class="btn btn-primary">Manage Bookings</a>
+              <a href="/dashboard/reservations/history" class="btn btn-primary">Manage Bookings</a>
             </div>
           </div>
         </div>
