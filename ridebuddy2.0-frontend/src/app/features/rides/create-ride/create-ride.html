@@ -1,64 +1,139 @@
 <div class="container my-4">
   <h2 class="text-center mb-4">Offer a Ride</h2>
-
   <form [formGroup]="rideForm" (ngSubmit)="submitRide()">
+    @if(rideForm.invalid && rideForm.touched){
+      <div class="alert alert-danger">
+        Some fields are missing or invalid. Please check the form.
+      </div>
+    }
+
     <div class="row mb-3">
       <div class="col">
         <label>Departure Location</label>
-        <input type="text" formControlName="departureLocation" class="form-control" />
+        <input
+          type="text"
+          formControlName="departureLocation"
+          class="form-control"
+          [class.is-invalid]="isInvalid('departureLocation')"
+        />
+        <div class="invalid-feedback">
+          Departure location is required.
+        </div>
       </div>
+
       <div class="col">
         <label>Start Governorate</label>
-        <select formControlName="startGovernorate" class="form-control">
-          <option value="" disabled selected>Select governorate</option>
+        <select
+          formControlName="startGovernorate"
+          class="form-control"
+          [class.is-invalid]="isInvalid('startGovernorate')"
+        >
+          <option value="" disabled>Select governorate</option>
           @for(gov of governorates; track gov){
             <option [value]="gov">{{ gov }}</option>
           }
         </select>
+        <div class="invalid-feedback">
+          Start governorate is required.
+        </div>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
         <label>Departure Date</label>
-        <input type="date" formControlName="departureDate" class="form-control" />
+        <input
+          type="date"
+          formControlName="departureDate"
+          class="form-control"
+          [class.is-invalid]="isInvalid('departureDate')"
+        />
+        <div class="invalid-feedback">
+          Please select a valid date.
+        </div>
       </div>
+
       <div class="col">
         <label>Departure Time</label>
-        <input type="time" formControlName="departureTime" class="form-control" />
+        <input
+          type="time"
+          formControlName="departureTime"
+          class="form-control"
+          [class.is-invalid]="isInvalid('departureTime')"
+        />
+        <div class="invalid-feedback">
+          Please select a valid time.
+        </div>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
         <label>Destination</label>
-        <input type="text" formControlName="destination" class="form-control" />
+        <input
+          type="text"
+          formControlName="destination"
+          class="form-control"
+          [class.is-invalid]="isInvalid('destination')"
+        />
+        <div class="invalid-feedback">
+          Destination is required.
+        </div>
       </div>
+
       <div class="col">
         <label>End Governorate</label>
-        <select formControlName="endGovernorate" class="form-control">
-          <option value="" disabled selected>Select governorate</option>
+        <select
+          formControlName="endGovernorate"
+          class="form-control"
+          [class.is-invalid]="isInvalid('endGovernorate')"
+        >
+          <option value="" disabled>Select governorate</option>
           @for(gov of governorates; track gov){
             <option [value]="gov">{{ gov }}</option>
           }
         </select>
+        <div class="invalid-feedback">
+          End governorate is required.
+        </div>
       </div>
     </div>
 
     <div class="row mb-3">
       <div class="col">
         <label>Available Places</label>
-        <input type="number" formControlName="availablePlaces" class="form-control" />
+        <input
+          type="number"
+          formControlName="availablePlaces"
+          class="form-control"
+          [class.is-invalid]="isInvalid('availablePlaces')"
+        />
+        <div class="invalid-feedback">
+          Enter the number of available places (at least 1).
+        </div>
       </div>
+
       <div class="col">
         <label>Price Per Seat</label>
-        <input type="number" formControlName="pricePerSeat" class="form-control" />
+        <input
+          type="number"
+          formControlName="pricePerSeat"
+          class="form-control"
+          [class.is-invalid]="isInvalid('pricePerSeat')"
+        />
+        <div class="invalid-feedback">
+          Enter a valid price.
+        </div>
       </div>
     </div>
 
     <div class="mb-3">
       <label>Comments</label>
-      <textarea formControlName="comments" class="form-control" rows="3"></textarea>
+      <textarea
+        formControlName="comments"
+        class="form-control"
+        rows="3"
+      ></textarea>
     </div>
 
     <div id="map" style="height: 400px; width: 100%" class="mb-3"></div>

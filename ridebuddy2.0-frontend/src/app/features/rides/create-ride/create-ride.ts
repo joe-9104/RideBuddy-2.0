@@ -102,8 +102,17 @@ export class CreateRide implements OnInit, AfterViewInit {
     this.instructions = 'Click on the map to select your end location.';
   }
 
+  isInvalid(field: string): boolean {
+    const control = this.rideForm.get(field);
+    return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
   submitRide() {
-    if (this.rideForm.invalid) return;
+    if (this.rideForm.invalid) {
+      this.rideForm.markAllAsTouched();
+      alert("Please fill in all required fields.");
+      return;
+    }
 
     const ridesRef = collection(this.firestore, 'rides');
 
@@ -113,11 +122,7 @@ export class CreateRide implements OnInit, AfterViewInit {
         this.rideForm.reset();
         this.resetStart();
         this.resetEnd();
-
         return this.router.navigate(['/dashboard']);
-      })
-      .then(() => {
-        console.log("ride successfully saved, redirection to dashboard...");
       })
       .catch(error => {
         console.error('Error creating ride:', error);
