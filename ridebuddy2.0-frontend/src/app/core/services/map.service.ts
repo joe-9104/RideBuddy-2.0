@@ -98,20 +98,25 @@ export class MapService {
     }
   }
 
-  async getLocationName(coord: { lat: number, lng: number }): Promise<string> {
+  async getLocationInfo(coord: { lat: number; lng: number }): Promise<{
+    name: string;
+    governorate: string;
+  }> {
     const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${this.apiKey}&point.lon=${coord.lng}&point.lat=${coord.lat}`;
     const res = await fetch(url);
-    if (!res.ok) return '';
+
+    if (!res.ok) {
+      return { name: '', governorate: '' };
+    }
+
     const data = await res.json();
-    return data.features?.[0]?.properties?.label || '';
+    const props = data.features?.[0]?.properties || {};
+
+    return {
+      name: props.label || '',
+      governorate: props.region || ''
+    };
   }
 
-  async getGovernorate(coord: { lat: number, lng: number }): Promise<string> {
-    const url = `https://api.openrouteservice.org/geocode/reverse?api_key=${this.apiKey}&point.lon=${coord.lng}&point.lat=${coord.lat}`;
-    const res = await fetch(url);
-    if (!res.ok) return '';
-    const data = await res.json();
-    return data.features?.[0]?.properties?.region || '';
-  }
 
 }

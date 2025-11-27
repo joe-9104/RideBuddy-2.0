@@ -2,16 +2,15 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MapService} from '../../../core/services/map.service';
 import {addDoc, collection, Firestore} from '@angular/fire/firestore';
-import {NgForOf} from '@angular/common';
 import * as L from 'leaflet';
 import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
+import {filter} from 'rxjs';
 
 @Component({
   selector: 'app-create-ride',
   imports: [
     ReactiveFormsModule,
-    NgForOf
   ],
   templateUrl: './create-ride.html',
   styleUrl: './create-ride.scss',
@@ -53,16 +52,27 @@ export class CreateRide implements OnInit, AfterViewInit {
       status: ['in-progress', Validators.required],
     });
 
-    // Synchronisation carte -> formulaire
-    this.mapService.startCoordinates$.subscribe(coord => {
-      this.rideForm.patchValue({
-        startCoordinate: coord ? `${coord.lng},${coord.lat}` : ''
+    this.mapService.startCoordinates$.pipe(
+      filter(coords => coords !== null)
+    ).subscribe(coord => {
+      this.mapService.getLocationInfo(coord).then(location => {
+        this.rideForm.patchValue({
+          startCoordinate: `${coord.lng},${coord.lat}`,
+          startGovernorate: location.governorate,
+          departureLocation: location.name.split(',')[0],
+        });
       });
     });
 
-    this.mapService.endCoordinates$.subscribe(coord => {
-      this.rideForm.patchValue({
-        endCoordinate: coord ? `${coord.lng},${coord.lat}` : ''
+    this.mapService.endCoordinates$.pipe(
+      filter(coords => coords !== null)
+    ).subscribe(coord => {
+      this.mapService.getLocationInfo(coord).then(location => {
+        this.rideForm.patchValue({
+          startCoordinate: `${coord.lng},${coord.lat}`,
+          endGovernorate: location.governorate,
+          destination: location.name.split(',')[0],
+        });
       });
     });
   }

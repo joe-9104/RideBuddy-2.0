@@ -11,7 +11,9 @@
         <label>Start Governorate</label>
         <select formControlName="startGovernorate" class="form-control">
           <option value="" disabled selected>Select governorate</option>
-          <option *ngFor="let gov of governorates" [value]="gov">{{ gov }}</option>
+          @for(gov of governorates; track gov){
+            <option [value]="gov">{{ gov }}</option>
+          }
         </select>
       </div>
     </div>
@@ -36,7 +38,9 @@
         <label>End Governorate</label>
         <select formControlName="endGovernorate" class="form-control">
           <option value="" disabled selected>Select governorate</option>
-          <option *ngFor="let gov of governorates" [value]="gov">{{ gov }}</option>
+          @for(gov of governorates; track gov){
+            <option [value]="gov">{{ gov }}</option>
+          }
         </select>
       </div>
     </div>
