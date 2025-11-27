@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
-<div *ngIf="user$ | async as user">
+<div>
   <!-- Conductor Section -->
-  <ng-container *ngIf="user.role === 'CONDUCTOR'">
+  @if((user$ | async)?.role === 'CONDUCTOR'){
     <div style="width: 96vw; margin-left: 2vw;">
       <div class="row g-4 mt-1">
         <div class="col-md-4">
@@ -45,19 +45,19 @@
           <div class="col-md-4">
             <div class="stat-box">
               <h5>Completed Rides</h5>
-              <p>{{ user.completedRides || 0 }}</p>
+              <p>{{ (user$ | async)?.completedRides || 0 }}</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="stat-box">
               <h5>Ratings Received</h5>
-              <p>{{ user.averageRating || 0 }}/5</p>
+              <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="stat-box">
               <h5>Total Earnings</h5>
-              <p>{{ user.totalEarnings || 0 }} TND</p>
+              <p>{{ (user$ | async)?.totalEarnings || 0 }} TND</p>
             </div>
           </div>
         </div>
@@ -108,10 +108,7 @@
         </div>
       </div>
     </div>
-  </ng-container>
-
-  <!-- Passenger Section -->
-  <ng-container *ngIf="user.role === 'PASSENGER'">
+  } @else if ((user$ | async)?.role === 'PASSENGER'){
     <div style="width: 96vw; margin-left: 2vw;">
       <div class="row g-4 mt-1">
         <div class="col-md-4">
@@ -155,13 +152,13 @@
           <div class="col-md-4">
             <div class="stat-box">
               <h5>Completed Rides</h5>
-              <p>{{ user.completedRides || 0 }}</p>
+              <p>{{ (user$ | async)?.completedRides || 0 }}</p>
             </div>
           </div>
           <div class="col-md-4">
             <div class="stat-box">
               <h5>Ratings Received</h5>
-              <p>{{ user.averageRating || 0 }}/5</p>
+              <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
             </div>
           </div>
         </div>
@@ -212,6 +209,5 @@
         </div>
       </div>
     </div>
-
-  </ng-container>
+  }
 </div>
