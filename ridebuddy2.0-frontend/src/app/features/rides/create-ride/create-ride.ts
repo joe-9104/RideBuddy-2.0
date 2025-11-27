@@ -65,7 +65,7 @@ export class CreateRide implements OnInit, AfterViewInit {
     ).subscribe(coordinates => {
       this.mapService.getLocationInfo(coordinates).subscribe(location => {
         this.rideForm.patchValue({
-          startCoordinate: `${coordinates.lng},${coordinates.lat}`,
+          endCoordinate: `${coordinates.lng},${coordinates.lat}`,
           endGovernorate: location.governorate,
           destination: location.name.split(',')[0],
         });
@@ -102,20 +102,27 @@ export class CreateRide implements OnInit, AfterViewInit {
     this.instructions = 'Click on the map to select your end location.';
   }
 
-  async submitRide() {
+  submitRide() {
     if (this.rideForm.invalid) return;
 
-    try {
-      const ridesRef = collection(this.firestore, 'rides');
-      await addDoc(ridesRef, this.rideForm.value);
-      alert('Ride successfully created!');
-      this.rideForm.reset();
-      this.resetStart();
-      this.resetEnd();
-      this.router.navigate(['/dashboard']).then(() => console.log("ride successfully saved, redirection to dashboard..."));
-    } catch (error) {
-      console.error('Error creating ride:', error);
-      alert('Failed to create ride.');
-    }
+    const ridesRef = collection(this.firestore, 'rides');
+
+    addDoc(ridesRef, this.rideForm.value)
+      .then(() => {
+        alert('Ride successfully created!');
+        this.rideForm.reset();
+        this.resetStart();
+        this.resetEnd();
+
+        return this.router.navigate(['/dashboard']);
+      })
+      .then(() => {
+        console.log("ride successfully saved, redirection to dashboard...");
+      })
+      .catch(error => {
+        console.error('Error creating ride:', error);
+        alert('Failed to create ride.');
+      });
   }
+
 }
