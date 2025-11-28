@@ -1,8 +1,10 @@
 <div class="min-h-screen flex flex-col bg-gray-50">
   <app-nav></app-nav>
 
-  <div class="flex flex-1">
-    <app-side-nav></app-side-nav>
+  <div class="flex flex-1 overflow-hidden">
+    <aside class="overflow-y-auto">
+      <app-side-nav></app-side-nav>
+    </aside>
 
     <main class="flex-1 bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 overflow-auto">
       <router-outlet></router-outlet>

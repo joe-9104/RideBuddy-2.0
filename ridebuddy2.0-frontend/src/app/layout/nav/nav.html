@@ -1,69 +1,81 @@
-<nav class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-xl">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-    <a href="/" class="flex items-center font-extrabold text-lg tracking-wider hover:opacity-90 transition-opacity">
-      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-3 u-logo-40 rounded-md shadow-md" />
-      <span class="uppercase">RideBuddy</span>
+<nav class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
+    <a href="/" class="flex items-center font-extrabold text-base tracking-wider hover:opacity-90 transition-opacity">
+      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 h-8 rounded-md shadow-md" />
+      <span class="uppercase text-sm">RideBuddy</span>
     </a>
 
-    <div class="flex items-center space-x-5">
+    <div class="flex items-center space-x-4">
       <!-- Message Button -->
-      <button class="relative p-2.5 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40" aria-label="Messages">
-        <i class="bi bi-envelope text-xl"></i>
-        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-yellow-300 rounded-full">3</span>
+      <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Messages">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M16 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h14zM2 0a2 2 0 0 0-2 2v4.5L7.823 7.88a1 1 0 0 0 .354 0L16 6.5V2a2 2 0 0 0-2-2H2z"/>
+        </svg>
+        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-yellow-300 rounded-full">3</span>
       </button>
 
       <!-- Notification Button -->
-      <button class="relative p-2.5 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40" aria-label="Notifications">
-        <i class="bi bi-bell-fill text-xl"></i>
-        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
+      <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Notifications">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742.37.57.735.811 1.02.886.25.012.5.01.707.01.274 0 .45.01.707-.01.285-.075.65-.316 1.02-.886C12.137 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.645.643 1.222.643.4 0 .63-.11.926-.223l-1.868-2.423A4.993 4.993 0 0 0 14.22 12z"/>
+        </svg>
+        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
       </button>
 
       @if (user$ | async) {
         <div class="relative">
-          <button (click)="toggleMenu()" class="flex items-center gap-2.5 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full text-white font-semibold focus:ring-2 focus:ring-white/50 focus:outline-none transition-all duration-200">
-            <div class="rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-red-400 to-pink-500 shadow-lg">
-              <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full w-9 h-9 border-2 border-white object-cover" />
+          <button (click)="toggleMenu()" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-full text-white font-semibold focus:ring-1 focus:ring-white/50 focus:outline-none transition-all duration-200">
+            <div class="rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-red-400 to-pink-500 shadow-md">
+              <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full w-7 h-7 border-2 border-white object-cover" />
             </div>
-            <span class="truncate max-w-[120px] text-sm font-medium">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</span>
-            <i class="bi bi-caret-down-fill text-xs ml-1"></i>
+            <span class="truncate max-w-[100px] text-xs font-medium">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</span>
+            <svg class="w-3 h-3 ml-1" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
           </button>
 
-          <div *ngIf="menuOpen" class="absolute right-0 mt-3 w-72 bg-white text-gray-800 rounded-xl shadow-2xl ring-1 ring-black ring-opacity-10 overflow-hidden z-50">
+          <div *ngIf="menuOpen" class="absolute right-0 mt-2 w-64 bg-white text-gray-800 rounded-xl shadow-2xl ring-1 ring-black ring-opacity-10 overflow-hidden z-50">
             <!-- Header -->
-            <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
-              <div class="text-sm font-bold text-gray-900">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
+            <div class="p-3 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+              <div class="text-xs font-bold text-gray-900">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
               <div class="text-xs text-gray-600 mt-1">
-                <span class="inline-block mt-1 px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
+                <span class="inline-block mt-1 px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
                   {{ (user$ | async)?.role || 'Member' }}
                 </span>
               </div>
             </div>
 
             <!-- Menu Items -->
-            <div class="py-2">
-              <a routerLink="/profile" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50 transition-colors">
-                <i class="bi bi-person-circle text-indigo-600 text-lg"></i>
+            <div class="py-1">
+              <a routerLink="/profile" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
+                <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm.078-7a6 6 0 0 1 5.858 9.667 3.5 3.5 0 0 0-5.858-3.667 4 4 0 1 0-5.858 3.667A6 6 0 0 1 8.059 0z"/>
+                </svg>
                 <span class="font-medium">Profile</span>
               </a>
-              <a routerLink="/settings" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50 transition-colors">
-                <i class="bi bi-gear text-indigo-600 text-lg"></i>
+              <a routerLink="/settings" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
+                <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.264-2.17 1.619l.087.319a1.464 1.464 0 0 1-1.038 1.59l-.319.094c-1.3.47-1.3 2.005 0 2.472l.319.094c.768.35 1.063.997 1.038 1.59l-.087.319c-.516 1.355 1.08 2.317 2.17 1.619l.31-.17a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.264 2.17-1.619l-.087-.319a1.464 1.464 0 0 1 1.038-1.59l.319-.094c1.3-.47 1.3-2.005 0-2.472l-.319-.094a1.464 1.464 0 0 1-1.038-1.59l.087-.319c.516-1.355-1.08-2.317-2.17-1.619l-.31.17a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.93 2.93 0 1 1 0-5.86 2.93 2.93 0 0 1 0 5.86z"/>
+                </svg>
                 <span class="font-medium">Settings</span>
               </a>
             </div>
 
             <!-- Logout -->
-            <div class="border-t border-gray-200 p-3">
-              <button (click)="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all font-semibold">
-                <i class="bi bi-box-arrow-right"></i>
+            <div class="border-t border-gray-200 p-2">
+              <button (click)="logout()" class="w-full flex items-center justify-center gap-1 px-3 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all font-semibold text-xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
                 Logout
               </button>
             </div>
           </div>
         </div>
       } @else {
-        <div class="flex items-center gap-3 ml-4 pl-4 border-l border-white/30">
-          <a routerLink="/register" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white text-sm font-semibold transition-all">Register</a>
-          <a routerLink="/login" class="px-4 py-2 bg-white text-indigo-700 rounded-lg text-sm font-bold hover:shadow-lg transition-all">Login</a>
+        <div class="flex items-center gap-2 ml-3 pl-3 border-l border-white/30">
+          <a routerLink="/register" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-white text-xs font-semibold transition-all">Register</a>
+          <a routerLink="/login" class="px-3 py-1.5 bg-white text-indigo-700 rounded-lg text-xs font-bold hover:shadow-lg transition-all">Login</a>
         </div>
       }
     </div>
