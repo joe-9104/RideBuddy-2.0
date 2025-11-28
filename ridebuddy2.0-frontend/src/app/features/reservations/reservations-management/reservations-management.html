@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <h2 class="text-center mb-4">Reservations on Your Rides</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Departure</th>
+        <th>Destination</th>
+        <th>Departure Time</th>
+        <th>Passenger</th>
+        <th>Reserved Seats</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (res of reservations$ | async; track res.id) {
+        <tr>
+          <td>
+            @if (res.ride) {
+              {{ res.ride.departureLocation }}
+            }
+          </td>
+          <td>
+            @if (res.ride) {
+              {{ res.ride.destination }}
+            }
+          </td>
+          <td>
+            @if (res.ride) {
+              {{ res.ride.departureDate + ' ' + res.ride.departureTime }}
+            }
+          </td>
+          <td>{{ res.user?.displayName || res.user?.email }}</td>
+          <td>{{ res.reservedPlaces }}</td>
+          <td>{{ res.status }}</td>
+          <td>
+            @if (res.ride?.status === 'in-progress' && res.status === 'PENDING') {
+              <button class="btn btn-primary btn-sm me-1" (click)="acceptReservation(res.id!)">Accept</button>
+              <button class="btn btn-danger btn-sm" (click)="rejectReservation(res.id!)">Reject</button>
+            }
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="7" class="text-center">No reservations found</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto my-4 bg-white rounded-lg shadow p-4">
+<div class="container my-4">
   <div class="filter-ui mb-3 p-3 border rounded">
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -56,15 +56,14 @@
       <tr *ngFor="let ride of rides$ | async; let i = index"
           [ngClass]="{ 'bg-yellow-50': ride.id === highlightRideId, 'odd:bg-white even:bg-gray-50': true }">
 
-        <td class="px-4 py-2 text-sm">{{ i + 1 }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.departureLocation }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.destination }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.departureDate }} {{ ride.departureTime }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.availablePlaces }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.pricePerSeat }} TND</td>
-        <td class="px-4 py-2 text-sm">{{ ride.status }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.conductorName }}</td>
-        <td class="px-4 py-2 text-sm">{{ ride.comments }}</td>
+      <td class="px-4 py-2 text-sm">{{ i + 1 }}</td>
+      <td  class="px-4 py-2 text-sm">{{ ride.departureLocation }}</td>
+      <td  class="px-4 py-2 text-sm">{{ ride.destination }}</td>
+      <td class="px-4 py-2 text-sm">{{ ride.departureDate }} {{ ride.departureTime }}</td>
+      <td class="px-4 py-2 text-sm">{{ ride.availablePlaces }}</td>
+      <td class="px-4 py-2 text-sm">{{ ride.pricePerSeat }} TND</td>
+      <td class="px-4 py-2 text-sm">{{ ride.status }}</td>
+      <td class="px-4 py-2 text-sm">{{ ride.comments }}</td>
 
         <td class="px-4 py-2 text-sm">
 
@@ -93,12 +92,17 @@
           </div>
         </td>
 
+      <td>
+        <a class="btn btn-secondary btn-sm"
+           (click)="openRideDetails(ride)">
+          Details
+        </a>
+      </td>
         <td class="px-4 py-2 text-sm">
           <a [routerLink]="['/dashboard/rides/details', ride.id]" class="inline-block px-2 py-1 bg-secondary text-white rounded text-sm">Details</a>
         </td>
 
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    </tr>
+    </tbody>
+  </table>
 </div>

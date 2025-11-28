@@ -1,3 +1,32 @@
 <div class="my-4 bg-white rounded-lg shadow p-4">
-  <p>ride-details works!</p>
+
+  <h2>Ride Details</h2>
+
+  @if(ride) {
+    <div class="row">
+
+      <div class="col-md-6">
+        <p><strong>Driver:</strong> {{ conductor!!.displayName }}</p>
+        <p><strong>Departure:</strong> {{ ride.departureLocation }}, {{ride.startGovernorate}}</p>
+        <p><strong>Destination:</strong> {{ ride.destination }}, {{ride.endGovernorate}}</p>
+        <p><strong>Departure Time:</strong> {{ ride.departureDate }} at {{ ride.departureTime }}</p>
+        <p><strong>Available Seats:</strong> {{ ride.availablePlaces }}</p>
+        <p><strong>Price per Seat:</strong> {{ ride.pricePerSeat }} TND</p>
+        <p><strong>Comments:</strong> {{ ride.comments }}</p>
+        <p><strong>Status:</strong>
+          <span class="text-uppercase"> {{ ride.status }}</span>
+        </p>
+      </div>
+
+      <div class="col-md-6 map-wrapper">
+        <div id="map"></div>
+      </div>
+    </div>
+  }
+
+  @if(!hasReservation && ride?.status == 'in-progress') {
+    <button class="btn btn-primary mt-3">
+      Make Reservation
+    </button>
+  }
 </div>

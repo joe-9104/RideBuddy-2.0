@@ -15,6 +15,20 @@ export interface Ride {
   status?: 'in-progress' | 'over' | 'canceled';
 }
 
+export interface Reservation {
+  id?: string;
+  createdAt: any;
+  reservedPlaces: number;
+  rideId: string;
+  status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED';
+  userId: string;
+  ride?: Ride | null;
+  user?: {
+    displayName?: string;
+    email?: string;
+  };
+}
+
 export interface User {
   uid: string;
   email: string;
