@@ -1,137 +1,121 @@
-<div class="container my-4 bg-white rounded shadow p-4">
-  <h2 class="text-center mb-4">Offer a Ride</h2>
+<div class="max-w-3xl mx-auto my-4 bg-white rounded-lg shadow p-6">
+  <h2 class="text-center mb-4 text-2xl font-semibold">Offer a Ride</h2>
   <form [formGroup]="rideForm" (ngSubmit)="submitRide()">
     @if(rideForm.invalid && rideForm.touched){
-      <div class="alert alert-danger">
+      <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-800">
         Some fields are missing or invalid. Please check the form.
       </div>
     }
 
-    <div class="row mb-3">
-      <div class="col">
-        <label>Departure Location</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div>
+        <label class="block mb-1">Departure Location</label>
         <input
           type="text"
           formControlName="departureLocation"
-          class="form-control"
-          [class.is-invalid]="isInvalid('departureLocation')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('departureLocation') }"
         />
-        <div class="invalid-feedback">
-          Departure location is required.
-        </div>
+        <div *ngIf="isInvalid('departureLocation')" class="text-red-600 text-sm mt-1">Departure location is required.</div>
       </div>
 
-      <div class="col">
-        <label>Start Governorate</label>
+      <div>
+        <label class="block mb-1">Start Governorate</label>
         <select
           formControlName="startGovernorate"
-          class="form-control"
-          [class.is-invalid]="isInvalid('startGovernorate')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('startGovernorate') }"
         >
           <option value="" disabled>Select governorate</option>
           @for(gov of governorates; track gov){
             <option [value]="gov">{{ gov }}</option>
           }
         </select>
-        <div class="invalid-feedback">
-          Start governorate is required.
-        </div>
+        <div *ngIf="isInvalid('startGovernorate')" class="text-red-600 text-sm mt-1">Start governorate is required.</div>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <label>Departure Date</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div>
+        <label class="block mb-1">Departure Date</label>
         <input
           type="date"
           formControlName="departureDate"
-          class="form-control"
-          [class.is-invalid]="isInvalid('departureDate')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('departureDate') }"
         />
-        <div class="invalid-feedback">
-          Please select a valid date.
-        </div>
+        <div *ngIf="isInvalid('departureDate')" class="text-red-600 text-sm mt-1">Please select a valid date.</div>
       </div>
 
-      <div class="col">
-        <label>Departure Time</label>
+      <div>
+        <label class="block mb-1">Departure Time</label>
         <input
           type="time"
           formControlName="departureTime"
-          class="form-control"
-          [class.is-invalid]="isInvalid('departureTime')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('departureTime') }"
         />
-        <div class="invalid-feedback">
-          Please select a valid time.
-        </div>
+        <div *ngIf="isInvalid('departureTime')" class="text-red-600 text-sm mt-1">Please select a valid time.</div>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <label>Destination</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div>
+        <label class="block mb-1">Destination</label>
         <input
           type="text"
           formControlName="destination"
-          class="form-control"
-          [class.is-invalid]="isInvalid('destination')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('destination') }"
         />
-        <div class="invalid-feedback">
-          Destination is required.
-        </div>
+        <div *ngIf="isInvalid('destination')" class="text-red-600 text-sm mt-1">Destination is required.</div>
       </div>
 
-      <div class="col">
-        <label>End Governorate</label>
+      <div>
+        <label class="block mb-1">End Governorate</label>
         <select
           formControlName="endGovernorate"
-          class="form-control"
-          [class.is-invalid]="isInvalid('endGovernorate')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('endGovernorate') }"
         >
           <option value="" disabled>Select governorate</option>
           @for(gov of governorates; track gov){
             <option [value]="gov">{{ gov }}</option>
           }
         </select>
-        <div class="invalid-feedback">
-          End governorate is required.
-        </div>
+        <div *ngIf="isInvalid('endGovernorate')" class="text-red-600 text-sm mt-1">End governorate is required.</div>
       </div>
     </div>
 
-    <div class="row mb-3">
-      <div class="col">
-        <label>Available Places</label>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div>
+        <label class="block mb-1">Available Places</label>
         <input
           type="number"
           formControlName="availablePlaces"
-          class="form-control"
-          [class.is-invalid]="isInvalid('availablePlaces')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('availablePlaces') }"
         />
-        <div class="invalid-feedback">
-          Enter the number of available places (at least 1).
-        </div>
+        <div *ngIf="isInvalid('availablePlaces')" class="text-red-600 text-sm mt-1">Enter the number of available places (at least 1).</div>
       </div>
 
-      <div class="col">
-        <label>Price Per Seat</label>
+      <div>
+        <label class="block mb-1">Price Per Seat</label>
         <input
           type="number"
           formControlName="pricePerSeat"
-          class="form-control"
-          [class.is-invalid]="isInvalid('pricePerSeat')"
+          class="w-full border rounded px-3 py-2"
+          [ngClass]="{ 'border-red-500': isInvalid('pricePerSeat') }"
         />
-        <div class="invalid-feedback">
-          Enter a valid price.
-        </div>
+        <div *ngIf="isInvalid('pricePerSeat')" class="text-red-600 text-sm mt-1">Enter a valid price.</div>
       </div>
     </div>
 
     <div class="mb-3">
-      <label>Comments</label>
+      <label class="block mb-1">Comments</label>
       <textarea
         formControlName="comments"
-        class="form-control"
+        class="w-full border rounded px-3 py-2"
         rows="3"
       ></textarea>
     </div>
@@ -139,11 +123,11 @@
     <div id="map" class="mb-3 u-map-400"></div>
     <p>{{ instructions }}</p>
 
-    <div class="d-flex justify-content-between mb-3">
-      <button type="button" class="btn btn-warning" (click)="resetStart()">Reset Start</button>
-      <button type="button" class="btn btn-warning" (click)="resetEnd()">Reset End</button>
+    <div class="flex justify-between mb-3 gap-2">
+      <button type="button" class="px-3 py-1 rounded bg-warning text-black" (click)="resetStart()">Reset Start</button>
+      <button type="button" class="px-3 py-1 rounded bg-warning text-black" (click)="resetEnd()">Reset End</button>
     </div>
 
-    <button type="submit" class="btn btn-primary w-100">Create Ride</button>
+    <button type="submit" class="w-full px-4 py-2 bg-primary text-white rounded">Create Ride</button>
   </form>
 </div>

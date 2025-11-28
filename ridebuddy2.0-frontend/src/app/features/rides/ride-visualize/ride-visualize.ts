@@ -9,7 +9,7 @@ import {LatLng} from 'leaflet';
   selector: 'app-ride-visualize',
   imports: [],
   templateUrl: './ride-visualize.html',
-  styleUrl: './ride-visualize.scss',
+  styleUrl: './ride-visualize.css',
 })
 export class RideVisualize implements OnInit, AfterViewInit {
   private firestore = inject(Firestore);

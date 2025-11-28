@@ -7,7 +7,7 @@ import {Navbar} from '../../../shared/navbar/navbar';
     Navbar
   ],
   templateUrl: './landing-page.html',
-  styleUrl: './landing-page.scss',
+  styleUrl: './landing-page.css',
 })
 export class LandingPage {
 

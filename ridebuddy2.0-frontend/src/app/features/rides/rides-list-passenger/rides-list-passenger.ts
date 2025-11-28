@@ -10,7 +10,7 @@ import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
   selector: 'app-rides-list-passenger',
   imports: [NgForOf, NgIf, NgClass, AsyncPipe, FormsModule, RouterLink, FormsModule, NgForOf, AsyncPipe],
   templateUrl: './rides-list-passenger.html',
-  styleUrl: './rides-list-passenger.scss',
+  styleUrl: './rides-list-passenger.css',
 })
 export class RidesListPassenger {
 private firestore = inject(Firestore);

@@ -1,13 +1,13 @@
-<div class="d-flex flex-column vh-100 p-3 shadow-sm bg-primary bg-opacity-25" style="width: 250px;">
-  <h5 class="text-primary fw-bold mb-4">Menu</h5>
-  <ul class="nav nav-pills flex-column">
-    <li class="nav-item mb-2">
-      <a class="nav-link text-dark" href="/dashboard">Dashboard</a>
+<div class="flex flex-col h-screen p-3 shadow bg-primary/25 w-64">
+  <h5 class="text-primary font-bold mb-4">Menu</h5>
+  <ul class="flex flex-col space-y-2">
+    <li class="mb-2">
+      <a class="text-gray-800 hover:text-primary" href="/dashboard">Dashboard</a>
     </li>
     @for( item of navItems; track item){
       @if((role$ | async) == item.role){
-        <li class="nav-item mb-2">
-          <a class="nav-link text-dark" [href]="item.link">{{item.title}}</a>
+        <li class="mb-2">
+          <a class="text-gray-800 hover:text-primary" [href]="item.link">{{item.title}}</a>
         </li>
       }
     }

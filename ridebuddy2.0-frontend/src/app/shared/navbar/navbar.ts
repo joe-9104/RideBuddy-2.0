@@ -17,8 +17,14 @@ import {AuthService} from '../../core/services/auth.service';
 })
 export class Navbar {
   user$: BehaviorSubject<User | null>;
+  public menuOpen: boolean = false; // control dropdown
+
   constructor(private auth: AuthService, private router: Router) {
     this.user$ = this.auth.userSubject;
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
    logout() {

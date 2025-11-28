@@ -10,7 +10,7 @@ import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
 @Component({
   selector: 'app-rides-list-conductor',
   templateUrl: './rides-list-conductor.html',
-  styleUrls: ['./rides-list-conductor.scss'],
+  styleUrls: ['./rides-list-conductor.css'],
   imports: [
     FormsModule,
     RouterLink,

@@ -11,7 +11,7 @@ import {User} from '../../app.models';
     CommonModule,
   ],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss',
+  styleUrl: './dashboard.css',
 })
 export class Dashboard {
   user$: BehaviorSubject<User | null>;

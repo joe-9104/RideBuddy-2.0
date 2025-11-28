@@ -1,10 +1,10 @@
-<div class="container my-4 bg-white rounded shadow p-4">
+<div class="max-w-7xl mx-auto my-4 bg-white rounded-lg shadow p-4">
   <div class="filter-ui mb-3 p-3 border rounded">
 
-    <div class="row g-2">
-      <div class="col-md-4">
-        <label>Choose Column:</label>
-        <select [(ngModel)]="filterColumn" class="form-select"
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div>
+        <label class="block mb-1">Choose Column:</label>
+        <select [(ngModel)]="filterColumn" class="w-full border rounded px-2 py-1 text-sm"
                 (change)="filterValue = ''">
           <option value="">-- Select Column --</option>
           <option value="departureLocation">Departure Location</option>
@@ -17,9 +17,9 @@
         </select>
       </div>
 
-      <div class="col-md-4">
-        <label>Choose Value:</label>
-        <select [(ngModel)]="filterValue" class="form-select">
+      <div>
+        <label class="block mb-1">Choose Value:</label>
+        <select [(ngModel)]="filterValue" class="w-full border rounded px-2 py-1 text-sm">
           <option value="">-- Select Value --</option>
           <option *ngFor="let v of getDistinctValuesForColumn(filterColumn)" [value]="v">
             {{ v }}
@@ -27,79 +27,78 @@
         </select>
       </div>
 
-      <div class="col-md-4 d-flex align-items-end gap-2">
-        <button class="btn btn-primary" (click)="applyFilter()">Apply</button>
-        <button class="btn btn-secondary" (click)="resetFilter()">Reset</button>
+      <div class="flex items-end gap-2">
+        <button class="px-3 py-1 rounded bg-primary text-white text-sm" (click)="applyFilter()">Apply</button>
+        <button class="px-3 py-1 rounded bg-secondary text-white text-sm" (click)="resetFilter()">Reset</button>
       </div>
     </div>
   </div>
 
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Departure</th>
-        <th>Destination</th>
-        <th>Departure Time</th>
-        <th>Available</th>
-        <th>Price</th>
-        <th>Status</th>
-        <th>Conductor</th>
-        <th>Comments</th>
-        <th>Actions</th>
-        <th>Details</th>
-      </tr>
-    </thead>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">#</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Departure</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Destination</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Departure Time</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Available</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Price</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Status</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Conductor</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Comments</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Actions</th>
+          <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Details</th>
+        </tr>
+      </thead>
 
-    <tbody>
-    <tr *ngFor="let ride of rides$ | async; let i = index"
-        [ngClass]="{
-          'table-warning': ride.id === highlightRideId
-        }">
+      <tbody>
+      <tr *ngFor="let ride of rides$ | async; let i = index"
+          [ngClass]="{ 'bg-yellow-50': ride.id === highlightRideId, 'odd:bg-white even:bg-gray-50': true }">
 
-      <td>{{ i + 1 }}</td>
-      <td>{{ ride.departureLocation }}</td>
-      <td>{{ ride.destination }}</td>
-      <td>{{ ride.departureDate }} {{ ride.departureTime }}</td>
-      <td>{{ ride.availablePlaces }}</td>
-      <td>{{ ride.pricePerSeat }} TND</td>
-      <td>{{ ride.status }}</td>
-      <td>{{ ride.conductorName }}</td>
-      <td>{{ ride.comments }}</td>
+        <td class="px-4 py-2 text-sm">{{ i + 1 }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.departureLocation }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.destination }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.departureDate }} {{ ride.departureTime }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.availablePlaces }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.pricePerSeat }} TND</td>
+        <td class="px-4 py-2 text-sm">{{ ride.status }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.conductorName }}</td>
+        <td class="px-4 py-2 text-sm">{{ ride.comments }}</td>
 
-      <td>
+        <td class="px-4 py-2 text-sm">
 
-        <!-- Already reserved -->
-        <a *ngIf="userReservations.includes(ride.id)"
-           [routerLink]="['/reservations/manage']"
-           [queryParams]="{ rideId: ride.id }"
-           class="btn btn-warning btn-sm text-nowrap">
-          Manage Reservation
-        </a>
+          <!-- Already reserved -->
+          <a *ngIf="userReservations.includes(ride.id)"
+             [routerLink]="['/reservations/manage']"
+             [queryParams]="{ rideId: ride.id }"
+             class="inline-block px-2 py-1 bg-warning text-black rounded text-sm whitespace-nowrap">
+            Manage Reservation
+          </a>
 
-        <!-- Not reserved -->
-        <div *ngIf="!userReservations.includes(ride.id)">
-          <div *ngIf="ride.status === 'in-progress'" class="d-flex gap-1">
-            <select #places class="form-select form-select-sm w-auto">
-              <option *ngFor="let _ of [].constructor(ride.availablePlaces); let idx = index"
-                      [value]="idx + 1">
-                {{ idx + 1 }}
-              </option>
-            </select>
-            <button class="btn btn-success btn-sm"
-                    (click)="reserve(ride, +places.value)">
-              Submit
-            </button>
+          <!-- Not reserved -->
+          <div *ngIf="!userReservations.includes(ride.id)">
+            <div *ngIf="ride.status === 'in-progress'" class="flex gap-1">
+              <select #places class="border rounded text-sm px-2 py-1 w-auto">
+                <option *ngFor="let _ of [].constructor(ride.availablePlaces); let idx = index"
+                        [value]="idx + 1">
+                  {{ idx + 1 }}
+                </option>
+              </select>
+              <button class="px-2 py-1 rounded bg-success text-white text-sm"
+                      (click)="reserve(ride, +places.value)">
+                Submit
+              </button>
+            </div>
           </div>
-        </div>
-      </td>
+        </td>
 
-      <td>
-        <a [routerLink]="['/dashboard/rides/details', ride.id]"
-           class="btn btn-secondary btn-sm">Details</a>
-      </td>
+        <td class="px-4 py-2 text-sm">
+          <a [routerLink]="['/dashboard/rides/details', ride.id]" class="inline-block px-2 py-1 bg-secondary text-white rounded text-sm">Details</a>
+        </td>
 
-    </tr>
-    </tbody>
-  </table>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

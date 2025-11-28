@@ -1,91 +1,87 @@
-<nav class="navbar navbar-expand-lg py-3 bg-light">
-  <div class="container-fluid px-5">
+<nav class="w-full bg-white/90 backdrop-blur shadow-sm border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between">
     <!-- Brand -->
-    <a
-      class="navbar-brand d-flex align-items-center text-primary fw-bold"
-      routerLink="/"
-    >
+    <a routerLink="/" class="flex items-center text-primary font-bold">
       <img
         src="assets/ridebuddy.png"
         alt="RideBuddy Logo"
-        class="u-logo-40 me-2"
+        class="u-logo-40 mr-2"
       />
-      RideBuddy
+      <span>RideBuddy</span>
     </a>
 
     <!-- Menu (always visible on desktop and mobile) -->
-    <div class="d-flex flex-column flex-lg-row align-items-center ms-auto">
+    <div class="flex flex-col lg:flex-row items-center ml-auto">
       <!-- Left Links -->
-      <ul class="navbar-nav d-flex flex-row me-lg-auto mb-2 mb-lg-0">
-        <li class="nav-item me-3">
-          <a routerLink="/" class="nav-link text-primary fw-bold">Home</a>
+      <ul class="flex flex-row lg:mr-6 space-x-6">
+        <li>
+          <a routerLink="/" class="text-primary font-semibold">Home</a>
         </li>
-        <li class="nav-item me-3">
-          <a routerLink="/contact" class="nav-link text-primary fw-bold">Contact</a>
+        <li>
+          <a routerLink="/contact" class="text-primary font-semibold">Contact</a>
         </li>
       </ul>
 
       <!-- Guest Buttons -->
-      <div *ngIf="!(user$ | async)" class="d-flex align-items-center">
+      <div *ngIf="!(user$ | async)" class="flex items-center space-x-3">
         <a
           routerLink="/register"
-          class="btn btn-primary me-2 rounded-pill"
+          class="px-4 py-2 rounded-full text-sm font-medium bg-primary text-white hover:bg-primary/90 transition"
         >
           Register
         </a>
         <a
           routerLink="/login"
-          class="btn btn-outline-primary rounded-pill"
+          class="px-4 py-2 rounded-full text-sm font-medium border border-primary text-primary hover:bg-primary hover:text-white transition"
         >
           Login
         </a>
       </div>
 
       <!-- Logged-in User Dropdown -->
-      <div *ngIf="user$ | async as user" class="dropdown ms-3">
-        <a
-          class="d-flex align-items-center text-decoration-none dropdown-toggle text-primary fw-bold"
-          href="#"
-          id="userMenu"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+      <div *ngIf="user$ | async as user" class="relative ml-3">
+        <button
+          (click)="toggleMenu()"
+          class="flex items-center text-primary font-bold focus:outline-none"
         >
           <img
             src="/assets/driver-2.svg"
             alt="Profile"
-            class="rounded-circle me-2 border border-2 border-primary u-logo-40"
+            class="rounded-full mr-2 border-2 border-primary u-logo-40"
           />
           <span>{{ user.displayName }}</span>
-        </a>
+        </button>
 
-        <ul
-          class="dropdown-menu dropdown-menu-end shadow rounded"
-          aria-labelledby="userMenu"
+        <div
+          *ngIf="menuOpen"
+          class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5"
         >
-          <li>
-            <span class="dropdown-item disabled text-primary fw-bold">
+          <div class="py-2">
+            <div class="px-4 text-sm text-primary font-bold">
               Role: {{ user.role }}
-            </span>
-          </li>
-          <li><hr class="dropdown-divider" /></li>
-          <li>
-            <a class="dropdown-item" routerLink="/profile">
-              <i class="bi bi-person me-2"></i> Profile
+            </div>
+            <div class="border-t my-2"></div>
+            <a
+              routerLink="/profile"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            >
+              <i class="bi bi-person mr-2"></i> Profile
             </a>
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="/settings">
-              <i class="bi bi-gear me-2"></i> Settings
+            <a
+              routerLink="/settings"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            >
+              <i class="bi bi-gear mr-2"></i> Settings
             </a>
-          </li>
-          <li><hr class="dropdown-divider" /></li>
-          <li>
-            <button class="dropdown-item" (click)="logout()">
-              <i class="bi bi-box-arrow-left me-2"></i> Logout
+            <div class="border-t my-2"></div>
+            <button
+              (click)="logout()"
+              class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+            >
+              <i class="bi bi-box-arrow-left mr-2"></i> Logout
             </button>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

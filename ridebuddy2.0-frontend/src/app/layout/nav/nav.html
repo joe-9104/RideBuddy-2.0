@@ -1,77 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bold d-flex align-items-center" href="/">
-      <img
-        src="assets/ridebuddy.png"
-        alt="RideBuddy Logo"
-        class="me-2 u-logo-40"
-      />
+<nav class="w-full bg-primary text-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="flex items-center font-bold">
+      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 u-logo-40" />
       RideBuddy
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link text-white"><i class="bi bi-envelope"></i></a>
-        </li>
-        <li>
-          <a class="nav-link text-white"><i class="bi bi-bell"></i></a>
-        </li>
-        <li class="nav-item">
-          @if (user$ | async) {
-            <div class="dropdown ms-3">
-              <a
-                class="d-flex align-items-center text-decoration-none dropdown-toggle text-white fw-bold"
-                href="#"
-                id="userMenu"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <img
-                  src="/assets/driver-2.svg"
-                  alt="Profile"
-                  class="rounded-circle me-2 border border-2 border-white u-logo-40"
-                />
-                <span class="text-white">{{ (user$ | async)?.displayName }}</span>
-              </a>
 
-              <ul
-                class="dropdown-menu dropdown-menu-end shadow"
-                aria-labelledby="userMenu"
-                style="border-radius: 10px;"
-              >
-                <li>
-              <span class="dropdown-item disabled text-primary fw-bold">
-                Role: {{ (user$ | async)?.role }}
-              </span>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="/profile">
-                    <i class="bi bi-person me-2"></i> Profile
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="/settings">
-                    <i class="bi bi-gear me-2"></i> Settings
-                  </a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <button class="dropdown-item" (click)="logout()">
-                    <i class="bi bi-box-arrow-left me-2"></i> Logout
-                  </button>
-                </li>
-              </ul>
+    <div class="flex items-center space-x-4">
+      <button class="text-white"><i class="bi bi-envelope"></i></button>
+      <button class="text-white"><i class="bi bi-bell"></i></button>
+
+      @if (user$ | async) {
+        <div class="relative">
+          <button (click)="toggleMenu()" class="flex items-center text-white font-bold focus:outline-none">
+            <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full mr-2 border-2 border-white u-logo-40" />
+            <span class="text-white">{{ (user$ | async)?.displayName }}</span>
+          </button>
+
+          <div *ngIf="menuOpen" class="absolute right-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+            <div class="py-2">
+              <div class="px-4 text-sm font-bold">Role: {{ (user$ | async)?.role }}</div>
+              <div class="border-t my-2"></div>
+              <a class="block px-4 py-2 text-sm hover:bg-gray-50" href="/profile"><i class="bi bi-person mr-2"></i> Profile</a>
+              <a class="block px-4 py-2 text-sm hover:bg-gray-50" href="/settings"><i class="bi bi-gear mr-2"></i> Settings</a>
+              <div class="border-t my-2"></div>
+              <button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" (click)="logout()"><i class="bi bi-box-arrow-left mr-2"></i> Logout</button>
             </div>
-          } @else {
-            <a class="nav-link text-white" href="/register">Register</a>
-          }
-        </li>
-      </ul>
+          </div>
+        </div>
+      } @else {
+        <a class="text-white" href="/register">Register</a>
+      }
     </div>
   </div>
 </nav>

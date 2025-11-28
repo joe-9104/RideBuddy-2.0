@@ -7,14 +7,17 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {filter} from 'rxjs';
 import {Governorate} from '../../../app.models';
+import {NgClass, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-create-ride',
   imports: [
     ReactiveFormsModule,
+    NgClass,
+    NgIf,
   ],
   templateUrl: './create-ride.html',
-  styleUrl: './create-ride.scss',
+  styleUrl: './create-ride.css',
 })
 export class CreateRide implements OnInit, AfterViewInit {
   rideForm!: FormGroup;

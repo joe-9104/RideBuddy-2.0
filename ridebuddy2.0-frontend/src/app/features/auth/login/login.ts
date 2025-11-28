@@ -14,7 +14,7 @@ import {doc, Firestore, getDoc} from '@angular/fire/firestore';
     RouterLink
   ],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
+  styleUrl: './login.css',
 })
 export class Login {
 

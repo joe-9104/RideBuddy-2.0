@@ -14,7 +14,7 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
     AsyncPipe
   ],
   templateUrl: './passenger-reservations-history.html',
-  styleUrl: './passenger-reservations-history.scss',
+  styleUrl: './passenger-reservations-history.css',
 })
 export class PassengerReservationsHistory implements OnInit {
 

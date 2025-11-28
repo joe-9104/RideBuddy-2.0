@@ -12,7 +12,7 @@ import {NgIf} from '@angular/common';
     RouterLink
   ],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
+  styleUrl: './register.css',
 })
 export class Register {
   registerForm!: FormGroup;

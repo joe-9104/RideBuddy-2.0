@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes swing {
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  100% { transform: rotate(0); }
+}
+
+/* Small helper classes (prefixed with 'u-' to indicate utility helpers) */
+.u-map-400 { height: 400px; width: 100%; }
+.u-map-500 { height: 500px; width: 100%; }
+.u-logo-40 { height: 40px; }
+.u-object-fit-cover { object-fit: cover; }
+.u-max-w-80 { max-width: 80%; }
+.u-side-nav-width { width: 250px; }
+
+/* Visual helpers */
+.u-card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.u-card-lift:hover { transform: translateY(-8px); box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.12); }
+.u-icon-3 { font-size: 3rem; line-height: 1; }
+
+/* Animation helpers that reference the keyframes above */
+.u-animate-bounce { animation: bounce 1.5s infinite; }
+.u-animate-pulse { animation: pulse 2s infinite; }
+.u-animate-swing { animation: swing 1.5s infinite; }
