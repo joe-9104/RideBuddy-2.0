@@ -1,34 +1,70 @@
-<nav class="w-full bg-primary text-white shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/" class="flex items-center font-bold">
-      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 u-logo-40" />
-      RideBuddy
+<nav class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-xl">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center font-extrabold text-lg tracking-wider hover:opacity-90 transition-opacity">
+      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-3 u-logo-40 rounded-md shadow-md" />
+      <span class="uppercase">RideBuddy</span>
     </a>
 
-    <div class="flex items-center space-x-4">
-      <button class="text-white"><i class="bi bi-envelope"></i></button>
-      <button class="text-white"><i class="bi bi-bell"></i></button>
+    <div class="flex items-center space-x-5">
+      <!-- Message Button -->
+      <button class="relative p-2.5 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40" aria-label="Messages">
+        <i class="bi bi-envelope text-xl"></i>
+        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-yellow-300 rounded-full">3</span>
+      </button>
+
+      <!-- Notification Button -->
+      <button class="relative p-2.5 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40" aria-label="Notifications">
+        <i class="bi bi-bell-fill text-xl"></i>
+        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
+      </button>
 
       @if (user$ | async) {
         <div class="relative">
-          <button (click)="toggleMenu()" class="flex items-center text-white font-bold focus:outline-none">
-            <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full mr-2 border-2 border-white u-logo-40" />
-            <span class="text-white">{{ (user$ | async)?.displayName }}</span>
+          <button (click)="toggleMenu()" class="flex items-center gap-2.5 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-full text-white font-semibold focus:ring-2 focus:ring-white/50 focus:outline-none transition-all duration-200">
+            <div class="rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-red-400 to-pink-500 shadow-lg">
+              <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full w-9 h-9 border-2 border-white object-cover" />
+            </div>
+            <span class="truncate max-w-[120px] text-sm font-medium">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</span>
+            <i class="bi bi-caret-down-fill text-xs ml-1"></i>
           </button>
 
-          <div *ngIf="menuOpen" class="absolute right-0 mt-2 w-56 bg-white text-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
+          <div *ngIf="menuOpen" class="absolute right-0 mt-3 w-72 bg-white text-gray-800 rounded-xl shadow-2xl ring-1 ring-black ring-opacity-10 overflow-hidden z-50">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
+              <div class="text-sm font-bold text-gray-900">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
+              <div class="text-xs text-gray-600 mt-1">
+                <span class="inline-block mt-1 px-2.5 py-1 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
+                  {{ (user$ | async)?.role || 'Member' }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Menu Items -->
             <div class="py-2">
-              <div class="px-4 text-sm font-bold">Role: {{ (user$ | async)?.role }}</div>
-              <div class="border-t my-2"></div>
-              <a class="block px-4 py-2 text-sm hover:bg-gray-50" href="/profile"><i class="bi bi-person mr-2"></i> Profile</a>
-              <a class="block px-4 py-2 text-sm hover:bg-gray-50" href="/settings"><i class="bi bi-gear mr-2"></i> Settings</a>
-              <div class="border-t my-2"></div>
-              <button class="w-full text-left px-4 py-2 text-sm hover:bg-gray-50" (click)="logout()"><i class="bi bi-box-arrow-left mr-2"></i> Logout</button>
+              <a routerLink="/profile" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50 transition-colors">
+                <i class="bi bi-person-circle text-indigo-600 text-lg"></i>
+                <span class="font-medium">Profile</span>
+              </a>
+              <a routerLink="/settings" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-indigo-50 transition-colors">
+                <i class="bi bi-gear text-indigo-600 text-lg"></i>
+                <span class="font-medium">Settings</span>
+              </a>
+            </div>
+
+            <!-- Logout -->
+            <div class="border-t border-gray-200 p-3">
+              <button (click)="logout()" class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all font-semibold">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+              </button>
             </div>
           </div>
         </div>
       } @else {
-        <a class="text-white" href="/register">Register</a>
+        <div class="flex items-center gap-3 ml-4 pl-4 border-l border-white/30">
+          <a routerLink="/register" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white text-sm font-semibold transition-all">Register</a>
+          <a routerLink="/login" class="px-4 py-2 bg-white text-indigo-700 rounded-lg text-sm font-bold hover:shadow-lg transition-all">Login</a>
+        </div>
       }
     </div>
   </div>

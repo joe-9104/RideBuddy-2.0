@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../../app.models';
 import {AuthService} from '../../core/services/auth.service';
@@ -10,6 +10,7 @@ import {AsyncPipe, NgIf} from '@angular/common';
   imports: [
     AsyncPipe,
     NgIf,
+    RouterLink,
   ],
   templateUrl: './nav.html',
   styleUrl: './nav.css',
