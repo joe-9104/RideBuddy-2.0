@@ -1,212 +1,214 @@
-<div>
-  <!-- Conductor Section -->
-  @if((user$ | async)?.role === 'CONDUCTOR'){
-    <div>
-      <div class="row g-4 mt-1">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/offer_ride.png" class="card-img-top" alt="Offer a Ride">
-            <div class="card-body">
-              <h5 class="card-title">Offer a Ride</h5>
-              <p class="card-text">Share your ride and earn money while helping others travel.</p>
-              <a href="/dashboard/rides/create" class="btn btn-primary">Offer a Ride</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/rides%20management%20dashboard.webp" class="card-img-top" alt="Rides Management Dashboard">
-            <div class="card-body">
-              <h5 class="card-title">Rides Management Dashboard</h5>
-              <p class="card-text">Easily view, update, and organize your created rides in one place.</p>
-              <a href="/dashboard/rides/myRides" class="btn btn-primary">Go to Rides Dashboard</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/manage_reservations.webp" class="card-img-top" alt="Manage Reservations">
-            <div class="card-body">
-              <h5 class="card-title">Manage Reservations</h5>
-              <p class="card-text">View and manage passenger reservations for your rides.</p>
-              <a href="/dashboard/reservations/manage" class="btn btn-primary">Manage Passenger Reservations</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Conductor Statistics -->
-      <div class="my-5">
-        <h3 class="text-center mb-4">Your Statistics</h3>
-        <div class="row justify-content-center">
+<div class="container my-4 bg-white rounded shadow p-4">
+  <div>
+    <!-- Conductor Section -->
+    @if((user$ | async)?.role === 'CONDUCTOR'){
+      <div>
+        <div class="row g-4 mt-1">
           <div class="col-md-4">
-            <div class="stat-box">
-              <h5>Completed Rides</h5>
-              <p>{{ (user$ | async)?.completedRides || 0 }}</p>
+            <div class="card">
+              <img src="/assets/offer_ride.png" class="card-img-top" alt="Offer a Ride">
+              <div class="card-body">
+                <h5 class="card-title">Offer a Ride</h5>
+                <p class="card-text">Share your ride and earn money while helping others travel.</p>
+                <a href="/dashboard/rides/create" class="btn btn-primary">Offer a Ride</a>
+              </div>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="stat-box">
-              <h5>Ratings Received</h5>
-              <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
+            <div class="card">
+              <img src="/assets/rides%20management%20dashboard.webp" class="card-img-top" alt="Rides Management Dashboard">
+              <div class="card-body">
+                <h5 class="card-title">Rides Management Dashboard</h5>
+                <p class="card-text">Easily view, update, and organize your created rides in one place.</p>
+                <a href="/dashboard/rides/myRides" class="btn btn-primary">Go to Rides Dashboard</a>
+              </div>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="stat-box">
-              <h5>Total Earnings</h5>
-              <p>{{ (user$ | async)?.totalEarnings || 0 }} TND</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Conductor FAQs -->
-      <div class="my-5 bg-white p-4 rounded shadow">
-        <h3 class="text-center mb-4">Frequently Asked Questions</h3>
-        <div class="accordion" id="faqAccordionConductor">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOneC">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneC" aria-expanded="false" aria-controls="collapseOneC">
-                How do I post a ride?
-              </button>
-            </h2>
-            <div id="collapseOneC" class="accordion-collapse collapse" aria-labelledby="headingOneC" data-bs-parent="#faqAccordionConductor">
-              <div class="accordion-body border-0 p-3">
-                Go to the "Offer a Ride" section, fill in the details such as departure location, destination, and available seats, and click "Post Ride."
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwoC">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoC" aria-expanded="false" aria-controls="collapseTwoC">
-                How can I manage reservations for my rides?
-              </button>
-            </h2>
-            <div id="collapseTwoC" class="accordion-collapse collapse" aria-labelledby="headingTwoC" data-bs-parent="#faqAccordionConductor">
-              <div class="accordion-body border-0 p-3">
-                Navigate to the "Manage Reservations" section to view, accept, or reject reservations for your rides.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThreeC">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeC" aria-expanded="false" aria-controls="collapseThreeC">
-                Can I edit or cancel a posted ride?
-              </button>
-            </h2>
-            <div id="collapseThreeC" class="accordion-collapse collapse" aria-labelledby="headingThreeC" data-bs-parent="#faqAccordionConductor">
-              <div class="accordion-body border-0 p-3">
-                Yes, you can edit the details or cancel a ride before it starts. Visit the "Rides Management Dashboard" to make changes.
+            <div class="card">
+              <img src="/assets/manage_reservations.webp" class="card-img-top" alt="Manage Reservations">
+              <div class="card-body">
+                <h5 class="card-title">Manage Reservations</h5>
+                <p class="card-text">View and manage passenger reservations for your rides.</p>
+                <a href="/dashboard/reservations/manage" class="btn btn-primary">Manage Passenger Reservations</a>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Conductor Statistics -->
+        <div class="my-5">
+          <h3 class="text-center mb-4">Your Statistics</h3>
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <div class="stat-box">
+                <h5>Completed Rides</h5>
+                <p>{{ (user$ | async)?.completedRides || 0 }}</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-box">
+                <h5>Ratings Received</h5>
+                <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-box">
+                <h5>Total Earnings</h5>
+                <p>{{ (user$ | async)?.totalEarnings || 0 }} TND</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conductor FAQs -->
+        <div class="my-5 bg-white p-4 rounded shadow">
+          <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+          <div class="accordion" id="faqAccordionConductor">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOneC">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneC" aria-expanded="false" aria-controls="collapseOneC">
+                  How do I post a ride?
+                </button>
+              </h2>
+              <div id="collapseOneC" class="accordion-collapse collapse" aria-labelledby="headingOneC" data-bs-parent="#faqAccordionConductor">
+                <div class="accordion-body border-0 p-3">
+                  Go to the "Offer a Ride" section, fill in the details such as departure location, destination, and available seats, and click "Post Ride."
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwoC">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoC" aria-expanded="false" aria-controls="collapseTwoC">
+                  How can I manage reservations for my rides?
+                </button>
+              </h2>
+              <div id="collapseTwoC" class="accordion-collapse collapse" aria-labelledby="headingTwoC" data-bs-parent="#faqAccordionConductor">
+                <div class="accordion-body border-0 p-3">
+                  Navigate to the "Manage Reservations" section to view, accept, or reject reservations for your rides.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThreeC">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeC" aria-expanded="false" aria-controls="collapseThreeC">
+                  Can I edit or cancel a posted ride?
+                </button>
+              </h2>
+              <div id="collapseThreeC" class="accordion-collapse collapse" aria-labelledby="headingThreeC" data-bs-parent="#faqAccordionConductor">
+                <div class="accordion-body border-0 p-3">
+                  Yes, you can edit the details or cancel a ride before it starts. Visit the "Rides Management Dashboard" to make changes.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  } @else if ((user$ | async)?.role === 'PASSENGER'){
-    <div>
-      <div class="row g-4 mt-1">
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/find_ride.png" class="card-img-top" alt="Find a Ride">
-            <div class="card-body">
-              <h5 class="card-title">Find a Ride</h5>
-              <p class="card-text">Discover rides tailored to your schedule and needs.</p>
-              <a href="/dashboard/rides/all-rides" class="btn btn-primary">Find Rides</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/find_nearby_ride.png" class="card-img-top" alt="Find Nearby Ride">
-            <div class="card-body">
-              <h5 class="card-title">Find a Nearby Ride</h5>
-              <p class="card-text">Easily locate rides near your current location for quick and convenient travel.</p>
-              <a href="/dashboard/rides/rides-near-me" class="btn btn-primary">Nearby Rides</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <img src="/assets/manage_bookings.png" class="card-img-top" alt="Manage Bookings">
-            <div class="card-body">
-              <h5 class="card-title">Manage Bookings</h5>
-              <p class="card-text">View, manage, and cancel your ride bookings, ensuring convenience for your travel plans.</p>
-              <a href="/dashboard/reservations/history" class="btn btn-primary">Manage Bookings</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Passenger Statistics -->
-      <div class="my-5">
-        <h3 class="text-center mb-4">Your Statistics</h3>
-        <div class="row justify-content-center">
+    } @else if ((user$ | async)?.role === 'PASSENGER'){
+      <div>
+        <div class="row g-4 mt-1">
           <div class="col-md-4">
-            <div class="stat-box">
-              <h5>Completed Rides</h5>
-              <p>{{ (user$ | async)?.completedRides || 0 }}</p>
+            <div class="card">
+              <img src="/assets/find_ride.png" class="card-img-top" alt="Find a Ride">
+              <div class="card-body">
+                <h5 class="card-title">Find a Ride</h5>
+                <p class="card-text">Discover rides tailored to your schedule and needs.</p>
+                <a href="/dashboard/rides/all-rides" class="btn btn-primary">Find Rides</a>
+              </div>
             </div>
           </div>
+
           <div class="col-md-4">
-            <div class="stat-box">
-              <h5>Ratings Received</h5>
-              <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Passenger FAQs -->
-      <div class="my-5 bg-white p-4 rounded shadow">
-        <h3 class="text-center mb-4">Frequently Asked Questions</h3>
-        <div class="accordion" id="faqAccordionPassenger">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOneP">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneP" aria-expanded="false" aria-controls="collapseOneP">
-                How do I book a ride?
-              </button>
-            </h2>
-            <div id="collapseOneP" class="accordion-collapse collapse" aria-labelledby="headingOneP" data-bs-parent="#faqAccordionPassenger">
-              <div class="accordion-body border-0 p-3">
-                Browse available rides, select one that suits your schedule, and click "Book Now."
+            <div class="card">
+              <img src="/assets/find_nearby_ride.png" class="card-img-top" alt="Find Nearby Ride">
+              <div class="card-body">
+                <h5 class="card-title">Find a Nearby Ride</h5>
+                <p class="card-text">Easily locate rides near your current location for quick and convenient travel.</p>
+                <a href="/dashboard/rides/rides-near-me" class="btn btn-primary">Nearby Rides</a>
               </div>
             </div>
           </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwoP">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoP" aria-expanded="false" aria-controls="collapseTwoP">
-                Can I cancel a reservation?
-              </button>
-            </h2>
-            <div id="collapseTwoP" class="accordion-collapse collapse" aria-labelledby="headingTwoP" data-bs-parent="#faqAccordionPassenger">
-              <div class="accordion-body border-0 p-3">
-                Yes, you can cancel a reservation before the ride starts through the "Manage Bookings" section.
-              </div>
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThreeP">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeP" aria-expanded="false" aria-controls="collapseThreeP">
-                How can I contact the driver?
-              </button>
-            </h2>
-            <div id="collapseThreeP" class="accordion-collapse collapse" aria-labelledby="headingThreeP" data-bs-parent="#faqAccordionPassenger">
-              <div class="accordion-body border-0 p-3">
-                Once you've booked a ride, the driver's contact details will be available in the "My Rides" section.
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/assets/manage_bookings.png" class="card-img-top" alt="Manage Bookings">
+              <div class="card-body">
+                <h5 class="card-title">Manage Bookings</h5>
+                <p class="card-text">View, manage, and cancel your ride bookings, ensuring convenience for your travel plans.</p>
+                <a href="/dashboard/reservations/history" class="btn btn-primary">Manage Bookings</a>
               </div>
             </div>
           </div>
         </div>
+
+        <!-- Passenger Statistics -->
+        <div class="my-5">
+          <h3 class="text-center mb-4">Your Statistics</h3>
+          <div class="row justify-content-center">
+            <div class="col-md-4">
+              <div class="stat-box">
+                <h5>Completed Rides</h5>
+                <p>{{ (user$ | async)?.completedRides || 0 }}</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="stat-box">
+                <h5>Ratings Received</h5>
+                <p>{{ (user$ | async)?.averageRating || 0 }}/5</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passenger FAQs -->
+        <div class="my-5 bg-white p-4 rounded shadow">
+          <h3 class="text-center mb-4">Frequently Asked Questions</h3>
+          <div class="accordion" id="faqAccordionPassenger">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOneP">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOneP" aria-expanded="false" aria-controls="collapseOneP">
+                  How do I book a ride?
+                </button>
+              </h2>
+              <div id="collapseOneP" class="accordion-collapse collapse" aria-labelledby="headingOneP" data-bs-parent="#faqAccordionPassenger">
+                <div class="accordion-body border-0 p-3">
+                  Browse available rides, select one that suits your schedule, and click "Book Now."
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwoP">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwoP" aria-expanded="false" aria-controls="collapseTwoP">
+                  Can I cancel a reservation?
+                </button>
+              </h2>
+              <div id="collapseTwoP" class="accordion-collapse collapse" aria-labelledby="headingTwoP" data-bs-parent="#faqAccordionPassenger">
+                <div class="accordion-body border-0 p-3">
+                  Yes, you can cancel a reservation before the ride starts through the "Manage Bookings" section.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThreeP">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThreeP" aria-expanded="false" aria-controls="collapseThreeP">
+                  How can I contact the driver?
+                </button>
+              </h2>
+              <div id="collapseThreeP" class="accordion-collapse collapse" aria-labelledby="headingThreeP" data-bs-parent="#faqAccordionPassenger">
+                <div class="accordion-body border-0 p-3">
+                  Once you've booked a ride, the driver's contact details will be available in the "My Rides" section.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </div>

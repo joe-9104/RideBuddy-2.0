@@ -1,4 +1,4 @@
-<div class="container my-4">
+<div class="container my-4 bg-white rounded shadow p-4">
   <div class="filter-ui mb-3 p-3 border rounded">
 
     <div class="row g-2">
@@ -81,7 +81,7 @@
         <div *ngIf="!userReservations.includes(ride.id)">
           <div *ngIf="ride.status === 'in-progress'" class="d-flex gap-1">
             <select #places class="form-select form-select-sm w-auto">
-              <option *ngFor="let n of [].constructor(ride.availablePlaces); let idx = index"
+              <option *ngFor="let _ of [].constructor(ride.availablePlaces); let idx = index"
                       [value]="idx + 1">
                 {{ idx + 1 }}
               </option>

@@ -21,6 +21,27 @@ $body-color: $dark !default;
 $border-radius: 0.75rem !default;
 $btn-border-radius: $border-radius !default;
 
+// Button variant variables (ensure button text color uses the 'on-*' contrast colors)
+$btn-primary-color: $on-primary !default;
+$btn-primary-bg: $primary !default;
+$btn-primary-border: $primary !default;
+
+$btn-secondary-color: $on-secondary !default;
+$btn-secondary-bg: $secondary !default;
+$btn-secondary-border: $secondary !default;
+
+$btn-success-color: $on-success !default;
+$btn-success-bg: $success !default;
+$btn-success-border: $success !default;
+
+$btn-warning-color: $on-warning !default;
+$btn-warning-bg: $warning !default;
+$btn-warning-border: $warning !default;
+
+$btn-danger-color: $on-danger !default;
+$btn-danger-bg: $danger !default;
+$btn-danger-border: $danger !default;
+
 
 // Theme colors map used by Bootstrap utilities
 $theme-colors: (
