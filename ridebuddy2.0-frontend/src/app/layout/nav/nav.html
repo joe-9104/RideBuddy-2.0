@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: #38a89d;">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand text-white fw-bold" href="/">
+    <a class="navbar-brand text-white fw-bold d-flex align-items-center" href="/">
       <img
         src="assets/ridebuddy.png"
         alt="RideBuddy Logo"
-        style="height: 40px; margin-right: 10px;"
+        class="me-2 u-logo-40"
       />
       RideBuddy
     </a>
@@ -14,28 +14,26 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link"><i class="bi bi-envelope"></i></a>
+          <a class="nav-link text-white"><i class="bi bi-envelope"></i></a>
         </li>
         <li>
-          <a class="nav-link"><i class="bi bi-bell"></i></a>
+          <a class="nav-link text-white"><i class="bi bi-bell"></i></a>
         </li>
         <li class="nav-item">
           @if (user$ | async) {
             <div class="dropdown ms-3">
               <a
-                class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                class="d-flex align-items-center text-decoration-none dropdown-toggle text-white fw-bold"
                 href="#"
                 id="userMenu"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                style="color: #38a89d; font-weight: bold;"
               >
                 <img
                   src="/assets/driver-2.svg"
                   alt="Profile"
-                  class="rounded-circle me-2"
-                  style="width: 40px; height: 40px; border: 2px solid #38a89d;"
+                  class="rounded-circle me-2 border border-2 border-white u-logo-40"
                 />
                 <span class="text-white">{{ (user$ | async)?.displayName }}</span>
               </a>
@@ -46,7 +44,7 @@
                 style="border-radius: 10px;"
               >
                 <li>
-              <span class="dropdown-item disabled" style="color: #38a89d; font-weight: bold;">
+              <span class="dropdown-item disabled text-primary fw-bold">
                 Role: {{ (user$ | async)?.role }}
               </span>
                 </li>
@@ -77,4 +75,3 @@
     </div>
   </div>
 </nav>
-

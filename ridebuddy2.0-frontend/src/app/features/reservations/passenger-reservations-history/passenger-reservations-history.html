@@ -61,10 +61,10 @@
         <td>
           <div
             *ngIf="res.status === 'PENDING' && res.ride.status === 'in-progress'"
-            style="display: flex; align-items: center; gap: 0.5rem"
+            class="d-flex align-items-center gap-2"
           >
             <select #places class="form-select form-select-sm w-auto d-inline-block">
-              <option *ngFor="let p of [].constructor(res.maxPlaces); let idx = index" [value]="idx + 1">
+              <option *ngFor="let _ of [].constructor(res.maxPlaces); let idx = index" [value]="idx + 1">
                 {{ idx + 1 }}
               </option>
             </select>

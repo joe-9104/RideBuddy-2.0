@@ -1,164 +1,93 @@
-@import "bootstrap/dist/css/bootstrap.min.css";
+$primary: #38a89d !default;
+$secondary: #6c757d !default;
+$success: #198754 !default;
+$warning: #ffc107 !default;
+$danger: #dc3545 !default;
+$info: #0dcaf0 !default;
+$light: #f8f9fa !default;
+$dark: #212529 !default;
+
+// 'On' colors for contrast (text-on-*), useful for utilities
+$on-primary: #ffffff !default;
+$on-secondary: #ffffff !default;
+$on-success: #ffffff !default;
+$on-warning: #000000 !default;
+$on-danger: #ffffff !default;
+$on-light: #000000 !default;
+$on-dark: #ffffff !default;
+
+$body-bg: #ffffff !default;
+$body-color: $dark !default;
+$border-radius: 0.75rem !default;
+$btn-border-radius: $border-radius !default;
+
+
+// Theme colors map used by Bootstrap utilities
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+) !default;
+
+
+@import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+:root {
+  /* Helpful 'on-*' CSS variables for custom utilities or future use */
+  --on-primary: #{$on-primary};
+  --on-secondary: #{$on-secondary};
+  --on-success: #{$on-success};
+  --on-warning: #{$on-warning};
+  --on-danger: #{$on-danger};
+}
+
 body {
-    /*background-color: #f0f8f7;  Light background color */
     background-image: url("/assets/background.png");
     background-repeat: repeat;
 }
 
-header {
-    background-color: #38a89d; /* Main color for header */
-}
+/* No component-level CSS here — use Bootstrap utilities and component SCSS only when necessary. */
 
-.header-logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-}
-
-.nav-link {
-    color: white !important;
-    font-weight: bold;
-}
-
-.nav-link:hover {
-    color: #00796b !important; /* Hover effect for links */
-}
-
-.container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-}
-
-.card {
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.card:hover {
-    transform: translateY(-10px); /* Lift effect on hover */
-}
-
-.card-img-top {
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    object-fit: cover;
-    height: 200px;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.btn-primary {
-    background-color: #38a89d;
-    border-color: #38a89d;
-    border-radius: 25px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #00796b;
-    border-color: #00796b;
-}
-
-.btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(38, 177, 152, 0.25);
-}
-
-.stat-box {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.stat-box h5 {
-    font-weight: bold;
-}
-
-.stat-box p {
-    font-size: 2rem;
-    margin: 0;
-}
-
-.stat-box:last-child {
-    margin-bottom: 0;
-}
-.hover-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    z-index: 1;
-    /*background: rgba(0, 0, 0, 0.3);  Optional dark overlay for better contrast */
-}
-
-.hover-img img {
-    max-height: 100%;
-    max-width: 100%;
-    opacity: 0.2; /* Faint image effect */
-    filter: brightness(70%); /* Additional dimming for better text visibility */
-}
-
-.card:hover .hover-img {
-    opacity: 1; /* Show the image when hovering */
-}
-
-.card-body {
-    z-index: 2; /* Ensure text is above the dimmed image */
-    position: relative;
-}
-/* Bouncing animation */
+/* Animations used across the app (kept global so templates can reference them) */
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-15px);
-    }
-    60% {
-        transform: translateY(-10px);
-    }
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-10px); }
 }
 
-/* Pulsing animation */
 @keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
-/* Swinging animation */
 @keyframes swing {
-    20% {
-        transform: rotate(15deg);
-    }
-    40% {
-        transform: rotate(-10deg);
-    }
-    60% {
-        transform: rotate(5deg);
-    }
-    100% {
-        transform: rotate(0);
-    }
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  100% { transform: rotate(0); }
 }
+
+/* Small helper classes (prefixed with 'u-' to indicate utility helpers) */
+.u-map-400 { height: 400px; width: 100%; }
+.u-map-500 { height: 500px; width: 100%; }
+.u-logo-40 { height: 40px; }
+.u-object-fit-cover { object-fit: cover; }
+.u-max-w-80 { max-width: 80%; }
+.u-side-nav-width { width: 250px; }
+
+/* Visual helpers */
+.u-card-lift { transition: transform 0.25s ease, box-shadow 0.25s ease; }
+.u-card-lift:hover { transform: translateY(-8px); box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.12); }
+.u-icon-3 { font-size: 3rem; line-height: 1; }
+
+/* Animation helpers that reference the keyframes above */
+.u-animate-bounce { animation: bounce 1.5s infinite; }
+.u-animate-pulse { animation: pulse 2s infinite; }
+.u-animate-swing { animation: swing 1.5s infinite; }

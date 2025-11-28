@@ -1,15 +1,14 @@
-<nav class="navbar navbar-expand-lg py-3" style="background-color: #96e4dc;">
+<nav class="navbar navbar-expand-lg py-3 bg-light">
   <div class="container-fluid px-5">
     <!-- Brand -->
     <a
-      class="navbar-brand d-flex align-items-center"
+      class="navbar-brand d-flex align-items-center text-primary fw-bold"
       routerLink="/"
-      style="color: #38a89d; font-weight: bold; font-size: 1.5rem;"
     >
       <img
         src="assets/ridebuddy.png"
         alt="RideBuddy Logo"
-        style="height: 40px; margin-right: 10px;"
+        class="u-logo-40 me-2"
       />
       RideBuddy
     </a>
@@ -19,10 +18,10 @@
       <!-- Left Links -->
       <ul class="navbar-nav d-flex flex-row me-lg-auto mb-2 mb-lg-0">
         <li class="nav-item me-3">
-          <a routerLink="/" class="nav-link" style="color: #38a89d; font-weight: bold;">Home</a>
+          <a routerLink="/" class="nav-link text-primary fw-bold">Home</a>
         </li>
         <li class="nav-item me-3">
-          <a routerLink="/contact" class="nav-link" style="color: #38a89d; font-weight: bold;">Contact</a>
+          <a routerLink="/contact" class="nav-link text-primary fw-bold">Contact</a>
         </li>
       </ul>
 
@@ -30,15 +29,13 @@
       <div *ngIf="!(user$ | async)" class="d-flex align-items-center">
         <a
           routerLink="/register"
-          class="btn me-2"
-          style="color: #fff; background-color: #38a89d; font-weight: bold; border-radius: 20px;"
+          class="btn btn-primary me-2 rounded-pill"
         >
           Register
         </a>
         <a
           routerLink="/login"
-          class="btn"
-          style="color: #38a89d; border: 2px solid #38a89d; font-weight: bold; border-radius: 20px;"
+          class="btn btn-outline-primary rounded-pill"
         >
           Login
         </a>
@@ -47,30 +44,27 @@
       <!-- Logged-in User Dropdown -->
       <div *ngIf="user$ | async as user" class="dropdown ms-3">
         <a
-          class="d-flex align-items-center text-decoration-none dropdown-toggle"
+          class="d-flex align-items-center text-decoration-none dropdown-toggle text-primary fw-bold"
           href="#"
           id="userMenu"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
-          style="color: #38a89d; font-weight: bold;"
         >
           <img
             src="/assets/driver-2.svg"
             alt="Profile"
-            class="rounded-circle me-2"
-            style="width: 40px; height: 40px; border: 2px solid #38a89d;"
+            class="rounded-circle me-2 border border-2 border-primary u-logo-40"
           />
           <span>{{ user.displayName }}</span>
         </a>
 
         <ul
-          class="dropdown-menu dropdown-menu-end shadow"
+          class="dropdown-menu dropdown-menu-end shadow rounded"
           aria-labelledby="userMenu"
-          style="border-radius: 10px;"
         >
           <li>
-            <span class="dropdown-item disabled" style="color: #38a89d; font-weight: bold;">
+            <span class="dropdown-item disabled text-primary fw-bold">
               Role: {{ user.role }}
             </span>
           </li>
