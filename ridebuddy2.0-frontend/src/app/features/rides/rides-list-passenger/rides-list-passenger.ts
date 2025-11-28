@@ -1,10 +1,11 @@
 import {Component, inject} from '@angular/core';
 import {collection, collectionData, doc, Firestore, query, setDoc, where} from '@angular/fire/firestore';
 import {Auth, user} from '@angular/fire/auth';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {Ride} from '../../../app.models';
 
 @Component({
   selector: 'app-rides-list-passenger',
@@ -16,6 +17,7 @@ export class RidesListPassenger {
 private firestore = inject(Firestore);
   private auth = inject(Auth);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   highlightRideId = '';
 
@@ -102,5 +104,16 @@ private firestore = inject(Firestore);
       createdAt: new Date(),
       status: 'PENDING'
     });
+  }
+
+  openRideDetails(ride: Ride) {
+    this.router.navigate(
+      ['/dashboard/rides/details', ride.id],
+      {
+        state: {
+          hasReservation: this.userReservations.includes(ride.id!!)
+        }
+      }
+    );
   }
 }

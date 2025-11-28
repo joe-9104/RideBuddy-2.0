@@ -44,7 +44,6 @@
         <th>Available</th>
         <th>Price</th>
         <th>Status</th>
-        <th>Conductor</th>
         <th>Comments</th>
         <th>Actions</th>
         <th>Details</th>
@@ -64,7 +63,6 @@
       <td>{{ ride.availablePlaces }}</td>
       <td>{{ ride.pricePerSeat }} TND</td>
       <td>{{ ride.status }}</td>
-      <td>{{ ride.conductorName }}</td>
       <td>{{ ride.comments }}</td>
 
       <td>
@@ -95,8 +93,10 @@
       </td>
 
       <td>
-        <a [routerLink]="['/dashboard/rides/details', ride.id]"
-           class="btn btn-secondary btn-sm">Details</a>
+        <a class="btn btn-secondary btn-sm"
+           (click)="openRideDetails(ride)">
+          Details
+        </a>
       </td>
 
     </tr>

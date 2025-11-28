@@ -12,6 +12,7 @@ import {
 import {RideVisualize} from './features/rides/ride-visualize/ride-visualize';
 import {Layout} from './layout/layout';
 import {ReservationsManagement} from './features/reservations/reservations-management/reservations-management';
+import {RideDetails} from './features/rides/ride-details/ride-details';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, canActivate: [landingGuard] },
@@ -24,6 +25,8 @@ export const routes: Routes = [
       { path: 'rides/myRides', component: RidesListConductor },
       { path: 'rides/ride-visualize/:id', component: RideVisualize },
       { path: 'reservations/manage', component: ReservationsManagement},
+      { path: 'rides/details/:id', component: RideDetails, canActivate: [authGuard]},
+
       // PASSENGER
       { path: 'rides/all-rides', component: RidesListPassenger },
       { path: 'reservations/history', component: PassengerReservationsHistory },

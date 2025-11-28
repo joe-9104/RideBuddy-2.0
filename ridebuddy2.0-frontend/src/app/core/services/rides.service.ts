@@ -20,7 +20,7 @@ export class RidesService {
   }
 
   // get a single ride
-  getRide(id: string) {
+  getRide(id: string): Observable<Ride | undefined> {
     const docRef = doc(this.firestore, `rides/${id}`);
     return docData(docRef, { idField: 'id' }) as Observable<Ride | undefined>;
   }
