@@ -2,91 +2,102 @@
   <!-- Card -->
   <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
 
-  <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6">
-    <h2 class="text-2xl font-bold text-white">My Reservations</h2>
-    <p class="text-indigo-100 text-sm">Manage, filter, and track all your reservations</p>
-  </div>
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6">
+      <h2 class="text-2xl font-bold text-white">My Reservations</h2>
+      <p class="text-indigo-100 text-sm">Manage, filter, and track all your reservations</p>
+    </div>
 
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead>
+        <tr class="bg-gray-100 border-b border-gray-200">
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Departure</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Destination</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Departure Time</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Passenger</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Seats</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Status</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Actions</th>
+        </tr>
+        </thead>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full border border-gray-200 rounded-lg">
-      <thead class="bg-gray-100">
-      <tr>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Departure</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Destination</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Departure Time</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Passenger</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Seats</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Status</th>
-        <th class="px-4 py-2 text-left text-sm font-semibold text-gray-700">Actions</th>
-      </tr>
-      </thead>
+        <tbody>
+          @for (res of reservations$ | async; track res.id) {
+            <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
 
-      <tbody>
-        @for (res of reservations$ | async; track res.id) {
-          <tr class="border-t hover:bg-gray-50 transition">
-            <td class="px-4 py-2 text-sm">
-              @if (res.ride) { {{ res.ride.departureLocation }} }
-            </td>
+              <td class="px-4 py-3 text-sm">
+                @if (res.ride) { {{ res.ride.departureLocation }} }
+              </td>
 
-            <td class="px-4 py-2 text-sm">
-              @if (res.ride) { {{ res.ride.destination }} }
-            </td>
+              <td class="px-4 py-3 text-sm">
+                @if (res.ride) { {{ res.ride.destination }} }
+              </td>
 
-            <td class="px-4 py-2 text-sm">
-              @if (res.ride) { {{ res.ride.departureDate + ' ' + res.ride.departureTime }} }
-            </td>
+              <td class="px-4 py-3 text-sm">
+                @if (res.ride) { {{ res.ride.departureDate + ' ' + res.ride.departureTime }} }
+              </td>
 
-            <td class="px-4 py-2 text-sm">
-              {{ res.user?.displayName || res.user?.email }}
-            </td>
+              <td class="px-4 py-3 text-sm">
+                {{ res.user?.displayName || res.user?.email }}
+              </td>
 
-            <td class="px-4 py-2 text-sm">
-              {{ res.reservedPlaces }}
-            </td>
+              <td class="px-4 py-3 text-sm">
+                {{ res.reservedPlaces }}
+              </td>
 
-            <td class="px-4 py-2 text-sm">
-              <span
-                class="px-2 py-1 rounded text-xs font-medium"
-                [ngClass]="{
-                  'bg-primary/20 text-primary': res.status === 'PENDING',
-                  'bg-green-100 text-green-700': res.status === 'ACCEPTED',
-                  'bg-red-100 text-red-700': res.status === 'REJECTED'
-                }"
-              >
-                {{ res.status }}
-              </span>
-            </td>
-
-            <td class="px-4 py-2 text-sm">
-              @if (res.ride?.status === 'in-progress' && res.status === 'PENDING') {
-                <button
-                  class="px-3 py-1 rounded bg-primary text-white text-xs mr-1 hover:bg-primary/90"
-                  (click)="acceptReservation(res.id!)"
+              <td class="px-4 py-3 text-sm">
+                <span
+                  class="px-3 py-1 rounded-full text-xs font-semibold"
+                  [ngClass]="{
+                    'bg-primary/20 text-primary': res.status === 'PENDING',
+                    'bg-green-200 text-green-800': res.status === 'ACCEPTED',
+                    'bg-red-200 text-red-800': res.status === 'REJECTED'
+                  }"
                 >
-                  Accept
-                </button>
+                  {{ res.status }}
+                </span>
+              </td>
 
-                <button
-                  class="px-3 py-1 rounded bg-red-600 text-white text-xs hover:bg-red-700"
-                  (click)="rejectReservation(res.id!)"
-                >
-                  Reject
-                </button>
-              }
-            </td>
-          </tr>
-        }
+              <td class="px-4 py-3 text-sm space-x-2">
+                @if (res.ride?.status === 'in-progress' && res.status === 'PENDING') {
 
-        @empty {
-          <tr>
-            <td colspan="7" class="px-4 py-6 text-center text-gray-500">
-              No reservations found
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+                  <button
+                    class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary/90 transition"
+                    (click)="acceptReservation(res.id!)"
+                  >
+                    Accept
+                  </button>
+
+                  <button
+                    class="px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-semibold hover:bg-red-700 transition"
+                    (click)="rejectReservation(res.id!)"
+                  >
+                    Reject
+                  </button>
+
+                }
+              </td>
+
+            </tr>
+          }
+
+          @empty {
+            <tr>
+              <td colspan="7" class="px-4 py-6 text-center text-gray-500">
+                No reservations found
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-6 py-4 bg-gray-50 border-t text-center text-sm text-gray-600">
+      Manage your reservations easily with RideBuddy 🚗✨
+    </div>
+
   </div>
 </div>
