@@ -3,7 +3,7 @@ import {collection, collectionData, doc, Firestore, getDoc, query, updateDoc, wh
 import {Auth, user} from '@angular/fire/auth';
 import {combineLatest, from, map, Observable, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
+import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-passenger-reservations-history',
@@ -11,7 +11,8 @@ import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
     FormsModule,
     NgIf,
     NgForOf,
-    AsyncPipe
+    AsyncPipe,
+    NgClass
   ],
   templateUrl: './passenger-reservations-history.html',
   styleUrl: './passenger-reservations-history.css',

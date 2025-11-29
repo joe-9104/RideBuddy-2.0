@@ -1,12 +1,22 @@
-<div class="max-w-7xl mx-auto my-4 bg-white rounded-lg shadow p-4">
+<div class="max-w-7xl mx-5 my-7">
+  <!-- Card -->
+  <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
 
-  <h2 class="text-center mb-4">My Reservations History</h2>
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-6">
+      <h2 class="text-2xl font-bold text-white">My Reservations History</h2>
+      <p class="text-indigo-100 text-sm">Track, update, and manage all your past reservations</p>
+    </div>
 
-  <!-- FILTER UI -->
-  <div class="filter-ui mb-3">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 items-center">
-      <div>
-        <select [(ngModel)]="filterColumn" class="w-full border rounded px-2 py-1 text-sm">
+    <!-- Filter Section -->
+    <div class="p-6 border-b border-gray-200">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+        <!-- Column Selection -->
+        <select
+          [(ngModel)]="filterColumn"
+          class="px-4 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none
+                 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition">
           <option value="">-- Choose Column --</option>
           <option value="departureLocation">Departure Location</option>
           <option value="destination">Destination</option>
@@ -14,85 +24,144 @@
           <option value="rideStatus">Ride Status</option>
           <option value="status">Reservation Status</option>
         </select>
-      </div>
 
-      <div>
-        <input [(ngModel)]="filterValue" type="text" class="w-full border rounded px-2 py-1 text-sm" placeholder="Filter value" />
-      </div>
+        <!-- Value Input -->
+        <input
+          [(ngModel)]="filterValue"
+          type="text"
+          placeholder="Filter value..."
+          class="px-4 py-2 border-2 border-gray-200 rounded-lg text-sm focus:outline-none
+                 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+        />
 
-      <div>
-        <button class="px-3 py-1 rounded bg-primary text-white text-sm" (click)="0">Apply</button>
-      </div>
+        <!-- Apply -->
+        <button
+          class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg
+                 text-sm font-semibold hover:shadow-lg transition"
+          (click)="0"
+        >
+          Apply
+        </button>
 
-      <div>
-        <button class="px-3 py-1 rounded bg-secondary text-white text-sm" (click)="resetFilter()">Reset</button>
+        <!-- Reset -->
+        <button
+          class="px-4 py-2 bg-gray-500 text-white rounded-lg text-sm font-semibold
+                 hover:bg-gray-600 transition"
+          (click)="resetFilter()"
+        >
+          Reset
+        </button>
+
       </div>
     </div>
-  </div>
 
-  <!-- Reservations Table -->
-  <div class="overflow-x-auto">
-    <table class="min-w-full border border-gray-200">
-      <thead class="bg-gray-50">
-      <tr>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">#</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Departure Location</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Destination</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Departure Time</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Ride Status</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Update</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Delete</th>
-        <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Reservation Status</th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <ng-container *ngIf="reservations$ | async as reservations">
-        <tr *ngFor="let res of applyFilter(reservations); let i = index" class="odd:bg-white even:bg-gray-50">
-
-          <td class="px-4 py-2 text-sm">{{ i + 1 }}</td>
-
-          <td class="px-4 py-2 text-sm">{{ res.ride.departureLocation }}</td>
-          <td class="px-4 py-2 text-sm">{{ res.ride.destination }}</td>
-
-          <td class="px-4 py-2 text-sm">{{ res.ride.departureDate }} {{ res.ride.departureTime }}</td>
-
-          <td class="px-4 py-2 text-sm">{{ res.ride.status }}</td>
-
-          <td class="px-4 py-2 text-sm">
-            <div
-              *ngIf="res.status === 'PENDING' && res.ride.status === 'in-progress'"
-              class="flex items-center gap-2"
-            >
-              <select #places class="border rounded text-sm px-2 py-1 w-auto">
-                <option *ngFor="let _ of [].constructor(res.maxPlaces); let idx = index" [value]="idx + 1">
-                  {{ idx + 1 }}
-                </option>
-              </select>
-
-              <button class="px-2 py-1 rounded bg-warning text-black text-sm"
-                      (click)="updateReservation(res, +places.value)">
-                Update
-              </button>
-            </div>
-
-            <span *ngIf="res.status !== 'PENDING'">
-              {{ res.reservedPlaces }}
-            </span>
-          </td>
-
-          <td class="px-4 py-2 text-sm">
-            <button *ngIf="res.status === 'PENDING'" class="px-2 py-1 rounded bg-danger text-white text-sm"
-                    (click)="cancelReservation(res)">
-              Cancel
-            </button>
-          </td>
-
-          <td class="px-4 py-2 text-sm">{{ res.status }}</td>
-
+    <!-- Table Section -->
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-sm">
+        <thead>
+        <tr class="bg-gray-100 border-b border-gray-200">
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">#</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Departure</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Destination</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Departure Time</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Ride Status</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Update</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Delete</th>
+          <th class="px-4 py-3 text-left font-semibold text-gray-700">Reservation Status</th>
         </tr>
-      </ng-container>
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+        <ng-container *ngIf="reservations$ | async as reservations">
+
+          <tr
+            *ngFor="let res of applyFilter(reservations); let i = index"
+            class="border-b border-gray-100 hover:bg-gray-50 transition"
+          >
+            <td class="px-4 py-3">{{ i + 1 }}</td>
+
+            <td class="px-4 py-3">{{ res.ride.departureLocation }}</td>
+            <td class="px-4 py-3">{{ res.ride.destination }}</td>
+
+            <td class="px-4 py-3">
+              {{ res.ride.departureDate }} {{ res.ride.departureTime }}
+            </td>
+
+            <!-- Ride Status Badge -->
+            <td class="px-4 py-3">
+              <span
+                class="px-2 py-1 rounded-full text-xs font-semibold"
+                [ngClass]="{
+                  'bg-green-200 text-green-800': res.ride.status === 'over',
+                  'bg-red-200 text-red-800': res.ride.status === 'canceled',
+                  'bg-yellow-200 text-yellow-800': res.ride.status === 'in-progress'
+                }"
+              >
+                {{ res.ride.status }}
+              </span>
+            </td>
+
+            <!-- Update reservation -->
+            <td class="px-4 py-3">
+              <div *ngIf="res.status === 'PENDING' && res.ride.status === 'in-progress'"
+                   class="flex items-center gap-2">
+
+                <select #places class="border rounded-lg px-2 py-1 text-sm">
+                  <option *ngFor="let _ of [].constructor(res.maxPlaces); let idx = index" [value]="idx + 1">
+                    {{ idx + 1 }}
+                  </option>
+                </select>
+
+                <button
+                  class="px-3 py-1 bg-yellow-400 text-black rounded-lg text-xs font-semibold hover:bg-yellow-500 transition"
+                  (click)="updateReservation(res, +places.value)"
+                >
+                  Update
+                </button>
+              </div>
+
+              <span *ngIf="res.status !== 'PENDING'">
+                {{ res.reservedPlaces }}
+              </span>
+            </td>
+
+            <!-- Cancel -->
+            <td class="px-4 py-3">
+              <button
+                *ngIf="res.status === 'PENDING'"
+                class="px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-semibold
+                       hover:bg-red-700 transition"
+                (click)="cancelReservation(res)"
+              >
+                Cancel
+              </button>
+            </td>
+
+            <!-- Reservation Status Badge -->
+            <td class="px-4 py-3">
+              <span
+                class="px-2 py-1 rounded-full text-xs font-semibold"
+                [ngClass]="{
+                  'bg-blue-200 text-blue-800': res.status === 'PENDING',
+                  'bg-green-200 text-green-800': res.status === 'CONFIRMED',
+                  'bg-gray-300 text-gray-700': res.status === 'CANCELED'
+                }"
+              >
+                {{ res.status }}
+              </span>
+            </td>
+
+          </tr>
+
+        </ng-container>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-6 py-4 bg-gray-50 border-t text-center text-sm text-gray-600">
+      View and manage all your past reservations 🚗📝
+    </div>
+
   </div>
 </div>
