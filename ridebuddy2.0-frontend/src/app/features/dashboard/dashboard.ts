@@ -4,7 +4,16 @@ import {AsyncPipe, CommonModule} from '@angular/common';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../../app.models';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faCarSide, faGear, faMoneyBill1Wave, faStarHalfStroke} from '@fortawesome/free-solid-svg-icons';
+import {
+  faBookBookmark,
+  faCalendarCheck,
+  faCarSide,
+  faGaugeHigh,
+  faGear, faLocationDot, faMinus,
+  faMoneyBill1Wave, faPlus,
+  faPlusCircle, faSearch,
+  faStarHalfStroke
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,4 +35,12 @@ export class Dashboard {
   protected readonly faMoneyBill1Wave = faMoneyBill1Wave;
   protected readonly faStarHalfStroke = faStarHalfStroke;
   protected readonly faCarSide = faCarSide;
+  protected readonly faPlusCircle = faPlusCircle;
+  protected readonly faGaugeHigh = faGaugeHigh;
+  protected readonly faCalendarCheck = faCalendarCheck;
+  protected readonly faPlus = faPlus;
+  protected readonly faMinus = faMinus;
+  protected readonly faBookBookmark = faBookBookmark;
+  protected readonly faLocationDot = faLocationDot;
+  protected readonly faSearch = faSearch;
 }

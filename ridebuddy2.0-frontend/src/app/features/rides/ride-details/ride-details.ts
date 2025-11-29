@@ -5,10 +5,13 @@ import {Ride, User} from '../../../app.models';
 import {RidesService} from '../../../core/services/rides.service';
 import {UserService} from '../../../core/services/user.service';
 import {LatLng} from 'leaflet';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-ride-details',
-  imports: [],
+  imports: [
+    NgClass
+  ],
   templateUrl: './ride-details.html',
   styleUrl: './ride-details.css',
 })

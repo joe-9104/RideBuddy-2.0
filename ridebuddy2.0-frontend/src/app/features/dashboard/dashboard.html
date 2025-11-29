@@ -19,7 +19,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-green-100 rounded-lg">
-                  <i class="bi bi-plus-circle text-green-600 text-2xl"></i>
+                  <fa-icon [icon]="faPlusCircle" class="text-green-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Offer a Ride</h5>
               </div>
@@ -36,7 +36,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-blue-100 rounded-lg">
-                  <i class="bi bi-speedometer2 text-blue-600 text-2xl"></i>
+                  <fa-icon [icon]="faGaugeHigh" class="text-blue-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Rides Management</h5>
               </div>
@@ -53,7 +53,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-orange-100 rounded-lg">
-                  <i class="bi bi-calendar-check text-orange-600 text-2xl"></i>
+                  <fa-icon [icon]="faCalendarCheck" class="text-orange-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Manage Reservations</h5>
               </div>
@@ -113,8 +113,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>How do I post a ride?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Go to the "Offer a Ride" section, fill in the details such as departure location, destination, and available seats, and click "Post Ride."</p>
             </details>
@@ -123,8 +123,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>How can I manage reservations for my rides?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Navigate to the "Manage Reservations" section to view, accept, or reject reservations for your rides.</p>
             </details>
@@ -133,8 +133,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>Can I edit or cancel a posted ride?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Yes, you can edit the details or cancel a ride before it starts. Visit the "Rides Management Dashboard" to make changes.</p>
             </details>
@@ -159,7 +159,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-purple-100 rounded-lg">
-                  <i class="bi bi-search text-purple-600 text-2xl"></i>
+                  <fa-icon [icon]="faSearch" class="text-purple-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Find a Ride</h5>
               </div>
@@ -176,7 +176,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-cyan-100 rounded-lg">
-                  <i class="bi bi-geo-alt text-cyan-600 text-2xl"></i>
+                  <fa-icon [icon]="faLocationDot" class="text-cyan-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Nearby Rides</h5>
               </div>
@@ -193,7 +193,7 @@
             <div class="p-6 flex flex-col">
               <div class="flex items-center gap-3 mb-3">
                 <div class="p-2 bg-pink-100 rounded-lg">
-                  <i class="bi bi-bookmark-check text-pink-600 text-2xl"></i>
+                  <fa-icon [icon]="faBookBookmark" class="text-pink-600 text-2xl"></fa-icon>
                 </div>
                 <h5 class="text-xl font-bold text-gray-900">Manage Bookings</h5>
               </div>
@@ -211,8 +211,8 @@
             <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border border-indigo-200 shadow-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Rides Completed</h3>
-                <div class="p-3 bg-indigo-500 rounded-lg">
-                  <i class="bi bi-check-circle text-white text-xl"></i>
+                <div class="p-3 bg-indigo-500 text-white rounded-lg">
+                  <fa-icon [icon]="faCarSide"></fa-icon>
                 </div>
               </div>
               <p class="text-4xl font-bold text-indigo-600">{{ (user$ | async)?.completedRides || 0 }}</p>
@@ -223,8 +223,8 @@
             <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200 shadow-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Your Rating</h3>
-                <div class="p-3 bg-orange-500 rounded-lg">
-                  <i class="bi bi-star-fill text-white text-xl"></i>
+                <div class="p-3 bg-orange-500 text-white rounded-lg">
+                  <fa-icon [icon]="faStarHalfStroke"></fa-icon>
                 </div>
               </div>
               <p class="text-4xl font-bold text-orange-600">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
@@ -241,8 +241,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>How do I book a ride?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Browse available rides, select one that suits your schedule, and click "Book Now."</p>
             </details>
@@ -251,8 +251,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>Can I cancel a reservation?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Yes, you can cancel a reservation before the ride starts through the "Manage Bookings" section.</p>
             </details>
@@ -261,8 +261,8 @@
             <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
               <summary class="flex items-center justify-between font-semibold text-gray-900">
                 <span>How can I contact the driver?</span>
-                <i class="bi bi-plus-lg group-open:hidden"></i>
-                <i class="bi bi-dash-lg hidden group-open:block"></i>
+                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
               </summary>
               <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Once you've booked a ride, the driver's contact details will be available in the "My Rides" section.</p>
             </details>
