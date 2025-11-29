@@ -1,133 +1,190 @@
-<div class="max-w-3xl mx-auto my-4 bg-white rounded-lg shadow p-6">
-  <h2 class="text-center mb-4 text-2xl font-semibold">Offer a Ride</h2>
-  <form [formGroup]="rideForm" (ngSubmit)="submitRide()">
-    @if(rideForm.invalid && rideForm.touched){
-      <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-800">
-        Some fields are missing or invalid. Please check the form.
-      </div>
-    }
+<div class="min-h-screen  flex items-center justify-center p-6">
+  <div class="w-full max-w-3xl">
+    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-      <div>
-        <label class="block mb-1">Departure Location</label>
-        <input
-          type="text"
-          formControlName="departureLocation"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('departureLocation') }"
-        />
-        <div *ngIf="isInvalid('departureLocation')" class="text-red-600 text-sm mt-1">Departure location is required.</div>
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center">
+        <h2 class="text-3xl font-bold text-white mb-2">Offer a Ride</h2>
+        <p class="text-indigo-100">Fill in the details below to publish your ride</p>
       </div>
 
-      <div>
-        <label class="block mb-1">Start Governorate</label>
-        <select
-          formControlName="startGovernorate"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('startGovernorate') }"
-        >
-          <option value="" disabled>Select governorate</option>
-          @for(gov of governorates; track gov){
-            <option [value]="gov">{{ gov }}</option>
-          }
-        </select>
-        <div *ngIf="isInvalid('startGovernorate')" class="text-red-600 text-sm mt-1">Start governorate is required.</div>
+      <!-- Form Section -->
+      <div class="p-8">
+        <!-- Error Alert -->
+        @if(rideForm.invalid && rideForm.touched){
+          <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+            <div class="flex items-center gap-3">
+              <i class="bi bi-exclamation-circle text-red-600 text-xl"></i>
+              <p class="text-red-800 font-semibold text-sm">
+                Some fields are missing or invalid. Please check the form.
+              </p>
+            </div>
+          </div>
+        }
+
+        <form [formGroup]="rideForm" (ngSubmit)="submitRide()" class="space-y-6">
+
+          <!-- Row 1 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Departure Location</label>
+              <input
+                type="text"
+                formControlName="departureLocation"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('departureLocation')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> Departure location is required.
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Start Governorate</label>
+              <select
+                formControlName="startGovernorate"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              >
+                <option value="" disabled>Select governorate</option>
+                @for(gov of governorates; track gov){
+                  <option [value]="gov">{{ gov }}</option>
+                }
+              </select>
+              <div *ngIf="isInvalid('startGovernorate')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> Start governorate is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Departure Date</label>
+              <input
+                type="date"
+                formControlName="departureDate"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('departureDate')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> Please select a valid date.
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Departure Time</label>
+              <input
+                type="time"
+                formControlName="departureTime"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('departureTime')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> Please select a valid time.
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Destination</label>
+              <input
+                type="text"
+                formControlName="destination"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('destination')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> Destination is required.
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">End Governorate</label>
+              <select
+                formControlName="endGovernorate"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              >
+                <option value="" disabled>Select governorate</option>
+                @for(gov of governorates; track gov){
+                  <option [value]="gov">{{ gov }}</option>
+                }
+              </select>
+              <div *ngIf="isInvalid('endGovernorate')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i> End governorate is required.
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Available Places</label>
+              <input
+                type="number"
+                formControlName="availablePlaces"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('availablePlaces')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i>
+                Enter the number of available places (at least 1).
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2">Price Per Seat</label>
+              <input
+                type="number"
+                formControlName="pricePerSeat"
+                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              />
+              <div *ngIf="isInvalid('pricePerSeat')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i>
+                Enter a valid price.
+              </div>
+            </div>
+          </div>
+
+          <!-- Comments -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Comments</label>
+            <textarea
+              rows="3"
+              formControlName="comments"
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+            ></textarea>
+          </div>
+
+          <!-- Map -->
+          <div id="map" class="mb-3 u-map-400 rounded-lg overflow-hidden shadow"></div>
+          <p class="text-gray-600 text-sm">{{ instructions }}</p>
+
+          <!-- Reset buttons -->
+          <div class="flex justify-between gap-3">
+            <button
+              type="button"
+              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
+              (click)="resetStart()"
+            >Reset Start</button>
+            <button
+              type="button"
+              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
+              (click)="resetEnd()"
+            >Reset End</button>
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200"
+          >
+            Create Ride
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="px-8 py-4 bg-gray-50 border-t text-center text-sm text-gray-600">
+        Safe rides begin with shared journeys 💙
       </div>
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-      <div>
-        <label class="block mb-1">Departure Date</label>
-        <input
-          type="date"
-          formControlName="departureDate"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('departureDate') }"
-        />
-        <div *ngIf="isInvalid('departureDate')" class="text-red-600 text-sm mt-1">Please select a valid date.</div>
-      </div>
-
-      <div>
-        <label class="block mb-1">Departure Time</label>
-        <input
-          type="time"
-          formControlName="departureTime"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('departureTime') }"
-        />
-        <div *ngIf="isInvalid('departureTime')" class="text-red-600 text-sm mt-1">Please select a valid time.</div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-      <div>
-        <label class="block mb-1">Destination</label>
-        <input
-          type="text"
-          formControlName="destination"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('destination') }"
-        />
-        <div *ngIf="isInvalid('destination')" class="text-red-600 text-sm mt-1">Destination is required.</div>
-      </div>
-
-      <div>
-        <label class="block mb-1">End Governorate</label>
-        <select
-          formControlName="endGovernorate"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('endGovernorate') }"
-        >
-          <option value="" disabled>Select governorate</option>
-          @for(gov of governorates; track gov){
-            <option [value]="gov">{{ gov }}</option>
-          }
-        </select>
-        <div *ngIf="isInvalid('endGovernorate')" class="text-red-600 text-sm mt-1">End governorate is required.</div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-      <div>
-        <label class="block mb-1">Available Places</label>
-        <input
-          type="number"
-          formControlName="availablePlaces"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('availablePlaces') }"
-        />
-        <div *ngIf="isInvalid('availablePlaces')" class="text-red-600 text-sm mt-1">Enter the number of available places (at least 1).</div>
-      </div>
-
-      <div>
-        <label class="block mb-1">Price Per Seat</label>
-        <input
-          type="number"
-          formControlName="pricePerSeat"
-          class="w-full border rounded px-3 py-2"
-          [ngClass]="{ 'border-red-500': isInvalid('pricePerSeat') }"
-        />
-        <div *ngIf="isInvalid('pricePerSeat')" class="text-red-600 text-sm mt-1">Enter a valid price.</div>
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label class="block mb-1">Comments</label>
-      <textarea
-        formControlName="comments"
-        class="w-full border rounded px-3 py-2"
-        rows="3"
-      ></textarea>
-    </div>
-
-    <div id="map" class="mb-3 u-map-400"></div>
-    <p>{{ instructions }}</p>
-
-    <div class="flex justify-between mb-3 gap-2">
-      <button type="button" class="px-3 py-1 rounded bg-warning text-black" (click)="resetStart()">Reset Start</button>
-      <button type="button" class="px-3 py-1 rounded bg-warning text-black" (click)="resetEnd()">Reset End</button>
-    </div>
-
-    <button type="submit" class="w-full px-4 py-2 bg-primary text-white rounded">Create Ride</button>
-  </form>
+  </div>
 </div>

@@ -6,6 +6,8 @@ import { Auth, user } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {faMapLocation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rides-list-conductor',
@@ -17,7 +19,8 @@ import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
     NgForOf,
     NgIf,
     AsyncPipe,
-    NgClass
+    NgClass,
+    FaIconComponent
   ],
   standalone: true
 })
@@ -99,4 +102,6 @@ export class RidesListConductor {
     if (!ride.id) return;
     await updateDoc(doc(this.firestore, `rides/${ride.id}`), { status: 'over' });
   }
+
+  protected readonly faMapLocation = faMapLocation;
 }

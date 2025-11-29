@@ -7,13 +7,12 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../../core/services/auth.service';
 import {filter} from 'rxjs';
 import {Governorate} from '../../../app.models';
-import {NgClass, NgIf} from '@angular/common';
+import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-create-ride',
   imports: [
     ReactiveFormsModule,
-    NgClass,
     NgIf,
   ],
   templateUrl: './create-ride.html',

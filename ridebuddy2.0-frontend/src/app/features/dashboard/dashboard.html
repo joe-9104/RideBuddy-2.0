@@ -71,8 +71,8 @@
             <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200 shadow-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Completed Rides</h3>
-                <div class="p-3 bg-blue-500 rounded-lg">
-                  <i class="bi bi-check-circle text-white text-xl"></i>
+                <div class="p-3 bg-blue-500 text-white rounded-lg">
+                  <fa-icon [icon]="faCarSide"></fa-icon>
                 </div>
               </div>
               <p class="text-4xl font-bold text-blue-600">{{ (user$ | async)?.completedRides || 0 }}</p>
@@ -83,8 +83,8 @@
             <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200 shadow-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Average Rating</h3>
-                <div class="p-3 bg-yellow-500 rounded-lg">
-                  <i class="bi bi-star-fill text-white text-xl"></i>
+                <div class="p-3 bg-yellow-500 text-white rounded-lg">
+                  <fa-icon [icon]="faStarHalfStroke"></fa-icon>
                 </div>
               </div>
               <p class="text-4xl font-bold text-yellow-600">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
@@ -95,8 +95,8 @@
             <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200 shadow-lg">
               <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">Total Earnings</h3>
-                <div class="p-3 bg-green-500 rounded-lg">
-                  <i class="bi bi-wallet2 text-white text-xl"></i>
+                <div class="p-3 bg-green-500 text-white rounded-lg">
+                  <fa-icon [icon]="faMoneyBill1Wave"></fa-icon>
                 </div>
               </div>
               <p class="text-4xl font-bold text-green-600">{{ (user$ | async)?.totalEarnings || 0 }} <span class="text-xl">TND</span></p>

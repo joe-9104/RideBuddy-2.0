@@ -8,17 +8,13 @@
     <div class="flex items-center space-x-4">
       <!-- Message Button -->
       <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Messages">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M16 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h14zM2 0a2 2 0 0 0-2 2v4.5L7.823 7.88a1 1 0 0 0 .354 0L16 6.5V2a2 2 0 0 0-2-2H2z"/>
-        </svg>
+        <fa-icon [icon]="faEnvelope"></fa-icon>
         <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-yellow-300 rounded-full">3</span>
       </button>
 
       <!-- Notification Button -->
       <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Notifications">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742.37.57.735.811 1.02.886.25.012.5.01.707.01.274 0 .45.01.707-.01.285-.075.65-.316 1.02-.886C12.137 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.645.643 1.222.643.4 0 .63-.11.926-.223l-1.868-2.423A4.993 4.993 0 0 0 14.22 12z"/>
-        </svg>
+        <fa-icon [icon]="faBell"></fa-icon>
         <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
       </button>
 
@@ -48,15 +44,11 @@
             <!-- Menu Items -->
             <div class="py-1">
               <a routerLink="/profile" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
-                <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm.078-7a6 6 0 0 1 5.858 9.667 3.5 3.5 0 0 0-5.858-3.667 4 4 0 1 0-5.858 3.667A6 6 0 0 1 8.059 0z"/>
-                </svg>
+                <fa-icon [icon]="faUser"></fa-icon>
                 <span class="font-medium">Profile</span>
               </a>
               <a routerLink="/settings" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
-                <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.264-2.17 1.619l.087.319a1.464 1.464 0 0 1-1.038 1.59l-.319.094c-1.3.47-1.3 2.005 0 2.472l.319.094c.768.35 1.063.997 1.038 1.59l-.087.319c-.516 1.355 1.08 2.317 2.17 1.619l.31-.17a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.264 2.17-1.619l-.087-.319a1.464 1.464 0 0 1 1.038-1.59l.319-.094c1.3-.47 1.3-2.005 0-2.472l-.319-.094a1.464 1.464 0 0 1-1.038-1.59l.087-.319c.516-1.355-1.08-2.317-2.17-1.619l-.31.17a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.93 2.93 0 1 1 0-5.86 2.93 2.93 0 0 1 0 5.86z"/>
-                </svg>
+                <fa-icon [icon]="faGear"></fa-icon>
                 <span class="font-medium">Settings</span>
               </a>
             </div>

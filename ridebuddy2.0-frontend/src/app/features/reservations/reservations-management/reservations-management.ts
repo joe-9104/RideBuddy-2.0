@@ -3,12 +3,13 @@ import {collection, collectionData, doc, Firestore, getDoc, query, updateDoc, wh
 import {combineLatest, from, map, Observable, of, switchMap} from 'rxjs';
 import {Ride} from '../../../app.models';
 import {Auth, user} from '@angular/fire/auth';
-import {AsyncPipe} from '@angular/common';
+import {AsyncPipe, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-reservations-management',
   imports: [
-    AsyncPipe
+    AsyncPipe,
+    NgClass
   ],
   templateUrl: './reservations-management.html',
   styleUrl: './reservations-management.scss',
