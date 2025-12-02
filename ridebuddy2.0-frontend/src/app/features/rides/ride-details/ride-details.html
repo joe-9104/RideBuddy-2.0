@@ -67,6 +67,40 @@
         </div>
       }
 
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Evaluate Conductor</h3>
+
+        <div class="flex space-x-1 mb-5">
+          @for (star of [1, 2, 3, 4, 5]; track star) {
+            <svg
+              (click)="setRating(star)"
+              class="w-8 h-8 cursor-pointer transition-colors duration-200"
+              [ngClass]="{
+                'text-yellow-400': star <= rating,
+                'text-gray-300': star > rating
+              }"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+            </svg>
+          }
+        </div>
+
+        <button
+          (click)="submitRating()"
+          [disabled]="!rating || isEvaluating"
+          class="px-6 py-3 bg-green-600 text-white
+                 rounded-lg font-semibold shadow-md hover:bg-green-700 transition disabled:opacity-50"
+        >
+          {{ isEvaluating ? 'Submitting...' : 'Evaluate' }}
+        </button>
+        @if (finishedRating && !isEvaluating) {
+          <p>Your rating has been saved ✅</p>
+        }
+      </div>
+
       <!-- "Make Reservation" button -->
       @if (!hasReservation && ride?.status == 'in-progress') {
         <div class="mt-6">

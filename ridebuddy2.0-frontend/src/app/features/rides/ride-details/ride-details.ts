@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MapService} from '../../../core/services/map.service';
 import {Ride, User} from '../../../app.models';
@@ -6,6 +6,7 @@ import {RidesService} from '../../../core/services/rides.service';
 import {UserService} from '../../../core/services/user.service';
 import {LatLng} from 'leaflet';
 import {NgClass} from '@angular/common';
+import {ReservationService} from '../../../core/services/reservations.service';
 
 @Component({
   selector: 'app-ride-details',
@@ -21,11 +22,16 @@ export class RideDetails implements OnInit {
   private rideService = inject(RidesService);
   private userService = inject(UserService)
   private mapService = inject(MapService);
+  private reservationService = inject(ReservationService);
 
   ride: Ride | undefined = undefined;
   conductor: User | null = null;
 
-  hasReservation : boolean = false;
+  hasReservation : string | null = null;
+
+  rating: number = 0;
+  isEvaluating : boolean = false;
+  finishedRating: boolean = false;
 
   private rideId!: string;
 
@@ -36,6 +42,10 @@ export class RideDetails implements OnInit {
       console.log("hasReservation extracted:", this.hasReservation);
     } else {
       console.log("no hasReservation");
+    }
+
+    if(nav?.extras.state?.['conductorRating'] !== undefined) {
+      this.rating = nav.extras.state['conductorRating'];
     }
   }
 
@@ -89,5 +99,28 @@ export class RideDetails implements OnInit {
     }
 
     throw new Error('Invalid coordinate format');
+  }
+
+  setRating(star: number): void {
+    this.rating = star;
+  }
+
+  async submitRating(): Promise<void> {
+    if (!this.hasReservation || !this.rating || this.isEvaluating) {
+      console.error('Reservation problem!');
+      return;
+    }
+
+    this.isEvaluating = true;
+
+    try {
+      this.reservationService.evaluateConductor(this.hasReservation!!, this.rating);
+      this.finishedRating = true;
+      console.log('Evaluation success');
+    } catch (error) {
+      console.error('Evaluation error:', error);
+    } finally {
+      this.isEvaluating = false;
+    }
   }
 }

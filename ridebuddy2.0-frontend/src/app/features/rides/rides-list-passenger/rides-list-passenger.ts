@@ -6,6 +6,7 @@ import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Ride} from '../../../app.models';
+import {ReservationService} from '../../../core/services/reservations.service';
 
 @Component({
   selector: 'app-rides-list-passenger',
@@ -18,6 +19,7 @@ private firestore = inject(Firestore);
   private auth = inject(Auth);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private reservationService = inject(ReservationService);
 
   highlightRideId = '';
 
@@ -107,13 +109,16 @@ private firestore = inject(Firestore);
   }
 
   openRideDetails(ride: Ride) {
-    this.router.navigate(
-      ['/dashboard/rides/details', ride.id],
-      {
-        state: {
-          hasReservation: this.userReservations.includes(ride.id!!)
+    this.reservationService.findReservationByRideId(ride.id!!).subscribe(r => {
+      this.router.navigate(
+        ['/dashboard/rides/details', ride.id],
+        {
+          state: {
+            hasReservation: r.uid,
+            conductorRating: r.conductorRating,
+          }
         }
-      }
-    );
+      );
+    });
   }
 }
