@@ -64,7 +64,7 @@
                 @if (res.ride?.status === 'in-progress' && res.status === 'PENDING') {
 
                   <button
-                    class="px-3 py-1 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary/90 transition"
+                    class="px-3 py-1 bg-green-600 text-white rounded-lg text-xs font-semibold hover:bg-green-700 transition"
                     (click)="acceptReservation(res.id!)"
                   >
                     Accept
