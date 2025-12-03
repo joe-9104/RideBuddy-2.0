@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {filter, map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 export interface NavItem {
   title: string;
@@ -16,10 +17,11 @@ export interface NavItem {
     AsyncPipe
   ],
   templateUrl: './side-nav.html',
-  styleUrl: './side-nav.scss',
+  styleUrl: './side-nav.css',
 })
 export class SideNav implements OnInit{
   role$!: Observable<"CONDUCTOR" | "PASSENGER">;
+  protected router = inject(Router);
 
   constructor(private auth: AuthService) { }
 
@@ -42,6 +44,12 @@ export class SideNav implements OnInit{
       title: 'Rides Management',
       icon: 'bi-card-checklist',
       link: '/dashboard/rides/myRides',
+      role: 'CONDUCTOR',
+    },
+    {
+      title: 'Manage Reservations',
+      icon: 'bi-card-checklist',
+      link: '/dashboard/reservations/manage',
       role: 'CONDUCTOR',
     },
 

@@ -1,0 +1,5 @@
+.selected {
+  background-color: #eee;
+  border-radius: 0.5rem;
+  border-left: 4px solid #555;
+}
