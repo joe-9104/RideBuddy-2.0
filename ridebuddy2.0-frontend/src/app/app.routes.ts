@@ -13,6 +13,7 @@ import {RideVisualize} from './features/rides/ride-visualize/ride-visualize';
 import {Layout} from './layout/layout';
 import {ReservationsManagement} from './features/reservations/reservations-management/reservations-management';
 import {RideDetails} from './features/rides/ride-details/ride-details';
+import {ProfileComponent} from './features/profile/profile';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, canActivate: [landingGuard] },
@@ -20,6 +21,7 @@ export const routes: Routes = [
   { path: 'register', loadComponent: () => import('./features/auth/register/register').then(m => m.Register)},
   { path: 'dashboard', component: Layout, canActivate: [authGuard], children: [
       { path: '', component: Dashboard },
+      { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
       // CONDUCTOR
       { path: 'rides/create', component: CreateRide },
       { path: 'rides/myRides', component: RidesListConductor },

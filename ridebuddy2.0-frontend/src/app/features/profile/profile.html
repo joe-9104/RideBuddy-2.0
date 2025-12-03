@@ -1,0 +1,266 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 p-6">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">My Profile</h1>
+      <p class="text-gray-600">Manage your personal information and preferences</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- Left Column - Profile Card -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden sticky top-6">
+          <!-- Profile Header with Gradient -->
+          <div class="relative h-32 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+            <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+              <div class="relative">
+                <div class="w-24 h-24 rounded-full bg-white p-1 shadow-2xl">
+                  <div class="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
+                    <span class="text-3xl font-bold text-indigo-600">
+                      {{ ((user$ | async)?.displayName || 'U')[0] | uppercase }}
+                    </span>
+                  </div>
+                </div>
+                <div class="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-emerald-600 border-4 border-white flex items-center justify-center">
+                  <fa-icon [icon]="faCheck" class="text-white text-sm"></fa-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Info -->
+          <div class="pt-16 pb-8 px-6 text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-1">{{ (user$ | async)?.displayName || 'User' }}</h2>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 mb-4">
+              <fa-icon [icon]="getRoleIcon()" class="text-indigo-600"></fa-icon>
+              <span class="text-sm font-medium text-indigo-700">{{ (user$ | async)?.role || 'USER' }}</span>
+            </div>
+            <p class="text-gray-600 mb-6">{{ (user$ | async)?.email || 'No email provided' }}</p>
+
+            <!-- Stats Mini -->
+            <div class="grid grid-cols-2 gap-4 mb-6">
+              <div class="text-center">
+                <p class="text-2xl font-bold text-indigo-600">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-xs text-gray-500">Rides</p>
+              </div>
+              <div class="text-center">
+                <p class="text-2xl font-bold text-purple-600">4.8</p>
+                <p class="text-xs text-gray-500">Rating</p>
+              </div>
+            </div>
+
+            <!-- Account Status -->
+            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+              <div class="flex items-center gap-3">
+                <div class="p-2 bg-green-100 rounded-lg">
+                  <fa-icon [icon]="faShieldCheck" class="text-green-600"></fa-icon>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900">Verified Account</h4>
+                  <p class="text-sm text-gray-600">Email verified • Active member</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Details & Actions -->
+      <div class="lg:col-span-2 space-y-8">
+
+        <!-- Personal Information Card -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="border-b border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">Personal Information</h3>
+                <p class="text-gray-600 text-sm">Update your personal details</p>
+              </div>
+              <div class="p-3 bg-indigo-100 rounded-lg">
+                <fa-icon [icon]="faUserCircle" class="text-indigo-600 text-2xl"></fa-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 space-y-6">
+            <!-- Name Field -->
+            <div class="group">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <div class="flex items-center gap-4">
+                <div class="flex-1">
+                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
+                    <p class="text-gray-900">{{ (user$ | async)?.displayName || 'Not set' }}</p>
+                  </div>
+                </div>
+                <button class="px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                  Edit
+                </button>
+              </div>
+            </div>
+
+            <!-- Email Field -->
+            <div class="group">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <div class="flex items-center gap-4">
+                <div class="flex-1">
+                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <p class="text-gray-900">{{ (user$ | async)?.email || 'No email' }}</p>
+                      <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Verified</span>
+                    </div>
+                  </div>
+                </div>
+                <button class="px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                  Change
+                </button>
+              </div>
+            </div>
+
+            <!-- Role Field -->
+            <div class="group">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
+              <div class="flex items-center gap-4">
+                <div class="flex-1">
+                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
+                    <div class="flex items-center gap-3">
+                      <fa-icon [icon]="getRoleIcon()" class="text-indigo-600"></fa-icon>
+                      <p class="text-gray-900">{{ (user$ | async)?.role || 'USER' }}</p>
+                      <span class="text-xs text-gray-500">(Cannot be changed)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Card -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div class="border-b border-gray-100 p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-gray-900">Quick Actions</h3>
+                <p class="text-gray-600 text-sm">Manage your account</p>
+              </div>
+              <div class="p-3 bg-purple-100 rounded-lg">
+                <fa-icon [icon]="faBolt" class="text-purple-600 text-2xl"></fa-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Switch Role Action -->
+              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg">
+                  <fa-icon [icon]="faSync" class="text-purple-600 text-xl"></fa-icon>
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-900 group-hover:text-purple-700">Switch Mode</h4>
+                  <p class="text-sm text-gray-600">Change between driver/passenger</p>
+                </div>
+              </button>
+
+              <!-- Security Action -->
+              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg">
+                  <fa-icon [icon]="faShield" class="text-blue-600 text-xl"></fa-icon>
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-900 group-hover:text-blue-700">Security</h4>
+                  <p class="text-sm text-gray-600">Update password & 2FA</p>
+                </div>
+              </button>
+
+              <!-- Notifications Action -->
+              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg">
+                  <fa-icon [icon]="faBell" class="text-green-600 text-xl"></fa-icon>
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-900 group-hover:text-green-700">Notifications</h4>
+                  <p class="text-sm text-gray-600">Manage preferences</p>
+                </div>
+              </button>
+
+              <!-- Help Action -->
+              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-orange-300 hover:bg-orange-50 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-orange-100 to-red-100 rounded-lg">
+                  <fa-icon [icon]="faQuestionCircle" class="text-orange-600 text-xl"></fa-icon>
+                </div>
+                <div class="text-left">
+                  <h4 class="font-semibold text-gray-900 group-hover:text-orange-700">Help Center</h4>
+                  <p class="text-sm text-gray-600">Get support</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Card -->
+        <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl shadow-xl overflow-hidden">
+          <div class="p-6 text-white">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <h3 class="text-2xl font-bold">Your Journey</h3>
+                <p class="text-indigo-100">Activity statistics</p>
+              </div>
+              <div class="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                <fa-icon [icon]="faChartLine" class="text-2xl"></fa-icon>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+                <p class="text-3xl font-bold">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-sm text-indigo-100">Total Rides</p>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+                <p class="text-3xl font-bold">4.8</p>
+                <p class="text-sm text-indigo-100">Avg Rating</p>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+                <p class="text-3xl font-bold">98%</p>
+                <p class="text-sm text-indigo-100">Reliability</p>
+              </div>
+              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
+                <p class="text-3xl font-bold">12</p>
+                <p class="text-sm text-indigo-100">This Month</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-red-200">
+          <div class="border-b border-red-100 p-6">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-xl font-bold text-red-900">Danger Zone</h3>
+                <p class="text-red-600 text-sm">Irreversible actions</p>
+              </div>
+              <div class="p-3 bg-red-100 rounded-lg">
+                <fa-icon [icon]="faExclamationTriangle" class="text-red-600 text-2xl"></fa-icon>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div>
+                <h4 class="font-semibold text-gray-900">Delete Account</h4>
+                <p class="text-sm text-gray-600">Permanently remove your account and all data</p>
+              </div>
+              <button class="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:-translate-y-0.5">
+                Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
