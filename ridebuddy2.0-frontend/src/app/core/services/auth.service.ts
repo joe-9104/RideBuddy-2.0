@@ -78,7 +78,8 @@ export class AuthService {
     return await signInWithPopup(this.auth, provider)
   }
 
-  logout() {
-    return signOut(this.auth).then(() => this.userSubject.next(null));
+  async logout() {
+    await signOut(this.auth);
+    return this.userSubject.next(null);
   }
 }

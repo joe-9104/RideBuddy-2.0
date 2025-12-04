@@ -1,8 +1,8 @@
-<div class="flex flex-col min-h-full p-4 shadow-xl bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50 w-64 border-r border-indigo-200 sticky top-0 self-start">
+<div class="flex flex-col h-screen overflow-y-auto p-3 shadow-xl bg-gradient-to-b from-indigo-50 via-purple-50 to-pink-50 w-56 border-r border-indigo-200 sticky top-0 left-0">
   <!-- Logo Section -->
   <div class="mb-8 pb-4 border-b-2 border-indigo-200">
     <h5 class="text-indigo-700 font-extrabold mb-1 text-lg flex items-center gap-2">
-      <i class="bi bi-list text-purple-600 text-xl"></i>
+      <fa-icon [icon]="['fas','bars']" class="text-purple-600 text-xl"></fa-icon>
       Menu
     </h5>
     <p class="text-xs text-gray-500">Navigate your dashboard</p>
@@ -13,7 +13,7 @@
     <!-- Dashboard Link -->
     <li>
       <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 rounded-lg transition-all duration-200 border-l-4 border-transparent hover:border-indigo-600 hover:text-indigo-700">
-        <i class="bi bi-speedometer2 text-indigo-600 text-lg"></i>
+        <fa-icon [icon]="['fas','tachometer-alt']" class="text-indigo-600 text-lg"></fa-icon>
         <span>Dashboard</span>
       </a>
     </li>
@@ -23,7 +23,7 @@
       @if((role$ | async) == item.role){
         <li [class.selected]="item.link === router.url">
           <a [href]="item.link" class="flex items-center gap-3 px-4 py-3 text-gray-700 font-semibold hover:bg-gradient-to-r hover:from-indigo-100 hover:to-purple-100 rounded-lg transition-all duration-200 border-l-4 border-transparent hover:border-purple-600 hover:text-purple-700">
-            <i [class]="'bi ' + item.icon + ' text-purple-600 text-lg'"></i>
+            <fa-icon [icon]="getFaIcon(item)" class="text-purple-600 text-lg"></fa-icon>
             <span>{{ item.title }}</span>
           </a>
         </li>
@@ -34,7 +34,7 @@
   <!-- Footer Section -->
   <div class="mt-auto pt-4 border-t-2 border-indigo-200">
     <a href="/dashboard/profile" class="flex items-center gap-3 px-4 py-2 text-gray-600 text-sm hover:bg-indigo-100 rounded-lg transition-all duration-200">
-      <i class="bi bi-person-gear text-indigo-600"></i>
+      <fa-icon [icon]="['fas','user-cog']" class="text-indigo-600"></fa-icon>
       <span>Profile Settings</span>
     </a>
   </div>

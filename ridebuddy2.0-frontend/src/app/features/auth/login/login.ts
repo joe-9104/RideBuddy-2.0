@@ -4,12 +4,14 @@ import {AuthService} from '../../../core/services/auth.service';
 import {Router, RouterLink} from '@angular/router';
 import {User} from '../../../app.models';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-login',
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    FontAwesomeModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -24,7 +26,7 @@ export class Login {
   loading = false;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private firestore:Firestore) {
+  constructor(private fb: FormBuilder, protected auth: AuthService, private router: Router, private firestore:Firestore) {
     this.loginForm = this.fb.group({
       email: this.fb.nonNullable.control('', [Validators.required, Validators.email]),
       password: this.fb.nonNullable.control('', [Validators.required]),

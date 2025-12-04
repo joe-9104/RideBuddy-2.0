@@ -16,12 +16,12 @@
         @if (errorMessage) {
           <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
             <div class="flex items-center gap-3">
-              <i class="bi bi-exclamation-circle text-red-600 text-xl"></i>
+              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 text-xl"></fa-icon>
               <div class="flex-1">
                 <p class="text-red-800 font-semibold text-sm">{{ errorMessage }}</p>
               </div>
               <button type="button" class="text-red-600 hover:text-red-800" (click)="errorMessage=''">
-                <i class="bi bi-x"></i>
+                <fa-icon [icon]="['fas','xmark']"></fa-icon>
               </button>
             </div>
           </div>
@@ -32,7 +32,7 @@
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
             <div class="relative">
-              <i class="bi bi-envelope absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+              <fa-icon [icon]="['fas','envelope']" class="absolute left-3 top-3.5 text-indigo-600 text-lg"></fa-icon>
               <input
                 class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
                 type="email"
@@ -44,12 +44,12 @@
               <div class="mt-2 space-y-1">
                 @if (loginForm.controls.email.errors?.['required']) {
                   <div class="text-red-600 text-sm flex items-center gap-1">
-                    <i class="bi bi-exclamation-circle"></i>Email is required.
+                    <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Email is required.
                   </div>
                 }
                 @if (loginForm.controls.email.errors?.['email']){
                   <div class="text-red-600 text-sm flex items-center gap-1">
-                    <i class="bi bi-exclamation-circle"></i>Enter a valid email.
+                    <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Enter a valid email.
                   </div>
                 }
               </div>
@@ -61,7 +61,7 @@
           <div>
             <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
             <div class="relative">
-              <i class="bi bi-lock absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+              <fa-icon [icon]="['fas','lock']" class="absolute left-3 top-3.5 text-indigo-600 text-lg"></fa-icon>
               <input
                 class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
                 type="password"
@@ -71,7 +71,7 @@
             </div>
             @if (loginForm.controls.password.touched && loginForm.controls.password.invalid){
               <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i>Password is required.
+                <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Password is required.
               </div>
             }
           </div>
@@ -82,7 +82,7 @@
             type="submit"
             [disabled]="loading"
           >
-            <i class="bi bi-box-arrow-in-right"></i>
+            <fa-icon [icon]="['fas','right-to-bracket']"></fa-icon>
             {{ loading ? 'Signing in...' : 'Sign In' }}
           </button>
         </form>
@@ -110,3 +110,4 @@
     </div>
   </div>
 </div>
+<button (click)="auth.googleSignIn();">google</button>

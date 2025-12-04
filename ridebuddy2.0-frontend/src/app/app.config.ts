@@ -13,6 +13,10 @@ import {provideAuth, getAuth} from '@angular/fire/auth';
 import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 
+// FontAwesome imports for standalone bootstrap
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -23,5 +27,15 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    // Make FontAwesomeModule available to standalone components
+    FontAwesomeModule,
+    // Initialize icon library (adds all solid icons for convenience)
+    {
+      provide: 'FA_ICON_INIT',
+      useFactory: (library: FaIconLibrary) => {
+        return () => library.addIconPacks(fas);
+      },
+      deps: [FaIconLibrary]
+    }
   ]
 };
