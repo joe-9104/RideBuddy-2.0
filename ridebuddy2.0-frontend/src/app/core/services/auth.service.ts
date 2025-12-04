@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword, onAuthStateChanged,
-  signInWithEmailAndPassword,
-  signOut, updateProfile,
+  signInWithEmailAndPassword, signInWithPopup,
+  signOut, updateProfile, GoogleAuthProvider
 } from '@angular/fire/auth';
 import {BehaviorSubject} from 'rxjs';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
@@ -71,6 +71,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
+  }
+
+  async googleSignIn() {
+    const provider = new GoogleAuthProvider();
+    return await signInWithPopup(this.auth, provider)
   }
 
   logout() {

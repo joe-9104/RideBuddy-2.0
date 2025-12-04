@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../../core/services/auth.service';
 import {Router, RouterLink} from '@angular/router';
-import {NgIf} from '@angular/common';
 import {User} from '../../../app.models';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
   imports: [
-    NgIf,
     ReactiveFormsModule,
     RouterLink
   ],

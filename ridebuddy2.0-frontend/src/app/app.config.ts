@@ -19,10 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
-
-    // Firebase (AngularFire) providers — tree-shakable, recommended pattern.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),

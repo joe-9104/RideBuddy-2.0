@@ -13,18 +13,19 @@
 
       <!-- Form Section -->
       <div class="p-8">
-        <!-- Error Alert -->
-        <div *ngIf="errorMessage" class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
-          <div class="flex items-center gap-3">
-            <i class="bi bi-exclamation-circle text-red-600 text-xl"></i>
-            <div class="flex-1">
-              <p class="text-red-800 font-semibold text-sm">{{ errorMessage }}</p>
+        @if (errorMessage) {
+          <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+            <div class="flex items-center gap-3">
+              <i class="bi bi-exclamation-circle text-red-600 text-xl"></i>
+              <div class="flex-1">
+                <p class="text-red-800 font-semibold text-sm">{{ errorMessage }}</p>
+              </div>
+              <button type="button" class="text-red-600 hover:text-red-800" (click)="errorMessage=''">
+                <i class="bi bi-x"></i>
+              </button>
             </div>
-            <button type="button" class="text-red-600 hover:text-red-800" (click)="errorMessage=''">
-              <i class="bi bi-x"></i>
-            </button>
           </div>
-        </div>
+        }
 
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
           <!-- Email Field -->
@@ -39,14 +40,21 @@
                 formControlName="email"
               />
             </div>
-            <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid" class="mt-2 space-y-1">
-              <div *ngIf="loginForm.controls.email.errors?.['required']" class="text-red-600 text-sm flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i>Email is required.
+            @if(loginForm.controls.email.touched && loginForm.controls.email.invalid){
+              <div class="mt-2 space-y-1">
+                @if (loginForm.controls.email.errors?.['required']) {
+                  <div class="text-red-600 text-sm flex items-center gap-1">
+                    <i class="bi bi-exclamation-circle"></i>Email is required.
+                  </div>
+                }
+                @if (loginForm.controls.email.errors?.['email']){
+                  <div class="text-red-600 text-sm flex items-center gap-1">
+                    <i class="bi bi-exclamation-circle"></i>Enter a valid email.
+                  </div>
+                }
               </div>
-              <div *ngIf="loginForm.controls.email.errors?.['email']" class="text-red-600 text-sm flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i>Enter a valid email.
-              </div>
-            </div>
+            }
+
           </div>
 
           <!-- Password Field -->
@@ -61,9 +69,11 @@
                 formControlName="password"
               />
             </div>
-            <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-              <i class="bi bi-exclamation-circle"></i>Password is required.
-            </div>
+            @if (loginForm.controls.password.touched && loginForm.controls.password.invalid){
+              <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                <i class="bi bi-exclamation-circle"></i>Password is required.
+              </div>
+            }
           </div>
 
           <!-- Submit Button -->
