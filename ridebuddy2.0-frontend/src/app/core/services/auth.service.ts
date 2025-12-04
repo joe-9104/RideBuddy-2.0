@@ -73,8 +73,7 @@ export class AuthService {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
 
-  async googleSignIn() {
-    const provider = new GoogleAuthProvider();
+  async oauthSignIn(provider: GoogleAuthProvider | OAuthProvider) {
     const result = await signInWithPopup(this.auth, provider);
     const user = result.user;
     if (!user) return result;
@@ -101,33 +100,9 @@ export class AuthService {
     return result;
   }
 
-  async microsoftSignIn() {
-    const provider = new OAuthProvider('microsoft.com');
-    const result = await signInWithPopup(this.auth, provider);
-    const user = result.user;
-    if (!user) return result;
+  async googleSignIn() { return this.oauthSignIn(new GoogleAuthProvider()); }
 
-    const ref = doc(this.firestore, `users/${user.uid}`);
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) {
-      const displayName = user.displayName ?? '';
-      const [firstName, ...rest] = displayName.trim().split(' ');
-      const lastName = rest.join(' ') || '';
-
-      await setDoc(ref, {
-        uid: user.uid,
-        email: user.email ?? '',
-        displayName,
-        firstName,
-        lastName,
-        role: 'PASSENGER',
-        createdAt: new Date().toISOString()
-      });
-    }
-
-    return result;
-  }
+  async microsoftSignIn() { return this.oauthSignIn(new OAuthProvider('microsoft.com')); }
 
   async logout() {
     await signOut(this.auth);
