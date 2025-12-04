@@ -37,6 +37,7 @@ export interface User {
   completedRides?: number;
   averageRating?: number;
   totalEarnings?: number;
+  createdAt?: string;
 }
 
 export enum Governorate {

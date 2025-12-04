@@ -3,7 +3,7 @@ import {
   Auth,
   createUserWithEmailAndPassword, onAuthStateChanged,
   signInWithEmailAndPassword, signInWithPopup,
-  signOut, updateProfile, GoogleAuthProvider
+  signOut, updateProfile, GoogleAuthProvider, OAuthProvider
 } from '@angular/fire/auth';
 import {BehaviorSubject} from 'rxjs';
 import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
@@ -75,7 +75,58 @@ export class AuthService {
 
   async googleSignIn() {
     const provider = new GoogleAuthProvider();
-    return await signInWithPopup(this.auth, provider)
+    const result = await signInWithPopup(this.auth, provider);
+    const user = result.user;
+    if (!user) return result;
+
+    const ref = doc(this.firestore, `users/${user.uid}`);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      const displayName = user.displayName ?? '';
+      const [firstName, ...rest] = displayName.trim().split(' ');
+      const lastName = rest.join(' ') || '';
+
+      await setDoc(ref, {
+        uid: user.uid,
+        email: user.email ?? '',
+        displayName,
+        firstName,
+        lastName,
+        role: 'PASSENGER',
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    return result;
+  }
+
+  async microsoftSignIn() {
+    const provider = new OAuthProvider('microsoft.com');
+    const result = await signInWithPopup(this.auth, provider);
+    const user = result.user;
+    if (!user) return result;
+
+    const ref = doc(this.firestore, `users/${user.uid}`);
+    const snap = await getDoc(ref);
+
+    if (!snap.exists()) {
+      const displayName = user.displayName ?? '';
+      const [firstName, ...rest] = displayName.trim().split(' ');
+      const lastName = rest.join(' ') || '';
+
+      await setDoc(ref, {
+        uid: user.uid,
+        email: user.email ?? '',
+        displayName,
+        firstName,
+        lastName,
+        role: 'PASSENGER',
+        createdAt: new Date().toISOString()
+      });
+    }
+
+    return result;
   }
 
   async logout() {

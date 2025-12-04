@@ -14,7 +14,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule
   ],
   templateUrl: './login.html',
-  styleUrl: './login.css',
 })
 export class Login {
 
@@ -73,4 +72,23 @@ export class Login {
       }).finally(() => this.loading = false);
   }
 
+  signInWithGoogle() {
+    this.auth.googleSignIn()
+      .then(() => {
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((err) => {
+        this.errorMessage = err?.message || 'Google sign-in failed.';
+      })
+  }
+
+  signInWithMicrosoft() {
+    this.auth.microsoftSignIn()
+      .then(() => {
+        this.router.navigate(['/dashboard']);
+      })
+      .catch((err) => {
+        this.errorMessage = err?.message || 'Microsoft sign-in failed.';
+      })
+  }
 }
