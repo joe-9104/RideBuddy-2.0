@@ -1,4 +1,4 @@
-<nav class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg">
+<nav class="w-full bg-white/90 dark:bg-slate-900/80 text-slate-900 dark:text-slate-100 shadow-lg border-b border-emerald-200/60 dark:border-slate-800">
   <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
     <a href="/" class="flex items-center font-extrabold text-base tracking-wider hover:opacity-90 transition-opacity">
       <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 h-8 rounded-md shadow-md" />
@@ -7,20 +7,20 @@
 
     <div class="flex items-center space-x-4">
       <!-- Message Button -->
-      <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Messages">
-        <fa-icon [icon]="faEnvelope"></fa-icon>
-        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-yellow-300 rounded-full">3</span>
+      <button class="relative p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400/80" aria-label="Messages">
+        <fa-icon [icon]="faEnvelope" class="text-slate-700 dark:text-slate-100"></fa-icon>
+        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-indigo-700 bg-emerald-200 rounded-full">3</span>
       </button>
 
       <!-- Notification Button -->
-      <button class="relative p-2 rounded-lg hover:bg-white/15 transition-colors focus:outline-none focus:ring-1 focus:ring-white/40" aria-label="Notifications">
-        <fa-icon [icon]="faBell"></fa-icon>
+      <button class="relative p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400/80" aria-label="Notifications">
+        <fa-icon [icon]="faBell" class="text-slate-700 dark:text-slate-100"></fa-icon>
         <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
       </button>
 
       @if (user$ | async) {
         <div class="relative">
-          <button (click)="toggleMenu()" class="flex items-center gap-2 bg-white/20 hover:bg-white/30 px-3 py-2 rounded-full text-white font-semibold focus:ring-1 focus:ring-white/50 focus:outline-none transition-all duration-200">
+          <button (click)="toggleMenu()" class="flex items-center gap-2 bg-white/50 dark:bg-slate-800/70 hover:bg-white/80 dark:hover:bg-slate-700/80 px-3 py-2 rounded-full text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-emerald-400/70 focus:outline-none transition-all duration-200">
             <div class="rounded-full p-0.5 bg-gradient-to-br from-yellow-300 via-red-400 to-pink-500 shadow-md">
               <img src="/assets/driver-2.svg" alt="Profile" class="rounded-full w-7 h-7 border-2 border-white object-cover" />
             </div>
@@ -30,10 +30,10 @@
             </svg>
           </button>
 
-          <div *ngIf="menuOpen" class="absolute right-0 mt-2 w-64 bg-white text-gray-800 rounded-xl shadow-2xl ring-1 ring-black ring-opacity-10 overflow-hidden z-50">
+          <div *ngIf="menuOpen" class="absolute right-0 mt-2 w-64 bg-white text-gray-800 dark:bg-slate-900 dark:text-gray-100 rounded-xl shadow-2xl ring-1 ring-black ring-opacity-10 overflow-hidden z-50">
             <!-- Header -->
-            <div class="p-3 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50">
-              <div class="text-xs font-bold text-gray-900">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
+            <div class="p-3 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50 dark:border-slate-800 dark:from-slate-900 dark:to-slate-900">
+              <div class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
               <div class="text-xs text-gray-600 mt-1">
                 <span class="inline-block mt-1 px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
                   {{ (user$ | async)?.role || 'Member' }}
@@ -43,18 +43,18 @@
 
             <!-- Menu Items -->
             <div class="py-1">
-              <a routerLink="/dashboard/profile" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
+              <a routerLink="/dashboard/profile" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 dark:text-gray-100 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-colors">
                 <fa-icon [icon]="faUser"></fa-icon>
                 <span class="font-medium">Profile</span>
               </a>
-              <a routerLink="/settings" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 hover:bg-indigo-50 transition-colors">
+              <a routerLink="/settings" class="flex items-center gap-2 px-3 py-2 text-xs text-gray-700 dark:text-gray-100 hover:bg-indigo-50 dark:hover:bg-slate-800 transition-colors">
                 <fa-icon [icon]="faGear"></fa-icon>
                 <span class="font-medium">Settings</span>
               </a>
             </div>
 
             <!-- Logout -->
-            <div class="border-t border-gray-200 p-2">
+            <div class="border-t border-gray-200 dark:border-slate-800 p-2">
               <button (click)="logout()" class="w-full flex items-center justify-center gap-1 px-3 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all font-semibold text-xs">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>

@@ -1,142 +1,142 @@
-<div class="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 p-6">
+<div class="min-h-screen p-6">
   <div class="max-w-7xl mx-auto">
     <!-- Conductor Section -->
     @if((user$ | async)?.role === 'CONDUCTOR'){
       <div>
         <!-- Header -->
         <div class="mb-12">
-          <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Driver Dashboard</h1>
-          <p class="text-gray-600">Manage your rides, reservations, and earnings</p>
+          <h1 class="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 mb-2">Driver Dashboard</h1>
+          <p class="text-slate-600 dark:text-slate-400">Manage your rides, reservations, and earnings</p>
         </div>
 
         <!-- Cards Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <!-- Offer a Ride Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-green-400 to-emerald-600 overflow-hidden">
-              <img src="/assets/offer_ride.png" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Offer a Ride">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-emerald-400/80 to-teal-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/offer_ride.png" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Offer a Ride">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-green-100 rounded-lg">
-                  <fa-icon [icon]="faPlusCircle" class="text-green-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-xl">
+                  <fa-icon [icon]="faPlusCircle" class="text-emerald-600 dark:text-emerald-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Offer a Ride</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Offer a Ride</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">Share your ride and earn money while helping others travel.</p>
-              <a href="/dashboard/rides/create" class="inline-block px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Offer a Ride</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">Share your ride and earn money while helping others travel.</p>
+              <a href="/dashboard/rides/create" class="inline-block px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/30 transition-all text-center text-sm">Offer a Ride</a>
             </div>
           </div>
 
           <!-- Rides Management Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-blue-400 to-indigo-600 overflow-hidden">
-              <img src="/assets/rides%20management%20dashboard.webp" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Rides Management">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-cyan-400/80 to-blue-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/rides%20management%20dashboard.webp" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Rides Management">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-blue-100 rounded-lg">
-                  <fa-icon [icon]="faGaugeHigh" class="text-blue-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-xl">
+                  <fa-icon [icon]="faGaugeHigh" class="text-cyan-600 dark:text-cyan-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Rides Management</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Rides Management</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">View, update, and organize your created rides in one place.</p>
-              <a href="/dashboard/rides/myRides" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Go to Dashboard</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">View, update, and organize your created rides in one place.</p>
+              <a href="/dashboard/rides/myRides" class="inline-block px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/30 transition-all text-center text-sm">Go to Dashboard</a>
             </div>
           </div>
 
           <!-- Manage Reservations Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-orange-400 to-red-600 overflow-hidden">
-              <img src="/assets/manage_reservations.webp" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Manage Reservations">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-blue-400/80 to-indigo-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/manage_reservations.webp" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Manage Reservations">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-orange-100 rounded-lg">
-                  <fa-icon [icon]="faCalendarCheck" class="text-orange-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-blue-500/20 dark:bg-blue-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-xl">
+                  <fa-icon [icon]="faCalendarCheck" class="text-blue-600 dark:text-blue-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Manage Reservations</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Manage Reservations</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">View and manage passenger reservations for your rides.</p>
-              <a href="/dashboard/reservations/manage" class="inline-block px-6 py-3 bg-gradient-to-r from-orange-500 to-red-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Manage Reservations</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">View and manage passenger reservations for your rides.</p>
+              <a href="/dashboard/reservations/manage" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center text-sm">Manage Reservations</a>
             </div>
           </div>
         </div>
 
         <!-- Statistics Section -->
         <div class="mb-12">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Statistics</h2>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">Your Statistics</h2>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Completed Rides -->
-            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200 shadow-lg">
+            <div class="u-card-glass border-emerald-400/30 dark:border-emerald-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Completed Rides</h3>
-                <div class="p-3 bg-blue-500 text-white rounded-lg">
-                  <fa-icon [icon]="faCarSide"></fa-icon>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Completed Rides</h3>
+                <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-xl">
+                  <fa-icon [icon]="faCarSide" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-blue-600">{{ (user$ | async)?.completedRides || 0 }}</p>
-              <p class="text-sm text-gray-600 mt-2">Total rides completed</p>
+              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Total rides completed</p>
             </div>
 
             <!-- Average Rating -->
-            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200 shadow-lg">
+            <div class="u-card-glass border-cyan-400/30 dark:border-cyan-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Average Rating</h3>
-                <div class="p-3 bg-yellow-500 text-white rounded-lg">
-                  <fa-icon [icon]="faStarHalfStroke"></fa-icon>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Average Rating</h3>
+                <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-xl">
+                  <fa-icon [icon]="faStarHalfStroke" class="text-cyan-600 dark:text-cyan-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-yellow-600">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
-              <p class="text-sm text-gray-600 mt-2">Passenger ratings</p>
+              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Passenger ratings</p>
             </div>
 
             <!-- Total Earnings -->
-            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200 shadow-lg">
+            <div class="u-card-glass border-blue-400/30 dark:border-blue-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Total Earnings</h3>
-                <div class="p-3 bg-green-500 text-white rounded-lg">
-                  <fa-icon [icon]="faMoneyBill1Wave"></fa-icon>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Total Earnings</h3>
+                <div class="p-3 bg-blue-500/20 dark:bg-blue-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-xl">
+                  <fa-icon [icon]="faMoneyBill1Wave" class="text-blue-600 dark:text-blue-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-green-600">{{ (user$ | async)?.totalEarnings || 0 }} <span class="text-xl">TND</span></p>
-              <p class="text-sm text-gray-600 mt-2">Lifetime earnings</p>
+              <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ (user$ | async)?.totalEarnings || 0 }} <span class="text-xl">TND</span></p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Lifetime earnings</p>
             </div>
           </div>
         </div>
 
         <!-- FAQs Section -->
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="u-card-glass">
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8">Frequently Asked Questions</h2>
           <div class="space-y-4">
             <!-- FAQ Item 1 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>How do I post a ride?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Go to the "Offer a Ride" section, fill in the details such as departure location, destination, and available seats, and click "Post Ride."</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Go to the "Offer a Ride" section, fill in the details such as departure location, destination, and available seats, and click "Post Ride."</p>
             </details>
 
             <!-- FAQ Item 2 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>How can I manage reservations for my rides?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Navigate to the "Manage Reservations" section to view, accept, or reject reservations for your rides.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Navigate to the "Manage Reservations" section to view, accept, or reject reservations for your rides.</p>
             </details>
 
             <!-- FAQ Item 3 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>Can I edit or cancel a posted ride?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Yes, you can edit the details or cancel a ride before it starts. Visit the "Rides Management Dashboard" to make changes.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Yes, you can edit the details or cancel a ride before it starts. Visit the "Rides Management Dashboard" to make changes.</p>
             </details>
           </div>
         </div>
@@ -145,126 +145,126 @@
       <div>
         <!-- Header -->
         <div class="mb-12">
-          <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">Passenger Dashboard</h1>
-          <p class="text-gray-600">Find rides, manage bookings, and track your journey</p>
+          <h1 class="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 mb-2">Passenger Dashboard</h1>
+          <p class="text-slate-600 dark:text-slate-400">Find rides, manage bookings, and track your journey</p>
         </div>
 
         <!-- Cards Section -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <!-- Find a Ride Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-purple-400 to-purple-600 overflow-hidden">
-              <img src="/assets/find_ride.png" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Find a Ride">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-emerald-400/80 to-teal-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/find_ride.png" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Find a Ride">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-purple-100 rounded-lg">
-                  <fa-icon [icon]="faSearch" class="text-purple-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-xl">
+                  <fa-icon [icon]="faSearch" class="text-emerald-600 dark:text-emerald-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Find a Ride</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Find a Ride</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">Discover rides tailored to your schedule and needs.</p>
-              <a href="/dashboard/rides/all-rides" class="inline-block px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Find Rides</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">Discover rides tailored to your schedule and needs.</p>
+              <a href="/dashboard/rides/all-rides" class="inline-block px-4 py-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-emerald-500/30 transition-all text-center text-sm">Find Rides</a>
             </div>
           </div>
 
           <!-- Nearby Rides Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-cyan-400 to-blue-600 overflow-hidden">
-              <img src="/assets/find_nearby_ride.png" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Find Nearby Ride">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-cyan-400/80 to-blue-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/find_nearby_ride.png" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Find Nearby Ride">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-cyan-100 rounded-lg">
-                  <fa-icon [icon]="faLocationDot" class="text-cyan-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-xl">
+                  <fa-icon [icon]="faLocationDot" class="text-cyan-600 dark:text-cyan-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Nearby Rides</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Nearby Rides</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">Locate rides near your current location for quick travel.</p>
-              <a href="/dashboard/rides/rides-near-me" class="inline-block px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Find Nearby</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">Locate rides near your current location for quick travel.</p>
+              <a href="/dashboard/rides/rides-near-me" class="inline-block px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/30 transition-all text-center text-sm">Find Nearby</a>
             </div>
           </div>
 
           <!-- Manage Bookings Card -->
-          <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
-            <div class="relative h-40 bg-gradient-to-br from-pink-400 to-rose-600 overflow-hidden">
-              <img src="/assets/manage_bookings.png" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 transition-opacity" alt="Manage Bookings">
+          <div class="group u-card-glass-hover">
+            <div class="relative h-40 bg-gradient-to-br from-blue-400/80 to-indigo-600/80 overflow-hidden rounded-2xl mb-4">
+              <img src="/assets/manage_bookings.png" class="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity" alt="Manage Bookings">
             </div>
-            <div class="p-6 flex flex-col">
+            <div class="flex flex-col">
               <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-pink-100 rounded-lg">
-                  <fa-icon [icon]="faBookBookmark" class="text-pink-600 text-2xl"></fa-icon>
+                <div class="p-3 bg-blue-500/20 dark:bg-blue-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-xl">
+                  <fa-icon [icon]="faBookBookmark" class="text-blue-600 dark:text-blue-400 text-2xl"></fa-icon>
                 </div>
-                <h5 class="text-xl font-bold text-gray-900">Manage Bookings</h5>
+                <h5 class="text-xl font-bold text-slate-900 dark:text-slate-100">Manage Bookings</h5>
               </div>
-              <p class="text-gray-600 flex-grow mb-4">View, manage, and cancel your ride bookings easily.</p>
-              <a href="/dashboard/reservations/history" class="inline-block px-6 py-3 bg-gradient-to-r from-pink-500 to-rose-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all text-center">Manage Bookings</a>
+              <p class="text-slate-600 dark:text-slate-400 flex-grow mb-4">View, manage, and cancel your ride bookings easily.</p>
+              <a href="/dashboard/reservations/history" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all text-center text-sm">Manage Bookings</a>
             </div>
           </div>
         </div>
 
         <!-- Statistics Section -->
         <div class="mb-12">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Your Statistics</h2>
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">Your Statistics</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Completed Rides -->
-            <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border border-indigo-200 shadow-lg">
+            <div class="u-card-glass border-emerald-400/30 dark:border-emerald-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Rides Completed</h3>
-                <div class="p-3 bg-indigo-500 text-white rounded-lg">
-                  <fa-icon [icon]="faCarSide"></fa-icon>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Rides Completed</h3>
+                <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-xl">
+                  <fa-icon [icon]="faCarSide" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-indigo-600">{{ (user$ | async)?.completedRides || 0 }}</p>
-              <p class="text-sm text-gray-600 mt-2">Total rides taken</p>
+              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Total rides taken</p>
             </div>
 
             <!-- Average Rating -->
-            <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200 shadow-lg">
+            <div class="u-card-glass border-cyan-400/30 dark:border-cyan-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Your Rating</h3>
-                <div class="p-3 bg-orange-500 text-white rounded-lg">
-                  <fa-icon [icon]="faStarHalfStroke"></fa-icon>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Your Rating</h3>
+                <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-xl">
+                  <fa-icon [icon]="faStarHalfStroke" class="text-cyan-600 dark:text-cyan-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-orange-600">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
-              <p class="text-sm text-gray-600 mt-2">Driver ratings</p>
+              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Driver ratings</p>
             </div>
           </div>
         </div>
 
         <!-- FAQs Section -->
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-          <h2 class="text-2xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+        <div class="u-card-glass">
+          <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8">Frequently Asked Questions</h2>
           <div class="space-y-4">
             <!-- FAQ Item 1 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>How do I book a ride?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Browse available rides, select one that suits your schedule, and click "Book Now."</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Browse available rides, select one that suits your schedule, and click "Book Now."</p>
             </details>
 
             <!-- FAQ Item 2 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>Can I cancel a reservation?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Yes, you can cancel a reservation before the ride starts through the "Manage Bookings" section.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Yes, you can cancel a reservation before the ride starts through the "Manage Bookings" section.</p>
             </details>
 
             <!-- FAQ Item 3 -->
-            <details class="group border border-gray-200 rounded-lg p-4 cursor-pointer hover:bg-indigo-50 transition-colors">
-              <summary class="flex items-center justify-between font-semibold text-gray-900">
+            <details class="group border border-white/20 dark:border-white/10 rounded-xl p-4 cursor-pointer hover:bg-white/10 dark:hover:bg-white/8 transition-colors">
+              <summary class="flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100">
                 <span>How can I contact the driver?</span>
-                <fa-icon [icon]="faPlus" class="group-open:hidden"></fa-icon>
-                <fa-icon [icon]="faMinus" class="hidden group-open:block"></fa-icon>
+                <fa-icon [icon]="faPlus" class="group-open:hidden text-emerald-600 dark:text-emerald-400"></fa-icon>
+                <fa-icon [icon]="faMinus" class="hidden group-open:block text-emerald-600 dark:text-emerald-400"></fa-icon>
               </summary>
-              <p class="text-gray-600 mt-4 pt-4 border-t border-gray-200">Once you've booked a ride, the driver's contact details will be available in the "My Rides" section.</p>
+              <p class="text-slate-600 dark:text-slate-400 mt-4 pt-4 border-t border-white/20 dark:border-white/10">Once you've booked a ride, the driver's contact details will be available in the "My Rides" section.</p>
             </details>
           </div>
         </div>
@@ -272,3 +272,4 @@
     }
   </div>
 </div>
+
