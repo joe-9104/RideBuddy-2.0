@@ -2,7 +2,7 @@ import {Component, inject} from '@angular/core';
 import {collection, collectionData, doc, Firestore, query, setDoc, where} from '@angular/fire/firestore';
 import {Auth, user} from '@angular/fire/auth';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
+import {BehaviorSubject, map, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
 import {Ride} from '../../../app.models';
@@ -110,16 +110,24 @@ private firestore = inject(Firestore);
 
   openRideDetails(ride: Ride) {
     console.log(ride);
-    this.reservationService.findReservationByRideId(ride.id!!).subscribe(r => {
-      this.router.navigate(
-        ['/dashboard/rides/details', ride.id],
-        {
-          state: {
-            hasReservation: r.uid,
-            conductorRating: r.conductorRating,
+    this.reservationService.findReservationByRideId(ride.id!!).subscribe({
+      next: r => {
+        this.router.navigate(
+          ['/dashboard/rides/details', ride.id],
+          {
+            state: {
+              hasReservation: !!(r && r.uid),
+              conductorRating: r?.conductorRating ?? null,
+            }
           }
-        }
-      );
+        );
+      },
+      error: () => {
+        this.router.navigate(
+          ['/dashboard/rides/details', ride.id],
+          { state: { hasReservation: false, conductorRating: null } }
+        );
+      }
     });
   }
 }
