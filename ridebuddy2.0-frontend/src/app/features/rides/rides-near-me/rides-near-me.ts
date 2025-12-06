@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForOf, NgIf } from '@angular/common';
+import { DecimalPipe, NgForOf, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import {
@@ -15,12 +15,12 @@ import { Subject, takeUntil } from 'rxjs';
 interface NearbyRide {
   ride: Ride;
   distanceKm: number;
-  coords: { lat: number; lng: number } | null;
+  coords: { lat: number; lng: number };
 }
 
 @Component({
   selector: 'app-rides-near-me',
-  imports: [NgForOf, NgIf, RouterLink, FaIconComponent],
+  imports: [NgForOf, NgIf, RouterLink, FaIconComponent, DecimalPipe],
   templateUrl: './rides-near-me.html',
   styleUrl: './rides-near-me.css',
 })
@@ -108,18 +108,19 @@ export class RidesNearMe implements OnInit, OnDestroy {
       return;
     }
 
-    const updated: NearbyRide[] = this.ridesCache
+    const mapped = this.ridesCache
       .map(ride => {
         const coords = this.parseCoordinates(ride.startCoordinate);
         if (!coords) return null;
         const distance = this.haversineDistance(coords, this.currentLocation!);
         return { ride, distanceKm: distance, coords };
-      })
-      .filter((item): item is NearbyRide => item !== null && item.distanceKm <= this.selectedRadius)
-      .sort((a, b) => a.distanceKm - b.distanceKm);
+      });
 
-    this.nearbyRides = updated;
-    this.heroRide = updated[0] ?? null;
+    const filtered = mapped.filter((item): item is NearbyRide => item !== null && item.distanceKm <= this.selectedRadius);
+    filtered.sort((a, b) => a.distanceKm - b.distanceKm);
+
+    this.nearbyRides = filtered;
+    this.heroRide = filtered[0] ?? null;
   }
 
   private parseCoordinates(value?: string): { lat: number; lng: number } | null {
@@ -143,4 +144,3 @@ export class RidesNearMe implements OnInit, OnDestroy {
     return Number((R * c).toFixed(2));
   }
 }
-
