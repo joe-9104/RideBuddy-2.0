@@ -109,6 +109,7 @@ private firestore = inject(Firestore);
   }
 
   openRideDetails(ride: Ride) {
+    console.log(ride);
     this.reservationService.findReservationByRideId(ride.id!!).subscribe(r => {
       this.router.navigate(
         ['/dashboard/rides/details', ride.id],

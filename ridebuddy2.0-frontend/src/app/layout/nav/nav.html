@@ -18,6 +18,25 @@
         <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-red-700 bg-white rounded-full">9+</span>
       </button>
 
+      <!-- Dark Mode Toggle -->
+      <button
+        (click)="toggleDarkMode()"
+        class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400/80"
+        aria-label="Toggle dark mode"
+        title="Toggle dark mode"
+      >
+        <fa-icon
+          *ngIf="!isDarkMode"
+          [icon]="faMoon"
+          class="text-slate-700 dark:text-slate-100 transition-all"
+        ></fa-icon>
+        <fa-icon
+          *ngIf="isDarkMode"
+          [icon]="faSun"
+          class="text-slate-700 dark:text-slate-100 transition-all"
+        ></fa-icon>
+      </button>
+
       @if (user$ | async) {
         <div class="relative">
           <button (click)="toggleMenu()" class="flex items-center gap-2 bg-white/50 dark:bg-slate-800/70 hover:bg-white/80 dark:hover:bg-slate-700/80 px-3 py-2 rounded-full text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-emerald-400/70 focus:outline-none transition-all duration-200">

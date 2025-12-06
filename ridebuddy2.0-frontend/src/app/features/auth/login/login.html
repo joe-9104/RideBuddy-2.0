@@ -1,26 +1,26 @@
-<div class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center p-4">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 flex items-center justify-center p-4">
   <div class="w-full max-w-md">
     <!-- Card -->
-    <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <div class="u-card-glass">
       <!-- Header with gradient -->
-      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center">
+      <div class="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 border border-emerald-400/30 dark:border-emerald-400/20 p-8 text-center rounded-2xl mb-6">
         <div class="flex justify-center mb-4">
           <img src="assets/ridebuddy.png" alt="RideBuddy" class="h-16 rounded-lg shadow-lg" />
         </div>
-        <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-        <p class="text-indigo-100">Sign in to your RideBuddy account</p>
+        <h2 class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-cyan-600 dark:from-emerald-400 dark:to-cyan-400 bg-clip-text text-transparent mb-2">Welcome Back</h2>
+        <p class="text-slate-600 dark:text-slate-400">Sign in to your RideBuddy account</p>
       </div>
 
       <!-- Form Section -->
-      <div class="p-8">
+      <div class="space-y-6">
         @if (errorMessage) {
-          <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
+          <div class="p-4 bg-red-50/80 dark:bg-red-500/10 border-l-4 border-red-500 rounded-lg backdrop-blur-lg">
             <div class="flex items-center gap-3">
-              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 text-xl"></fa-icon>
+              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
               <div class="flex-1">
-                <p class="text-red-800 font-semibold text-sm">{{ errorMessage }}</p>
+                <p class="text-red-800 dark:text-red-300 font-semibold text-sm">{{ errorMessage }}</p>
               </div>
-              <button type="button" class="text-red-600 hover:text-red-800" (click)="errorMessage=''">
+              <button type="button" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300" (click)="errorMessage=''">
                 <fa-icon [icon]="['fas','xmark']"></fa-icon>
               </button>
             </div>
@@ -30,11 +30,11 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
           <!-- Email Field -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Email Address</label>
             <div class="relative">
-              <fa-icon [icon]="['fas','envelope']" class="absolute left-3 top-3.5 text-indigo-600 text-lg"></fa-icon>
+              <fa-icon [icon]="['fas','envelope']" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
               <input
-                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                 type="email"
                 placeholder="your@email.com"
                 formControlName="email"
@@ -43,34 +43,33 @@
             @if(loginForm.controls.email.touched && loginForm.controls.email.invalid){
               <div class="mt-2 space-y-1">
                 @if (loginForm.controls.email.errors?.['required']) {
-                  <div class="text-red-600 text-sm flex items-center gap-1">
+                  <div class="text-red-600 dark:text-red-400 text-sm flex items-center gap-1">
                     <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Email is required.
                   </div>
                 }
                 @if (loginForm.controls.email.errors?.['email']){
-                  <div class="text-red-600 text-sm flex items-center gap-1">
+                  <div class="text-red-600 dark:text-red-400 text-sm flex items-center gap-1">
                     <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Enter a valid email.
                   </div>
                 }
               </div>
             }
-
           </div>
 
           <!-- Password Field -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Password</label>
             <div class="relative">
-              <fa-icon [icon]="['fas','lock']" class="absolute left-3 top-3.5 text-indigo-600 text-lg"></fa-icon>
+              <fa-icon [icon]="['fas','lock']" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
               <input
-                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                 type="password"
                 placeholder="••••••••"
                 formControlName="password"
               />
             </div>
             @if (loginForm.controls.password.touched && loginForm.controls.password.invalid){
-              <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+              <div class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
                 <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Password is required.
               </div>
             }
@@ -78,7 +77,7 @@
 
           <!-- Submit Button -->
           <button
-            class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            class="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             type="submit"
             [disabled]="loading"
           >
@@ -92,7 +91,7 @@
           <button
             type="button"
             (click)="signInWithGoogle()"
-            class="w-full py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors flex items-center justify-center gap-2"
+            class="w-full py-3 border-2 border-slate-300 dark:border-white/20 bg-white/50 dark:bg-white/5 text-slate-900 dark:text-slate-100 font-semibold rounded-xl hover:bg-slate-50 dark:hover:bg-white/10 hover:border-slate-400 dark:hover:border-white/30 transition-colors flex items-center justify-center gap-2"
           >
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -100,45 +99,31 @@
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
-            Sign in with Google
-          </button>
-
-          <button
-            type="button"
-            (click)="signInWithMicrosoft()"
-            disabled
-            class="w-full py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-colors flex items-center justify-center gap-2"
-          >
-            <svg class="w-5 h-5" viewBox="0 0 23 23" fill="currentColor">
-              <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
-              <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
-              <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
-              <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
-            </svg>
-            Sign in with Microsoft
+            Continue with Google
           </button>
         </div>
 
         <!-- Divider -->
         <div class="my-6 flex items-center gap-4">
-          <div class="flex-1 h-px bg-gray-200"></div>
-          <span class="text-gray-500 text-sm">New to RideBuddy?</span>
-          <div class="flex-1 h-px bg-gray-200"></div>
+          <div class="flex-1 h-px bg-slate-300 dark:bg-white/20"></div>
+          <span class="text-slate-500 dark:text-slate-400 text-sm">New to RideBuddy?</span>
+          <div class="flex-1 h-px bg-slate-300 dark:bg-white/20"></div>
         </div>
 
         <!-- Register Link -->
         <a
           routerLink="/register"
-          class="w-full py-3 border-2 border-indigo-600 text-indigo-600 font-bold rounded-lg hover:bg-indigo-50 transition-colors text-center block"
+          class="w-full py-3 border-2 border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 font-bold rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors text-center block"
         >
           Create Account
         </a>
       </div>
 
       <!-- Footer -->
-      <div class="px-8 py-4 bg-gray-50 border-t border-gray-200 text-center text-sm text-gray-600">
-        <p>Need help? <a href="#" class="text-indigo-600 font-semibold hover:underline">Contact support</a></p>
+      <div class="px-6 py-4 bg-white/50 dark:bg-white/5 border-t border-slate-200 dark:border-white/10 text-center text-sm text-slate-600 dark:text-slate-400 rounded-b-2xl">
+        <p>Need help? <a href="#" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Contact support</a></p>
       </div>
     </div>
   </div>
 </div>
+

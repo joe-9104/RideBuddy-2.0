@@ -8,12 +8,14 @@ import {AuthService} from '../../../core/services/auth.service';
 import {filter} from 'rxjs';
 import {Governorate} from '../../../app.models';
 import {NgIf} from '@angular/common';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-create-ride',
   imports: [
     ReactiveFormsModule,
     NgIf,
+    FaIconComponent,
   ],
   templateUrl: './create-ride.html',
   styleUrl: './create-ride.css',

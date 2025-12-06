@@ -3,13 +3,15 @@ import {Router, RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../../core/services/auth.service';
 import {NgIf} from '@angular/common';
+import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-register',
   imports: [
     NgIf,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    FaIconComponent
   ],
   templateUrl: './register.html',
   styleUrl: './register.css',

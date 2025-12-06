@@ -1,29 +1,29 @@
-<div class="min-h-screen bg-gradient-to-br from-gray-50 via-indigo-50 to-purple-50 p-6">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 p-6">
   <div class="max-w-4xl mx-auto">
 
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-4xl font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">My Profile</h1>
-      <p class="text-gray-600">Manage your personal information and preferences</p>
+      <h1 class="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-2">My Profile</h1>
+      <p class="text-slate-600 dark:text-slate-400">Manage your personal information and preferences</p>
     </div>
 
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Left Column - Profile Card -->
       <div class="lg:col-span-1">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden sticky top-6">
+        <div class="u-card-glass sticky top-6">
           <!-- Profile Header with Gradient -->
-          <div class="relative h-32 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+          <div class="relative h-32 bg-gradient-to-r from-emerald-500/40 via-cyan-500/40 to-blue-500/40 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-t-2xl">
             <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
               <div class="relative">
-                <div class="w-24 h-24 rounded-full bg-white p-1 shadow-2xl">
-                  <div class="w-full h-full rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
-                    <span class="text-3xl font-bold text-indigo-600">
+                <div class="w-24 h-24 rounded-full bg-white dark:bg-slate-800 p-1 shadow-2xl">
+                  <div class="w-full h-full rounded-full bg-gradient-to-br from-emerald-100 dark:from-emerald-900 to-cyan-100 dark:to-cyan-900 flex items-center justify-center">
+                    <span class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
                       {{ ((user$ | async)?.displayName || 'U')[0] | uppercase }}
                     </span>
                   </div>
                 </div>
-                <div class="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-r from-green-400 to-emerald-600 border-4 border-white flex items-center justify-center">
+                <div class="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-600 border-4 border-white dark:border-slate-800 flex items-center justify-center">
                   <fa-icon [icon]="faCheck" class="text-white text-sm"></fa-icon>
                 </div>
               </div>
@@ -32,34 +32,34 @@
 
           <!-- Profile Info -->
           <div class="pt-16 pb-8 px-6 text-center">
-            <h2 class="text-2xl font-bold text-gray-900 mb-1">{{ (user$ | async)?.displayName || 'User' }}</h2>
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 mb-4">
-              <fa-icon [icon]="getRoleIcon()" class="text-indigo-600"></fa-icon>
-              <span class="text-sm font-medium text-indigo-700">{{ (user$ | async)?.role || 'USER' }}</span>
+            <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-1">{{ (user$ | async)?.displayName || 'User' }}</h2>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/30 dark:border-emerald-400/20 mb-4">
+              <fa-icon [icon]="getRoleIcon()" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
+              <span class="text-sm font-medium text-emerald-700 dark:text-emerald-300">{{ (user$ | async)?.role || 'USER' }}</span>
             </div>
-            <p class="text-gray-600 mb-6">{{ (user$ | async)?.email || 'No email provided' }}</p>
+            <p class="text-slate-600 dark:text-slate-400 mb-6">{{ (user$ | async)?.email || 'No email provided' }}</p>
 
             <!-- Stats Mini -->
             <div class="grid grid-cols-2 gap-4 mb-6">
               <div class="text-center">
-                <p class="text-2xl font-bold text-indigo-600">{{ (user$ | async)?.completedRides || 0 }}</p>
-                <p class="text-xs text-gray-500">Rides</p>
+                <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Rides</p>
               </div>
               <div class="text-center">
-                <p class="text-2xl font-bold text-purple-600">4.8</p>
-                <p class="text-xs text-gray-500">Rating</p>
+                <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">4.8</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Rating</p>
               </div>
             </div>
 
             <!-- Account Status -->
-            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+            <div class="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 rounded-xl p-4 border border-emerald-400/30 dark:border-emerald-400/20">
               <div class="flex items-center gap-3">
-                <div class="p-2 bg-green-100 rounded-lg">
-                  <fa-icon [icon]="faShieldCheck" class="text-green-600"></fa-icon>
+                <div class="p-2 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+                  <fa-icon [icon]="faShieldCheck" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                 </div>
                 <div>
-                  <h4 class="font-semibold text-gray-900">Verified Account</h4>
-                  <p class="text-sm text-gray-600">Email verified • Active member</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100">Verified Account</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">Email verified • Active member</p>
                 </div>
               </div>
             </div>
@@ -71,15 +71,15 @@
       <div class="lg:col-span-2 space-y-8">
 
         <!-- Personal Information Card -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div class="border-b border-gray-100 p-6">
+        <div class="u-card-glass">
+          <div class="border-b border-white/20 dark:border-white/10 p-6">
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="text-xl font-bold text-gray-900">Personal Information</h3>
-                <p class="text-gray-600 text-sm">Update your personal details</p>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Personal Information</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Update your personal details</p>
               </div>
-              <div class="p-3 bg-indigo-100 rounded-lg">
-                <fa-icon [icon]="faUserCircle" class="text-indigo-600 text-2xl"></fa-icon>
+              <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+                <fa-icon [icon]="faUserCircle" class="text-emerald-600 dark:text-emerald-400 text-2xl"></fa-icon>
               </div>
             </div>
           </div>
@@ -87,14 +87,14 @@
           <div class="p-6 space-y-6">
             <!-- Name Field -->
             <div class="group">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <label class="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">Full Name</label>
               <div class="flex items-center gap-4">
                 <div class="flex-1">
-                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
-                    <p class="text-gray-900">{{ (user$ | async)?.displayName || 'Not set' }}</p>
+                  <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors">
+                    <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.displayName || 'Not set' }}</p>
                   </div>
                 </div>
-                <button class="px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                <button class="px-4 py-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                   Edit
                 </button>
               </div>
@@ -102,17 +102,17 @@
 
             <!-- Email Field -->
             <div class="group">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+              <label class="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">Email Address</label>
               <div class="flex items-center gap-4">
                 <div class="flex-1">
-                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
+                  <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors">
                     <div class="flex items-center gap-3">
-                      <p class="text-gray-900">{{ (user$ | async)?.email || 'No email' }}</p>
-                      <span class="px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Verified</span>
+                      <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.email || 'No email' }}</p>
+                      <span class="px-2 py-1 text-xs font-medium bg-emerald-200 dark:bg-emerald-500/30 text-emerald-800 dark:text-emerald-300 rounded-full">Verified</span>
                     </div>
                   </div>
                 </div>
-                <button class="px-4 py-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors">
+                <button class="px-4 py-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
                   Change
                 </button>
               </div>
@@ -120,14 +120,14 @@
 
             <!-- Role Field -->
             <div class="group">
-              <label class="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
+              <label class="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">Account Type</label>
               <div class="flex items-center gap-4">
                 <div class="flex-1">
-                  <div class="bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 group-hover:border-indigo-300 transition-colors">
+                  <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors">
                     <div class="flex items-center gap-3">
-                      <fa-icon [icon]="getRoleIcon()" class="text-indigo-600"></fa-icon>
-                      <p class="text-gray-900">{{ (user$ | async)?.role || 'USER' }}</p>
-                      <span class="text-xs text-gray-500">(Cannot be changed)</span>
+                      <fa-icon [icon]="getRoleIcon()" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
+                      <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.role || 'USER' }}</p>
+                      <span class="text-xs text-slate-500 dark:text-slate-400">(Cannot be changed)</span>
                     </div>
                   </div>
                 </div>
@@ -137,15 +137,15 @@
         </div>
 
         <!-- Quick Actions Card -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-          <div class="border-b border-gray-100 p-6">
+        <div class="u-card-glass">
+          <div class="border-b border-white/20 dark:border-white/10 p-6">
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="text-xl font-bold text-gray-900">Quick Actions</h3>
-                <p class="text-gray-600 text-sm">Manage your account</p>
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Quick Actions</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Manage your account</p>
               </div>
-              <div class="p-3 bg-purple-100 rounded-lg">
-                <fa-icon [icon]="faBolt" class="text-purple-600 text-2xl"></fa-icon>
+              <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-lg">
+                <fa-icon [icon]="faBolt" class="text-cyan-600 dark:text-cyan-400 text-2xl"></fa-icon>
               </div>
             </div>
           </div>
@@ -153,46 +153,46 @@
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Switch Role Action -->
-              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg">
-                  <fa-icon [icon]="faSync" class="text-purple-600 text-xl"></fa-icon>
+              <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-emerald-400 dark:hover:border-emerald-400 bg-white/50 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+                  <fa-icon [icon]="faSync" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
-                  <h4 class="font-semibold text-gray-900 group-hover:text-purple-700">Switch Mode</h4>
-                  <p class="text-sm text-gray-600">Change between driver/passenger</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300">Switch Mode</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">Change between driver/passenger</p>
                 </div>
               </button>
 
               <!-- Security Action -->
-              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-blue-100 to-cyan-100 rounded-lg">
-                  <fa-icon [icon]="faShield" class="text-blue-600 text-xl"></fa-icon>
+              <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-cyan-400 dark:hover:border-cyan-400 bg-white/50 dark:bg-white/5 hover:bg-cyan-500/20 dark:hover:bg-cyan-500/20 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 dark:from-cyan-500/20 dark:to-blue-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-lg">
+                  <fa-icon [icon]="faShield" class="text-cyan-600 dark:text-cyan-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
-                  <h4 class="font-semibold text-gray-900 group-hover:text-blue-700">Security</h4>
-                  <p class="text-sm text-gray-600">Update password & 2FA</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-cyan-700 dark:group-hover:text-cyan-300">Security</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">Update password & 2FA</p>
                 </div>
               </button>
 
               <!-- Notifications Action -->
-              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-green-100 to-emerald-100 rounded-lg">
-                  <fa-icon [icon]="faBell" class="text-green-600 text-xl"></fa-icon>
+              <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-emerald-400 dark:hover:border-emerald-400 bg-white/50 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+                  <fa-icon [icon]="faBell" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
-                  <h4 class="font-semibold text-gray-900 group-hover:text-green-700">Notifications</h4>
-                  <p class="text-sm text-gray-600">Manage preferences</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300">Notifications</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">Manage preferences</p>
                 </div>
               </button>
 
               <!-- Help Action -->
-              <button class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 hover:border-orange-300 hover:bg-orange-50 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-orange-100 to-red-100 rounded-lg">
-                  <fa-icon [icon]="faQuestionCircle" class="text-orange-600 text-xl"></fa-icon>
+              <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-400 bg-white/50 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-blue-500/20 transition-all duration-300">
+                <div class="p-3 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 dark:from-blue-500/20 dark:to-indigo-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-lg">
+                  <fa-icon [icon]="faQuestionCircle" class="text-blue-600 dark:text-blue-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
-                  <h4 class="font-semibold text-gray-900 group-hover:text-orange-700">Help Center</h4>
-                  <p class="text-sm text-gray-600">Get support</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-700 dark:group-hover:text-blue-300">Help Center</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">Get support</p>
                 </div>
               </button>
             </div>
@@ -200,60 +200,60 @@
         </div>
 
         <!-- Statistics Card -->
-        <div class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 rounded-2xl shadow-xl overflow-hidden">
-          <div class="p-6 text-white">
+        <div class="bg-gradient-to-br from-emerald-500/30 via-cyan-500/30 to-blue-500/30 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-2xl shadow-xl overflow-hidden border border-white/20 dark:border-white/10 backdrop-blur-lg">
+          <div class="p-6 text-slate-900 dark:text-slate-100">
             <div class="flex items-center justify-between mb-6">
               <div>
                 <h3 class="text-2xl font-bold">Your Journey</h3>
-                <p class="text-indigo-100">Activity statistics</p>
+                <p class="text-slate-600 dark:text-slate-400">Activity statistics</p>
               </div>
-              <div class="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
-                <fa-icon [icon]="faChartLine" class="text-2xl"></fa-icon>
+              <div class="p-3 bg-white/20 dark:bg-white/10 rounded-xl backdrop-blur-sm border border-white/30 dark:border-white/20">
+                <fa-icon [icon]="faChartLine" class="text-2xl text-emerald-600 dark:text-emerald-400"></fa-icon>
               </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-3xl font-bold">{{ (user$ | async)?.completedRides || 0 }}</p>
-                <p class="text-sm text-indigo-100">Total Rides</p>
+              <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Total Rides</p>
               </div>
-              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-3xl font-bold">4.8</p>
-                <p class="text-sm text-indigo-100">Avg Rating</p>
+              <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">4.8</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Avg Rating</p>
               </div>
-              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-3xl font-bold">98%</p>
-                <p class="text-sm text-indigo-100">Reliability</p>
+              <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">98%</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Reliability</p>
               </div>
-              <div class="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                <p class="text-3xl font-bold">12</p>
-                <p class="text-sm text-indigo-100">This Month</p>
+              <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">12</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">This Month</p>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Danger Zone -->
-        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-red-200">
-          <div class="border-b border-red-100 p-6">
+        <div class="bg-gradient-to-br from-red-500/30 to-rose-500/30 dark:from-red-500/20 dark:to-rose-500/20 rounded-2xl shadow-xl overflow-hidden border border-red-400/30 dark:border-red-400/20 backdrop-blur-lg">
+          <div class="border-b border-red-400/30 dark:border-red-400/20 p-6">
             <div class="flex items-center justify-between">
               <div>
-                <h3 class="text-xl font-bold text-red-900">Danger Zone</h3>
-                <p class="text-red-600 text-sm">Irreversible actions</p>
+                <h3 class="text-xl font-bold text-red-900 dark:text-red-300">Danger Zone</h3>
+                <p class="text-red-700 dark:text-red-400 text-sm">Irreversible actions</p>
               </div>
-              <div class="p-3 bg-red-100 rounded-lg">
-                <fa-icon [icon]="faExclamationTriangle" class="text-red-600 text-2xl"></fa-icon>
+              <div class="p-3 bg-red-500/20 dark:bg-red-500/20 border border-red-400/50 dark:border-red-400/30 rounded-lg">
+                <fa-icon [icon]="faExclamationTriangle" class="text-red-600 dark:text-red-400 text-2xl"></fa-icon>
               </div>
             </div>
           </div>
 
           <div class="p-6">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 bg-white/50 dark:bg-white/5 rounded-xl border border-white/20 dark:border-white/10">
               <div>
-                <h4 class="font-semibold text-gray-900">Delete Account</h4>
-                <p class="text-sm text-gray-600">Permanently remove your account and all data</p>
+                <h4 class="font-semibold text-slate-900 dark:text-slate-100 mb-1">Delete Account</h4>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Permanently delete your account and all associated data</p>
               </div>
-              <button class="px-6 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all hover:-translate-y-0.5">
+              <button class="px-6 py-2 bg-red-600 hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600 text-white rounded-lg font-semibold transition-colors whitespace-nowrap">
                 Delete Account
               </button>
             </div>
