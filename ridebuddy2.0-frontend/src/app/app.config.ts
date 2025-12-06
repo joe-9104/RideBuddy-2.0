@@ -13,6 +13,7 @@ import {getFirestore, provideFirestore} from '@angular/fire/firestore';
 import {getStorage, provideStorage} from '@angular/fire/storage';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -28,7 +29,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: 'FA_ICON_INIT',
       useFactory: (library: FaIconLibrary) => {
-        return () => library.addIconPacks(fas);
+        return () => library.addIconPacks(fas, fab);
       },
       deps: [FaIconLibrary]
     }

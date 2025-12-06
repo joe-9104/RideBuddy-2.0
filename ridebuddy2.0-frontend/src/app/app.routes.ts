@@ -14,6 +14,7 @@ import {Layout} from './layout/layout';
 import {ReservationsManagement} from './features/reservations/reservations-management/reservations-management';
 import {RideDetails} from './features/rides/ride-details/ride-details';
 import {ProfileComponent} from './features/profile/profile';
+import {RidesNearMe} from './features/rides/rides-near-me/rides-near-me';
 
 export const routes: Routes = [
   { path: '', component: LandingPage, canActivate: [landingGuard] },
@@ -31,6 +32,7 @@ export const routes: Routes = [
 
       // PASSENGER
       { path: 'rides/all-rides', component: RidesListPassenger },
+      { path: 'rides/rides-near-me', component: RidesNearMe },
       { path: 'reservations/history', component: PassengerReservationsHistory },
     ]
   },
