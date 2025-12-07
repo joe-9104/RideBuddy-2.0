@@ -75,7 +75,7 @@
                   <fa-icon [icon]="faCarSide" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (stats$ | async)?.completedRides || 0 }}</p>
               <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Total rides completed</p>
             </div>
 
@@ -87,7 +87,7 @@
                   <fa-icon [icon]="faStarHalfStroke" class="text-cyan-600 dark:text-cyan-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
+              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (stats$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
               <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Passenger ratings</p>
             </div>
 
@@ -99,7 +99,7 @@
                   <fa-icon [icon]="faMoneyBill1Wave" class="text-blue-600 dark:text-blue-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ (user$ | async)?.totalEarnings || 0 }} <span class="text-xl">TND</span></p>
+              <p class="text-4xl font-bold text-blue-600 dark:text-blue-400">{{ (stats$ | async)?.totalEarnings || 0 }} <span class="text-xl">TND</span></p>
               <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Lifetime earnings</p>
             </div>
           </div>
@@ -215,20 +215,20 @@
                   <fa-icon [icon]="faCarSide" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+              <p class="text-4xl font-bold text-emerald-600 dark:text-emerald-400">{{ (stats$ | async)?.ridesTaken || 0 }}</p>
               <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Total rides taken</p>
             </div>
 
             <!-- Average Rating -->
             <div class="u-card-glass border-cyan-400/30 dark:border-cyan-400/20">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Your Rating</h3>
+                <h3 class="text-lg font-semibold text-slate-900 dark:text-slate-100">Accepted Rides</h3>
                 <div class="p-3 bg-cyan-500/20 dark:bg-cyan-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-xl">
                   <fa-icon [icon]="faStarHalfStroke" class="text-cyan-600 dark:text-cyan-400"></fa-icon>
                 </div>
               </div>
-              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (user$ | async)?.averageRating || 0 }}<span class="text-xl">/5</span></p>
-              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Driver ratings</p>
+              <p class="text-4xl font-bold text-cyan-600 dark:text-cyan-400">{{ (stats$ | async)?.acceptedReservations || 0 }}<span class="text-xl">/{{ (stats$ | async)?.totalReservations || 0 }}</span></p>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">out of total rides</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service';
 import {AsyncPipe, CommonModule} from '@angular/common';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {User} from '../../app.models';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {
@@ -14,6 +14,8 @@ import {
   faPlusCircle, faSearch,
   faStarHalfStroke
 } from '@fortawesome/free-solid-svg-icons';
+import {ConductorStatsService} from '../../core/services/conductorStats.service';
+import {PassengerStatsService} from '../../core/services/passengerStats.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,10 +27,24 @@ import {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard {
+export class Dashboard implements OnInit {
+  conductorStatsService = inject(ConductorStatsService);
+  passengerStatsService = inject(PassengerStatsService);
+
+  stats$!: Observable<any>;
+
   user$: BehaviorSubject<User | null>;
+
   constructor(public auth: AuthService) {
     this.user$ = this.auth.userSubject;
+  }
+
+  async ngOnInit() {
+    this.user$.subscribe(user => {
+      if(user?.role === 'CONDUCTOR') this.stats$ = this.conductorStatsService.getConductorStats();
+      else if (user?.role === 'PASSENGER') this.stats$ = this.passengerStatsService.getPassengerStats();
+    })
+
   }
 
   protected readonly faGear = faGear;
