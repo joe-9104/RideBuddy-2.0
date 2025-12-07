@@ -1,19 +1,23 @@
-<div class="flex flex-col h-screen overflow-y-auto p-4 bg-white/5 dark:bg-white/5 border-r border-white/20 dark:border-white/10 w-64 sticky top-0 left-0 backdrop-blur-lg">
+<div class="flex flex-col min-h-screen max-h-screen overflow-y-auto p-4 bg-slate-900/60 dark:bg-slate-900/60 border-r border-white/10 backdrop-blur-xl w-64 sticky top-0 left-0">
   <!-- Logo Section -->
-  <div class="mb-8 pb-4 border-b border-white/20 dark:border-white/10">
-    <h5 class="text-slate-900 dark:text-slate-100 font-extrabold mb-1 text-lg flex items-center gap-2">
-      <fa-icon [icon]="faBars" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
+  <div class="mb-8 pb-4 border-b border-white/10">
+    <h5 class="text-slate-50 font-extrabold mb-1 text-lg flex items-center gap-2">
+      <fa-icon [icon]="faBars" class="text-emerald-400 text-xl"></fa-icon>
       Menu
     </h5>
-    <p class="text-xs text-slate-600 dark:text-slate-400">Navigate your dashboard</p>
+    <p class="text-xs text-slate-300">Navigate your dashboard</p>
   </div>
 
   <!-- Navigation Items -->
-  <ul class="flex flex-col space-y-2 flex-1">
+  <ul class="flex flex-col gap-2 flex-1">
     <!-- Dashboard Link -->
     <li>
-      <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400">
-        <fa-icon [icon]="faTachometerAlt" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+      <a
+        routerLink="/dashboard"
+        [ngClass]="navClasses('/dashboard')"
+        class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400"
+      >
+        <fa-icon [icon]="faTachometerAlt" class="text-lg"></fa-icon>
         <span>Dashboard</span>
       </a>
     </li>
@@ -21,9 +25,13 @@
     <!-- Dynamic Navigation Items -->
     @for( item of navItems; track item){
       @if((role$ | async) == item.role){
-        <li [class.selected]="item.link === router.url">
-          <a [href]="item.link" class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400">
-            <fa-icon [icon]="item.faIcon" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+        <li>
+          <a
+            [routerLink]="item.link"
+            [ngClass]="navClasses(item.link)"
+            class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400"
+          >
+            <fa-icon [icon]="item.faIcon" class="text-lg"></fa-icon>
             <span>{{ item.title }}</span>
           </a>
         </li>
@@ -32,9 +40,13 @@
   </ul>
 
   <!-- Footer Section -->
-  <div class="mt-auto pt-4 border-t border-white/20 dark:border-white/10">
-    <a href="/dashboard/profile" class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 text-sm hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200">
-      <fa-icon [icon]="faUserCog" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
+  <div class="mt-auto pt-4 border-t border-white/10">
+    <a
+      routerLink="/dashboard/profile"
+      [ngClass]="navClasses('/dashboard/profile')"
+      class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 text-sm hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200"
+    >
+      <fa-icon [icon]="faUserCog" class="text-md"></fa-icon>
       <span>Profile Settings</span>
     </a>
   </div>
