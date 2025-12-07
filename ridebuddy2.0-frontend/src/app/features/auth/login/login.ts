@@ -5,6 +5,7 @@ import {Router, RouterLink} from '@angular/router';
 import {User} from '../../../app.models';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -91,4 +92,7 @@ export class Login {
         this.errorMessage = err?.message || 'Microsoft sign-in failed.';
       })
   }
+
+  protected readonly faEnvelope = faEnvelope;
+  protected readonly faLock = faLock;
 }

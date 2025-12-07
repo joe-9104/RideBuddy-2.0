@@ -114,38 +114,37 @@
 
           <!-- Role Selection -->
           <div>
-            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">I want to be a...</label>
-            <div class="grid grid-cols-2 gap-3">
-              <!-- Passenger Option -->
-              <label class="relative">
+            <p class="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-3">I want to be a...</p>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <label class="block cursor-pointer">
                 <input
                   type="radio"
                   value="PASSENGER"
                   formControlName="role"
-                  class="sr-only"
+                  class="peer sr-only"
                 />
-                <div class="p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-indigo-600 has-[:checked]:border-indigo-600 has-[:checked]:bg-indigo-50 transition-all">
-                  <div class="text-center">
-                    <i class="bi bi-person-circle text-2xl text-indigo-600 block mb-2"></i>
-                    <p class="font-semibold text-sm text-gray-900">Passenger</p>
+                <div class="flex flex-col items-center gap-3 rounded-3xl border-2 border-slate-200 bg-white/70 p-5 text-center transition hover:border-emerald-400 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 dark:border-slate-700 dark:bg-slate-900/60 dark:peer-checked:bg-emerald-500/10 dark:text-slate-100">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 text-white shadow-lg">
+                    <fa-icon [icon]="faUser" class="text-2xl"></fa-icon>
                   </div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">Passenger</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Instantly surface comfy rides nearby.</p>
                 </div>
               </label>
 
-              <!-- Driver Option -->
-              <label class="relative">
+              <label class="block cursor-pointer">
                 <input
                   type="radio"
                   value="CONDUCTOR"
                   formControlName="role"
-                  class="sr-only"
+                  class="peer sr-only"
                 />
-                <div class="p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-600 has-[:checked]:border-green-600 has-[:checked]:bg-green-50 transition-all">
-                  <div class="text-center">
-                    <fa-icon [icon]="faCarSide" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
-
-                    <p class="font-semibold text-sm text-gray-900">Driver</p>
+                <div class="flex flex-col items-center gap-3 rounded-3xl border-2 border-slate-200 bg-white/70 p-5 text-center transition hover:border-cyan-500 peer-checked:border-cyan-500 peer-checked:bg-cyan-50 dark:border-slate-700 dark:bg-slate-900/60 dark:peer-checked:bg-cyan-500/10 dark:text-slate-100">
+                  <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg">
+                    <fa-icon [icon]="faCarSide" class="text-2xl"></fa-icon>
                   </div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">Driver</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400">Share your routes and earn perks.</p>
                 </div>
               </label>
             </div>
@@ -153,7 +152,7 @@
 
           <!-- Submit Button -->
           <button
-            class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-lg hover:shadow-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed mt-6"
+            class="w-full py-3 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/30 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             type="submit"
             [disabled]="loading"
           >
@@ -172,15 +171,14 @@
         <!-- Login Link -->
         <a
           routerLink="/login"
-          class="w-full py-3 border-2 border-indigo-600 text-indigo-600 font-bold rounded-lg hover:bg-indigo-50 transition-colors text-center block"
+          class="w-full py-3 border-2 border-emerald-500 dark:border-emerald-400 text-emerald-600 dark:text-emerald-400 font-bold rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-500/10 transition-colors text-center block"
         >
           Sign In Instead
         </a>
       </div>
-
-      <!-- Footer -->
-      <div class="px-8 py-4 bg-gray-50 border-t border-gray-200 text-center text-xs text-gray-600">
-        <p>By signing up, you agree to our <a href="#" class="text-indigo-600 font-semibold hover:underline">Terms of Service</a></p>
+      <!-- Terms of Service -->
+      <div class="px-6 py-4 bg-white/50 dark:bg-white/5 border-t border-slate-200 dark:border-white/10 text-center text-sm text-slate-600 dark:text-slate-400 rounded-b-2xl">
+        <p>By signing up, you agree to our <a href="#" class="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline">Terms of Service</a></p>
       </div>
     </div>
   </div>
