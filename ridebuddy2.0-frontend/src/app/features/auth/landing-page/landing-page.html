@@ -1,232 +1,143 @@
-<app-navbar></app-navbar>
+<nav class="w-full bg-white/90 dark:bg-slate-900/80 text-slate-900 dark:text-slate-100 shadow-lg border-b border-emerald-200/60 dark:border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
+    <a href="/" class="flex items-center font-extrabold text-base tracking-wider hover:opacity-90 transition-opacity">
+      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 h-8 rounded-md shadow-md" />
+      <span class="uppercase text-sm">RideBuddy</span>
+    </a>
 
-<div class="min-h-screen bg-gradient-to-b from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950">
-  <!-- Welcome Section -->
-  <div class="pt-16 pb-20">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
-        Welcome to RideBuddy
-      </h1>
-      <p class="text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
-        Your trusted carpooling platform for seamless, affordable, and eco-friendly travel. Join thousands of users saving money and making a difference.
-      </p>
-
-      <!-- Hero Image -->
-      <div class="mb-6 flex justify-center">
-        <div class="relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-emerald-600/20 to-cyan-600/20 dark:from-emerald-500/20 dark:to-cyan-500/20 rounded-2xl blur-3xl"></div>
-          <img
-            src="assets/ridebuddy.png"
-            alt="RideBuddy"
-            class="relative rounded-2xl shadow-2xl max-w-md w-full hover:scale-105 transition-transform duration-300"
-          />
-        </div>
+    <div class="flex items-center space-x-4">
+      <a>Contact</a>
+      <a>About</a>
+      <div class="flex items-center gap-2 ml-3 pl-3 border-l border-white/30">
+        <a routerLink="/register" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-white text-xs font-semibold transition-all">Register</a>
+        <a routerLink="/login" class="px-3 py-1.5 bg-white text-indigo-700 rounded-lg text-xs font-bold hover:shadow-lg transition-all">Login</a>
       </div>
     </div>
   </div>
+</nav>
 
-  <!-- Benefits Section -->
-  <div class="py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center text-slate-900 dark:text-slate-100 mb-16">Why Choose RideBuddy?</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Passengers Card -->
-        <div class="group u-card-glass-hover">
-          <div class="h-48 bg-gradient-to-br from-emerald-400/80 to-teal-600/80 dark:from-emerald-400/40 dark:to-teal-600/40 relative overflow-hidden rounded-2xl mb-4">
-            <fa-icon [icon]="['fas','person-circle']" class="absolute text-white text-9xl opacity-20 top-6 right-4"></fa-icon>
+<div class="landing-root min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute -left-32 top-16 h-72 w-72 rounded-full bg-emerald-400/40 blur-[140px] dark:bg-emerald-500/30"></div>
+      <div class="absolute -right-16 bottom-10 h-72 w-72 rounded-full bg-cyan-500/30 blur-[120px]"></div>
+      <div class="absolute inset-y-0 left-[30%] w-1/2 bg-gradient-to-r from-white/70 to-transparent blur-3xl opacity-70"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto grid max-w-6xl gap-12 px-4 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div class="space-y-8">
+        <div class="inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/80 px-4 py-1 text-xs font-semibold uppercase tracking-[0.4em] text-slate-500 dark:border-slate-700 dark:bg-slate-900/70 dark:text-slate-200">
+          <fa-icon [icon]="['fas', 'wave-square']" class="text-emerald-500"></fa-icon>
+          <span>Live &amp; local</span>
+        </div>
+        <h1 class="text-4xl font-bold leading-tight text-slate-900 dark:text-white sm:text-5xl">
+          Nearby rides with confident comfort and calm.
+        </h1>
+        <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
+          RideBuddy mirrors the nearby-rides energy everywhere you go: bold gradients, soothing cards, and thoughtful spacing keep every interaction feeling curated and intuitive.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a routerLink="/rides-near-me" class="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-lg shadow-emerald-500/40 transition hover:shadow-emerald-500/70">
+            <fa-icon [icon]="['fas', 'map-marked-alt']"></fa-icon> Find nearby rides
+          </a>
+          <a routerLink="/register" class="inline-flex items-center gap-2 rounded-full border border-slate-900/10 bg-white/80 px-6 py-3 text-sm font-semibold uppercase tracking-wider text-slate-900 transition hover:border-slate-900/30 dark:border-slate-200/30 dark:bg-slate-900/60 dark:text-white">
+            <fa-icon [icon]="['fas', 'user-plus']"></fa-icon> Offer a seat
+          </a>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div *ngFor="let stat of stats" class="stat-card flex gap-4 rounded-2xl border border-slate-200/70 bg-white/80 px-4 py-5 shadow-sm transition dark:border-slate-800 dark:bg-slate-900/60">
+            <div class="stat-icon flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 text-white shadow dark:bg-white dark:text-slate-900">
+              <fa-icon [icon]="stat.icon"></fa-icon>
+            </div>
+            <div>
+              <p class="text-2xl font-semibold text-slate-900 dark:text-white">{{ stat.value }}</p>
+              <p class="text-sm text-slate-500 dark:text-slate-400">{{ stat.label }}</p>
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="nearby-panel flex flex-col gap-6 rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-2xl shadow-slate-900/30 dark:border-slate-800 dark:bg-slate-900/70">
+        <div class="flex items-start justify-between">
           <div>
-            <div class="flex items-center gap-3 mb-4">
-              <div class="p-3 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
-                <fa-icon [icon]="['fas','person-circle']" class="text-emerald-600 dark:text-emerald-400 text-2xl"></fa-icon>
+            <p class="text-xs uppercase tracking-[0.46em] text-slate-500 dark:text-slate-400">Nearby rides</p>
+            <h3 class="text-2xl font-semibold text-slate-900 dark:text-white">Fresh routes</h3>
+          </div>
+          <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-300">Updated 2m ago</span>
+        </div>
+        <div class="flex flex-col gap-4">
+          <article *ngFor="let ride of nearbyRides" class="ride-card rounded-2xl border border-transparent bg-slate-50/80 p-4 shadow-sm transition hover:border-emerald-400 hover:bg-white/90 dark:border-slate-800 dark:bg-slate-900/60 dark:hover:bg-slate-800">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="ride-icon flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-500 shadow dark:bg-slate-800 dark:text-emerald-300">
+                  <fa-icon [icon]="ride.icon"></fa-icon>
+                </div>
+                <div>
+                  <p class="text-base font-semibold text-slate-900 dark:text-white">{{ ride.route }}</p>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">{{ ride.driver }} · {{ ride.vibe }}</p>
+                </div>
               </div>
-              <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">For Passengers</h3>
+              <span class="text-sm font-semibold text-emerald-600 dark:text-emerald-300">{{ ride.price }}</span>
             </div>
-            <p class="text-slate-600 dark:text-slate-400 mb-6">
-              Find safe rides with trusted drivers, save money, and reduce your travel costs significantly.
-            </p>
-            <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
-              <li class="flex items-center gap-2"><fa-icon [icon]="['fas','check-circle']" class="text-emerald-500"></fa-icon> Affordable rates</li>
-              <li class="flex items-center gap-2"><fa-icon [icon]="['fas','check-circle']" class="text-emerald-500"></fa-icon> Trusted drivers</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Real-time tracking</li>
-            </ul>
-          </div>
+            <div class="mt-4 flex flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <span class="rounded-full bg-emerald-100/70 px-3 py-1 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-200">{{ ride.distance }}</span>
+              <span class="rounded-full bg-slate-200/70 px-3 py-1 dark:bg-slate-700/60">{{ ride.eta }}</span>
+              <span class="rounded-full bg-slate-200/70 px-3 py-1 dark:bg-slate-700/60">{{ ride.seats }}</span>
+            </div>
+          </article>
         </div>
+        <button class="btn-primary flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-4 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white shadow-lg shadow-emerald-500/40 transition hover:shadow-emerald-500/60">
+          <fa-icon [icon]="['fas', 'compass']"></fa-icon>
+          <span>See all nearby rides</span>
+        </button>
+      </div>
+    </div>
+  </section>
 
-        <!-- Drivers Card -->
-        <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
-          <div class="h-48 bg-gradient-to-br from-green-400 to-emerald-600 relative overflow-hidden">
-            <i class="bi bi-car-front-fill absolute text-white text-9xl opacity-20 top-6 right-4"></i>
+  <section class="features-section px-4 pb-16">
+    <div class="mx-auto max-w-6xl space-y-8">
+      <div class="space-y-3 text-center">
+        <p class="text-xs uppercase tracking-[0.4em] text-slate-500 dark:text-slate-400">Design inspired by nearby rides</p>
+        <h2 class="text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Everything feels aligned.</h2>
+        <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+          We mirrored the easy, bold near-me feed across RideBuddy so every page feels like part of the same pulse.
+        </p>
+      </div>
+      <div class="grid gap-6 md:grid-cols-3">
+        <article *ngFor="let feature of features" class="feature-card space-y-3 rounded-3xl border border-slate-200/70 bg-white/70 p-6 shadow-sm transition hover:shadow-2xl dark:border-slate-800 dark:bg-slate-900/70">
+          <div class="feature-icon grid h-14 w-14 place-items-center rounded-2xl text-white shadow-lg" [ngClass]="['bg-gradient-to-br', feature.accent]">
+            <fa-icon [icon]="feature.icon" class="text-xl"></fa-icon>
           </div>
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="p-3 bg-green-100 rounded-lg">
-                <i class="bi bi-car-front-fill text-green-600 text-2xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-900">For Drivers</h3>
-            </div>
-            <p class="text-gray-600 mb-6">
-              Offer spare seats, earn extra income, and connect with fellow travelers on your route.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Earn extra income</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Flexible schedule</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Driver support</li>
-            </ul>
-          </div>
+          <p class="text-xs uppercase tracking-[0.4em] text-slate-500 dark:text-slate-400">{{ feature.tag }}</p>
+          <h3 class="text-xl font-semibold text-slate-900 dark:text-white">{{ feature.title }}</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300">{{ feature.description }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section px-4 pb-24">
+    <div class="mx-auto max-w-5xl">
+      <div class="cta-card space-y-6 rounded-3xl bg-gradient-to-r from-slate-900 to-slate-700 p-8 text-white shadow-2xl dark:from-slate-800 dark:to-slate-900">
+        <div class="space-y-3">
+          <p class="text-xs uppercase tracking-[0.4em] text-white/70">RideBuddy</p>
+          <h2 class="text-3xl font-bold">Safe rides, near you.</h2>
+          <p class="text-lg text-white/80">
+            You already know the nearby feed energy; we just expanded it across the entire customer journey so every touchpoint feels bright, energetic, and cohesive.
+          </p>
         </div>
-
-        <!-- Planet Card -->
-        <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover:-translate-y-2">
-          <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-600 relative overflow-hidden">
-            <i class="bi bi-globe-europe-africa absolute text-white text-9xl opacity-20 top-6 right-4"></i>
-          </div>
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="p-3 bg-yellow-100 rounded-lg">
-                <i class="bi bi-globe-europe-africa text-yellow-600 text-2xl"></i>
-              </div>
-              <h3 class="text-2xl font-bold text-gray-900">For the Planet</h3>
-            </div>
-            <p class="text-gray-600 mb-6">
-              Reduce carbon emissions and be part of a sustainable, eco-friendly transportation solution.
-            </p>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Lower emissions</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Sustainable impact</li>
-              <li class="flex items-center gap-2"><i class="bi bi-check-circle text-green-500"></i> Green community</li>
-            </ul>
-          </div>
+        <div class="flex flex-wrap gap-4">
+          <a routerLink="/register" class="flex flex-1 min-w-[200px] items-center justify-center gap-2 rounded-full bg-white py-3 text-sm font-semibold uppercase tracking-[0.3em] text-slate-900 shadow-lg transition hover:translate-y-0.5">
+            <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+            <span>Create an account</span>
+          </a>
+          <a routerLink="/rides-near-me" class="flex flex-1 min-w-[200px] items-center justify-center gap-2 rounded-full border border-white/60 py-3 text-sm font-semibold uppercase tracking-[0.3em] text-white transition hover:bg-white/10">
+            <fa-icon [icon]="['fas', 'route']"></fa-icon>
+            <span>Explore nearby rides</span>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Stats Section -->
-  <div class="py-20 px-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center text-white mb-16">Our Impact</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Stat 1 -->
-        <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition-colors">
-          <div class="flex justify-center mb-4">
-            <div class="p-4 bg-yellow-400/20 rounded-full">
-              <i class="bi bi-people text-5xl text-yellow-300 animate-bounce"></i>
-            </div>
-          </div>
-          <h3 class="text-4xl font-bold text-white mb-2">10,000+</h3>
-          <p class="text-white/80 text-lg">Rides Shared</p>
-        </div>
-
-        <!-- Stat 2 -->
-        <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition-colors">
-          <div class="flex justify-center mb-4">
-            <div class="p-4 bg-green-400/20 rounded-full">
-              <i class="bi bi-person-check text-5xl text-green-300 animate-pulse"></i>
-            </div>
-          </div>
-          <h3 class="text-4xl font-bold text-white mb-2">5,000+</h3>
-          <p class="text-white/80 text-lg">Active Users</p>
-        </div>
-
-        <!-- Stat 3 -->
-        <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition-colors">
-          <div class="flex justify-center mb-4">
-            <div class="p-4 bg-cyan-400/20 rounded-full">
-              <i class="bi bi-tree text-5xl text-cyan-300 animate-bounce" style="animation-delay: 0.2s"></i>
-            </div>
-          </div>
-          <h3 class="text-4xl font-bold text-white mb-2">2 Tons</h3>
-          <p class="text-white/80 text-lg">CO₂ Saved Monthly</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Testimonials Section -->
-  <div class="py-20 px-4">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center text-gray-900 mb-16">What Our Users Say</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Testimonial 1 -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-blue-500">
-          <div class="flex items-center gap-1 mb-4">
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-          </div>
-          <blockquote class="italic text-gray-700 mb-4">"RideBuddy made my daily commute so much easier and affordable. I've saved hundreds this year!"</blockquote>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full"></div>
-            <div>
-              <p class="font-semibold text-gray-900">Youssef</p>
-              <p class="text-sm text-gray-600">Passenger</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-green-500">
-          <div class="flex items-center gap-1 mb-4">
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-          </div>
-          <blockquote class="italic text-gray-700 mb-4">"As a driver, RideBuddy helped me offset fuel costs and meet amazing people. Highly recommended!"</blockquote>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full"></div>
-            <div>
-              <p class="font-semibold text-gray-900">Idris</p>
-              <p class="text-sm text-gray-600">Driver</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-t-4 border-yellow-500">
-          <div class="flex items-center gap-1 mb-4">
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-            <i class="bi bi-star-fill text-yellow-400"></i>
-          </div>
-          <blockquote class="italic text-gray-700 mb-4">"Every ride I take is a step towards a better planet. RideBuddy is changing the game!"</blockquote>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full"></div>
-            <div>
-              <p class="font-semibold text-gray-900">Tasnime</p>
-              <p class="text-sm text-gray-600">Eco-Warrior</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <div class="py-20 px-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-4xl font-bold text-white mb-4">Ready to Join the Movement?</h2>
-      <p class="text-xl text-white/90 mb-10">Start your carpooling journey today and save money while helping the planet.</p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/register"
-           class="px-10 py-4 bg-white text-indigo-600 font-bold rounded-full text-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-          Get Started
-        </a>
-        <a href="/login"
-           class="px-10 py-4 bg-white/20 text-white font-bold rounded-full text-lg border-2 border-white hover:bg-white/30 transition-all duration-300">
-          Log In
-        </a>
-      </div>
-    </div>
-  </div>
+  </section>
 </div>
