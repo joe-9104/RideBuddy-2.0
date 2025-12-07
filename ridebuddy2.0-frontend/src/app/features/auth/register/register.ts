@@ -3,7 +3,15 @@ import {Router, RouterLink} from '@angular/router';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {AuthService} from '../../../core/services/auth.service';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-import {faCarSide, faEnvelope, faLock, faLockOpen, faPersonCirclePlus, faUser} from '@fortawesome/free-solid-svg-icons';
+import {
+  faCarSide, faCheckCircle,
+  faEnvelope,
+  faExclamationCircle,
+  faLock,
+  faLockOpen,
+  faPersonCirclePlus,
+  faUser, faXmark
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-register',
@@ -68,4 +76,7 @@ export class Register {
   protected readonly faLockOpen = faLockOpen;
   protected readonly faCarSide = faCarSide;
   protected readonly faPersonCirclePlus = faPersonCirclePlus;
+  protected readonly faExclamationCircle = faExclamationCircle;
+  protected readonly faXmark = faXmark;
+  protected readonly faCheckCircle = faCheckCircle;
 }

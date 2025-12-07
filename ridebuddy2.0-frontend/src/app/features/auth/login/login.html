@@ -16,12 +16,12 @@
         @if (errorMessage) {
           <div class="p-4 bg-red-50/80 dark:bg-red-500/10 border-l-4 border-red-500 rounded-lg backdrop-blur-lg">
             <div class="flex items-center gap-3">
-              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
+              <fa-icon [icon]="faExclamationCircle" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
               <div class="flex-1">
                 <p class="text-red-800 dark:text-red-300 font-semibold text-sm">{{ errorMessage }}</p>
               </div>
               <button type="button" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300" (click)="errorMessage=''">
-                <fa-icon [icon]="['fas','xmark']"></fa-icon>
+                <fa-icon [icon]="faXmark"></fa-icon>
               </button>
             </div>
           </div>
@@ -44,12 +44,12 @@
               <div class="mt-2 space-y-1">
                 @if (loginForm.controls.email.errors?.['required']) {
                   <div class="text-red-600 dark:text-red-400 text-sm flex items-center gap-1">
-                    <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Email is required.
+                    <fa-icon [icon]="faExclamationCircle"></fa-icon>Email is required.
                   </div>
                 }
                 @if (loginForm.controls.email.errors?.['email']){
                   <div class="text-red-600 dark:text-red-400 text-sm flex items-center gap-1">
-                    <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Enter a valid email.
+                    <fa-icon [icon]="faExclamationCircle"></fa-icon>Enter a valid email.
                   </div>
                 }
               </div>
@@ -70,7 +70,7 @@
             </div>
             @if (loginForm.controls.password.touched && loginForm.controls.password.invalid){
               <div class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
-                <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon>Password is required.
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>Password is required.
               </div>
             }
           </div>
@@ -81,7 +81,7 @@
             type="submit"
             [disabled]="loading"
           >
-            <fa-icon [icon]="['fas','right-to-bracket']"></fa-icon>
+            <fa-icon [icon]="faRightToBracket"></fa-icon>
             {{ loading ? 'Signing in...' : 'Sign In' }}
           </button>
         </form>
