@@ -2,7 +2,7 @@
   <!-- Logo Section -->
   <div class="mb-8 pb-4 border-b border-white/20 dark:border-white/10">
     <h5 class="text-slate-900 dark:text-slate-100 font-extrabold mb-1 text-lg flex items-center gap-2">
-      <fa-icon [icon]="['fas','bars']" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
+      <fa-icon [icon]="faBars" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
       Menu
     </h5>
     <p class="text-xs text-slate-600 dark:text-slate-400">Navigate your dashboard</p>
@@ -13,7 +13,7 @@
     <!-- Dashboard Link -->
     <li>
       <a href="/dashboard" class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400">
-        <fa-icon [icon]="['fas','tachometer-alt']" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+        <fa-icon [icon]="faTachometerAlt" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
         <span>Dashboard</span>
       </a>
     </li>
@@ -23,7 +23,7 @@
       @if((role$ | async) == item.role){
         <li [class.selected]="item.link === router.url">
           <a [href]="item.link" class="flex items-center gap-3 px-4 py-3 text-slate-700 dark:text-slate-300 font-semibold hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200 border-l-4 border-transparent hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-400">
-            <fa-icon [icon]="getFaIcon(item)" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+            <fa-icon [icon]="item.faIcon" class="text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
             <span>{{ item.title }}</span>
           </a>
         </li>
@@ -34,7 +34,7 @@
   <!-- Footer Section -->
   <div class="mt-auto pt-4 border-t border-white/20 dark:border-white/10">
     <a href="/dashboard/profile" class="flex items-center gap-3 px-4 py-2 text-slate-600 dark:text-slate-400 text-sm hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 rounded-xl transition-all duration-200">
-      <fa-icon [icon]="['fas','user-cog']" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
+      <fa-icon [icon]="faUserCog" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
       <span>Profile Settings</span>
     </a>
   </div>
