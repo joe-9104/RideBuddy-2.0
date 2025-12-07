@@ -1,20 +1,29 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import {RouterLink} from '@angular/router';
+import {FaIconComponent, IconDefinition} from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
+import {
+  faCarSide,
+  faCompass,
+  faLocationDot,
+  faMapMarkedAlt, faPaperPlane, faPersonBiking, faRoad, faRoute, faShieldAlt,
+  faSlidersH, faTachometerAlt,
+  faUserPlus,
+  faWaveSquare
+} from '@fortawesome/free-solid-svg-icons';
 
 interface FeatureCard {
   title: string;
   description: string;
   tag: string;
-  icon: [string, string];
-  accent: string;
+  icon: IconDefinition;
+  accent: string[];
 }
 
 interface MetricStat {
   value: string;
   label: string;
-  icon: [string, string];
+  icon: IconDefinition;
 }
 
 interface NearbyRide {
@@ -25,7 +34,7 @@ interface NearbyRide {
   price: string;
   distance: string;
   vibe: string;
-  icon: [string, string];
+  icon: IconDefinition;
 }
 
 @Component({
@@ -40,29 +49,29 @@ export class LandingPage {
       title: 'Nearby by design',
       description: 'Smart matching surfaces rides less than 3 km away so you are always seconds from a pickup.',
       tag: 'Live routes',
-      icon: ['fas', 'location-dot'],
-      accent: 'from-emerald-400 to-cyan-500',
+      icon: faLocationDot,
+      accent: ['from-emerald-400', 'to-cyan-500'],
     },
     {
       title: 'Intentional preferences',
       description: 'Save your regular routes, seating style, and comfort cues for perfectly curated offers.',
       tag: 'Personalized',
-      icon: ['fas', 'sliders-h'],
-      accent: 'from-sky-500 to-indigo-600',
+      icon: faSlidersH,
+      accent: ['from-sky-500', 'to-indigo-600'],
     },
     {
       title: 'Community secured',
       description: 'Human-verified profiles, safety checkpoints, and transparent feedback keep every mile mindful.',
       tag: 'Trust',
-      icon: ['fas', 'shield-alt'],
-      accent: 'from-amber-500 to-orange-600',
+      icon: faShieldAlt,
+      accent: ['from-amber-500', 'to-orange-600'],
     },
   ];
 
   readonly stats: MetricStat[] = [
-    { value: '1.8 km', label: 'Avg. Pickup Radius', icon: ['fas', 'map-marker-alt'] },
-    { value: '842', label: 'Drivers online', icon: ['fas', 'person-biking'] },
-    { value: '12k+', label: 'Monthly rides', icon: ['fas', 'route'] },
+    { value: '1.8 km', label: 'Avg. Pickup Radius', icon: faMapMarkedAlt},
+    { value: '842', label: 'Drivers online', icon: faPersonBiking },
+    { value: '12k+', label: 'Monthly rides', icon: faRoute },
   ];
 
   readonly nearbyRides: NearbyRide[] = [
@@ -74,7 +83,7 @@ export class LandingPage {
       price: 'Rp 35k',
       distance: '1.2 km away',
       vibe: 'EV — Calm AC',
-      icon: ['fas', 'car-side'],
+      icon: faCarSide,
     },
     {
       route: 'Pondok Indah → Blok M',
@@ -84,7 +93,7 @@ export class LandingPage {
       price: 'Rp 28k',
       distance: '1.7 km away',
       vibe: 'Hybrid — Quiet ride',
-      icon: ['fas', 'road'],
+      icon: faRoad,
     },
     {
       route: 'Cilandak → Senayan',
@@ -94,11 +103,14 @@ export class LandingPage {
       price: 'Rp 32k',
       distance: '1.4 km away',
       vibe: 'EV — Fast lane',
-      icon: ['fas', 'tachometer-alt'],
+      icon: faTachometerAlt,
     },
   ];
 
-  protected toggleDarkMode() {
-
-  }
+  protected readonly faWaveSquare = faWaveSquare;
+  protected readonly faMapMarkedAlt = faMapMarkedAlt;
+  protected readonly faUserPlus = faUserPlus;
+  protected readonly faCompass = faCompass;
+  protected readonly faPaperPlane = faPaperPlane;
+  protected readonly faRoute = faRoute;
 }
