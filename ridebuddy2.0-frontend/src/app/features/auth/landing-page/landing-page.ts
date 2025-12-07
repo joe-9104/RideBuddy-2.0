@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FaIconComponent, IconDefinition} from '@fortawesome/angular-fontawesome';
+import { FaIconComponent, IconDefinition } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
 import {
   faCarSide,
   faCompass,
+  faEnvelope,
   faLocationDot,
   faMapMarkedAlt, faPaperPlane, faPersonBiking, faRoad, faRoute, faShieldAlt,
   faSlidersH, faTachometerAlt,
   faUserPlus,
   faWaveSquare
 } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 interface FeatureCard {
   title: string;
@@ -35,6 +37,22 @@ interface NearbyRide {
   distance: string;
   vibe: string;
   icon: IconDefinition;
+}
+
+interface FooterLink {
+  label: string;
+  path: string;
+}
+
+interface FooterColumn {
+  heading: string;
+  links: FooterLink[];
+}
+
+interface SocialLink {
+  label: string;
+  icon: IconDefinition;
+  url: string;
 }
 
 @Component({
@@ -69,7 +87,7 @@ export class LandingPage {
   ];
 
   readonly stats: MetricStat[] = [
-    { value: '1.8 km', label: 'Avg. Pickup Radius', icon: faMapMarkedAlt},
+    { value: '1.8 km', label: 'Avg. Pickup Radius', icon: faMapMarkedAlt },
     { value: '842', label: 'Drivers online', icon: faPersonBiking },
     { value: '12k+', label: 'Monthly rides', icon: faRoute },
   ];
@@ -107,10 +125,46 @@ export class LandingPage {
     },
   ];
 
+  readonly footerColumns: FooterColumn[] = [
+    {
+      heading: 'Product',
+      links: [
+        { label: 'Nearby rides', path: '/rides-near-me' },
+        { label: 'Driver hub', path: '/register' },
+        { label: 'Route rewards', path: '/dashboard' },
+      ],
+    },
+    {
+      heading: 'Company',
+      links: [
+        { label: 'About', path: '/about' },
+        { label: 'Careers', path: '/careers' },
+        { label: 'Press', path: '/press' },
+      ],
+    },
+    {
+      heading: 'Support',
+      links: [
+        { label: 'Help center', path: '/help' },
+        { label: 'Security', path: '/security' },
+        { label: 'Feedback', path: '/contact' },
+      ],
+    },
+  ];
+
+  readonly footerSocials: SocialLink[] = [
+    { label: 'Facebook', icon: faFacebookF, url: 'https://facebook.com' },
+    { label: 'Instagram', icon: faInstagram, url: 'https://instagram.com' },
+    { label: 'LinkedIn', icon: faLinkedinIn, url: 'https://linkedin.com' },
+    { label: 'Twitter', icon: faTwitter, url: 'https://twitter.com' },
+  ];
+
+  protected readonly currentYear = new Date().getFullYear();
   protected readonly faWaveSquare = faWaveSquare;
   protected readonly faMapMarkedAlt = faMapMarkedAlt;
   protected readonly faUserPlus = faUserPlus;
   protected readonly faCompass = faCompass;
   protected readonly faPaperPlane = faPaperPlane;
   protected readonly faRoute = faRoute;
+  protected readonly faEnvelope = faEnvelope;
 }
