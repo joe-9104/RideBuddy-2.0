@@ -3,7 +3,7 @@ import {Router, RouterLink} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {User} from '../../app.models';
 import {AuthService} from '../../core/services/auth.service';
-import {AsyncPipe, NgIf} from '@angular/common';
+import {AsyncPipe} from '@angular/common';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faBell, faCoffee, faEnvelope, faGear, faUser, faMoon, faSun} from '@fortawesome/free-solid-svg-icons';
 
@@ -11,7 +11,6 @@ import {faBell, faCoffee, faEnvelope, faGear, faUser, faMoon, faSun} from '@fort
   selector: 'app-nav',
   imports: [
     AsyncPipe,
-    NgIf,
     RouterLink,
     FaIconComponent,
   ],
