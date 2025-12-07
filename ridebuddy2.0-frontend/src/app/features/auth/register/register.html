@@ -14,30 +14,34 @@
       <!-- Form Section -->
       <div class="space-y-6">
         <!-- Success Alert -->
-        <div *ngIf="successMessage" class="p-4 bg-green-50/80 dark:bg-green-500/10 border-l-4 border-green-500 rounded-lg backdrop-blur-lg">
-          <div class="flex items-center gap-3">
-            <fa-icon [icon]="['fas','check-circle']" class="text-green-600 dark:text-green-400 text-xl"></fa-icon>
-            <div class="flex-1">
-              <p class="text-green-800 dark:text-green-300 font-semibold text-sm">{{ successMessage }}</p>
+        @if (successMessage){
+          <div class="p-4 bg-green-50/80 dark:bg-green-500/10 border-l-4 border-green-500 rounded-lg backdrop-blur-lg">
+            <div class="flex items-center gap-3">
+              <fa-icon [icon]="['fas','check-circle']" class="text-green-600 dark:text-green-400 text-xl"></fa-icon>
+              <div class="flex-1">
+                <p class="text-green-800 dark:text-green-300 font-semibold text-sm">{{ successMessage }}</p>
+              </div>
+              <button type="button" class="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300" (click)="successMessage=''">
+                <fa-icon [icon]="['fas','xmark']"></fa-icon>
+              </button>
             </div>
-            <button type="button" class="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300" (click)="successMessage=''">
-              <fa-icon [icon]="['fas','xmark']"></fa-icon>
-            </button>
           </div>
-        </div>
+        }
 
         <!-- Error Alert -->
-        <div *ngIf="errorMessage" class="p-4 bg-red-50/80 dark:bg-red-500/10 border-l-4 border-red-500 rounded-lg backdrop-blur-lg">
-          <div class="flex items-center gap-3">
-            <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
-            <div class="flex-1">
-              <p class="text-red-800 dark:text-red-300 font-semibold text-sm">{{ errorMessage }}</p>
+        @if (errorMessage){
+          <div class="p-4 bg-red-50/80 dark:bg-red-500/10 border-l-4 border-red-500 rounded-lg backdrop-blur-lg">
+            <div class="flex items-center gap-3">
+              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
+              <div class="flex-1">
+                <p class="text-red-800 dark:text-red-300 font-semibold text-sm">{{ errorMessage }}</p>
+              </div>
+              <button type="button" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300" (click)="errorMessage=''">
+                <fa-icon [icon]="['fas','xmark']"></fa-icon>
+              </button>
             </div>
-            <button type="button" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300" (click)="errorMessage=''">
-              <fa-icon [icon]="['fas','xmark']"></fa-icon>
-            </button>
           </div>
-        </div>
+        }
 
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
           <!-- Name Row -->
@@ -45,7 +49,7 @@
             <div>
               <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">First Name</label>
               <div class="relative">
-                <fa-icon [icon]="['fas','user']" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+                <fa-icon [icon]="faUser" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
                 <input
                   class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                   placeholder="First"
@@ -54,11 +58,11 @@
               </div>
             </div>
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+              <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Last Name</label>
               <div class="relative">
-                <i class="bi bi-person absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+                <fa-icon [icon]="faUser" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
                 <input
-                  class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                  class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                   placeholder="Last"
                   formControlName="lastName"
                 />
@@ -68,11 +72,11 @@
 
           <!-- Email Field -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Email Address</label>
             <div class="relative">
-              <i class="bi bi-envelope absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+              <fa-icon [icon]="faEnvelope" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
               <input
-                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                 type="email"
                 placeholder="your@email.com"
                 formControlName="email"
@@ -82,11 +86,11 @@
 
           <!-- Password Field -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Password</label>
             <div class="relative">
-              <i class="bi bi-lock absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+              <fa-icon [icon]="faLock" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
               <input
-                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                 type="password"
                 placeholder="••••••••"
                 formControlName="password"
@@ -96,11 +100,11 @@
 
           <!-- Confirm Password Field -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Confirm Password</label>
             <div class="relative">
-              <i class="bi bi-lock-check absolute left-3 top-3.5 text-indigo-600 text-lg"></i>
+              <fa-icon [icon]="faLockOpen" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
               <input
-                class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition-colors"
+                class="w-full pl-10 pr-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition-colors"
                 type="password"
                 placeholder="••••••••"
                 formControlName="confirmPassword"
@@ -110,7 +114,7 @@
 
           <!-- Role Selection -->
           <div>
-            <label class="block text-sm font-semibold text-gray-700 mb-3">I want to be a...</label>
+            <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">I want to be a...</label>
             <div class="grid grid-cols-2 gap-3">
               <!-- Passenger Option -->
               <label class="relative">
@@ -138,7 +142,8 @@
                 />
                 <div class="p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-600 has-[:checked]:border-green-600 has-[:checked]:bg-green-50 transition-all">
                   <div class="text-center">
-                    <i class="bi bi-car-front-fill text-2xl text-green-600 block mb-2"></i>
+                    <fa-icon [icon]="faCarSide" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
+
                     <p class="font-semibold text-sm text-gray-900">Driver</p>
                   </div>
                 </div>
@@ -152,7 +157,7 @@
             type="submit"
             [disabled]="loading"
           >
-            <i class="bi bi-person-plus"></i>
+            <fa-icon [icon]="faPersonCirclePlus" class="absolute left-3 top-3.5 text-emerald-600 dark:text-emerald-400 text-lg"></fa-icon>
             {{ loading ? 'Creating Account...' : 'Create Account' }}
           </button>
         </form>

@@ -145,49 +145,49 @@
       </div>
     </div>
   </section>
+</div>
 
-  <section class="footer-section bg-slate-950/90 text-slate-100 px-4 pt-12 pb-8">
-    <div class="mx-auto flex max-w-6xl flex-col gap-10">
-      <div class="space-y-4 text-center sm:text-left">
-        <div class="inline-flex items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.3em] text-slate-200">
-          <fa-icon [icon]="faWaveSquare" class="text-emerald-300"></fa-icon>
-          <span>Pulse of nearby rides</span>
-        </div>
-        <p class="text-2xl font-semibold text-white">RideBuddy keeps the nearby feel flowing from landing to ride-ready.</p>
-        <p class="text-slate-300">Every page reflects the same bold gradients, rounded panels, and deliberate typography that make nearby rides so effortless.</p>
+<footer class="footer-section bg-slate-950/90 text-slate-100 px-4 pt-12 pb-8">
+  <div class="mx-auto flex max-w-6xl flex-col gap-10">
+    <div class="space-y-4 text-center sm:text-left">
+      <div class="inline-flex items-center gap-3 rounded-full bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.3em] text-slate-200">
+        <fa-icon [icon]="faWaveSquare" class="text-emerald-300"></fa-icon>
+        <span>Pulse of nearby rides</span>
       </div>
-      <div class="grid gap-8 md:grid-cols-4">
-        <div class="space-y-4">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Get in touch</p>
-          <div class="space-y-1 text-sm text-slate-200">
-            <p class="flex items-center gap-2">
-              <fa-icon [icon]="faEnvelope" class="text-emerald-300"></fa-icon>
-              hello@ridebuddy.com
-            </p>
-            <p class="text-slate-400">Operating 24/7 · Tunisia · Tunis · Manar</p>
-          </div>
-          <div class="flex gap-3">
-            @for (social of footerSocials; track social.label) {
-              <a [attr.aria-label]="social.label" [href]="social.url" target="_blank" rel="noreferrer" class="rounded-full border border-white/20 bg-white/10 p-2 text-xs text-white shadow-lg transition hover:border-emerald-400/60">
-                <fa-icon [icon]="social.icon"></fa-icon>
-              </a>
+      <p class="text-2xl font-semibold text-white">RideBuddy keeps the nearby feel flowing from landing to ride-ready.</p>
+      <p class="text-slate-300">Every page reflects the same bold gradients, rounded panels, and deliberate typography that make nearby rides so effortless.</p>
+    </div>
+    <div class="grid gap-8 md:grid-cols-4">
+      <div class="space-y-4">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-400">Get in touch</p>
+        <div class="space-y-1 text-sm text-slate-200">
+          <p class="flex items-center gap-2">
+            <fa-icon [icon]="faEnvelope" class="text-emerald-300"></fa-icon>
+            hello@ridebuddy.com
+          </p>
+          <p class="text-slate-400">Operating 24/7 · Tunisia · Tunis · Manar</p>
+        </div>
+        <div class="flex gap-3">
+          @for (social of footerSocials; track social.label) {
+            <a [attr.aria-label]="social.label" [href]="social.url" target="_blank" rel="noreferrer" class="rounded-full border border-white/20 bg-white/10 p-2 text-xs text-white shadow-lg transition hover:border-emerald-400/60">
+              <fa-icon [icon]="social.icon"></fa-icon>
+            </a>
+          }
+        </div>
+      </div>
+      @for (column of footerColumns; track column.heading){
+        <div class="space-y-3 text-sm text-slate-200">
+          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{{ column.heading }}</p>
+          <div class="space-y-2">
+            @for (link of column.links; track link.label) {
+              <a [routerLink]="link.path" class="block text-base text-slate-200 transition hover:text-emerald-300">{{ link.label }}</a>
             }
           </div>
         </div>
-        @for (column of footerColumns; track column.heading){
-          <div class="space-y-3 text-sm text-slate-200">
-            <p class="text-xs font-semibold uppercase tracking-[0.3em] text-slate-400">{{ column.heading }}</p>
-            <div class="space-y-2">
-              @for (link of column.links; track link.label) {
-                <a [routerLink]="link.path" class="block text-base text-slate-200 transition hover:text-emerald-300">{{ link.label }}</a>
-              }
-            </div>
-          </div>
-        }
-      </div>
-      <div class="border-t border-white/10 pt-6 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
-        © {{ currentYear }} RideBuddy · Crafted with Love <3.
-      </div>
+      }
     </div>
-  </section>
-</div>
+    <div class="border-t border-white/10 pt-6 text-center text-xs uppercase tracking-[0.3em] text-slate-400">
+      © {{ currentYear }} RideBuddy · Crafted with Love <3.
+    </div>
+  </div>
+</footer>
