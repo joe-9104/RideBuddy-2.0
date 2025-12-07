@@ -37,4 +37,5 @@ export const routes: Routes = [
     ]
   },
   { path: '**', redirectTo: '/'},
+  { path: 'contact' , loadComponent: () => import('./features/contact/contact').then(m => m.Contact)},
 ];
