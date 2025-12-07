@@ -22,7 +22,6 @@ export class ConductorStatsService {
 
   getStatsForConductor(conductorId: string) {
 
-    // 1️⃣ Récupérer les rides
     const ridesRef = collection(this.firestore, 'rides');
     const ridesQ = query(ridesRef, where('conductorId', '==', conductorId));
 
@@ -39,7 +38,6 @@ export class ConductorStatsService {
         const rides = ridesSnap.docs.map(doc => ({ id: doc.id, ...doc.data() as any }));
         const rideIds = rides.map(r => r.id);
 
-        // 2️⃣ Récupérer les réservations liées
         const reservationsRef = collection(this.firestore, 'reservations');
         const reservationsQ = query(reservationsRef, where('rideId', 'in', rideIds));
 
@@ -47,7 +45,6 @@ export class ConductorStatsService {
           map(reservationsSnap => {
             const reservations = reservationsSnap.docs.map(doc => doc.data() as any);
 
-            // 3️⃣ Moyenne des ratings
             const ratings = reservations
               .map(r => r.conductorRating)
               .filter((n: number | undefined) => typeof n === 'number');
@@ -57,10 +54,8 @@ export class ConductorStatsService {
                 ? Number((ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(2))
                 : null;
 
-            // 4️⃣ Rides terminés
             const completedRides = rides.filter(r => r.status === 'over').length;
 
-            // 5️⃣ Calcul du total gagné
             const priceMap = new Map<string, number>(rides.map(r => [r.id, r.pricePerSeat]));
 
             let totalEarnings = 0;

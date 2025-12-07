@@ -31,9 +31,9 @@ export class PassengerStatsService {
         const acceptedReservations = reservations.filter(r => r.status === 'ACCEPTED');
 
         return {
-          totalReservations: reservations.length,    // Toutes les réservations du passager
-          acceptedReservations: acceptedReservations.length, // Réservations acceptées
-          ridesTaken: acceptedReservations.length    // Nombre de rides réellement pris
+          totalReservations: reservations.length,
+          acceptedReservations: acceptedReservations.length,
+          ridesTaken: acceptedReservations.length
         };
       })
     );
