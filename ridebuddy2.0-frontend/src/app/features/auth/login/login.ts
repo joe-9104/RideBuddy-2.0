@@ -5,7 +5,7 @@ import {Router, RouterLink} from '@angular/router';
 import {User} from '../../../app.models';
 import {doc, Firestore, getDoc} from '@angular/fire/firestore';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope, faExclamationCircle, faLock, faRightToBracket, faXmark} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -95,4 +95,7 @@ export class Login {
 
   protected readonly faEnvelope = faEnvelope;
   protected readonly faLock = faLock;
+  protected readonly faExclamationCircle = faExclamationCircle;
+  protected readonly faRightToBracket = faRightToBracket;
+  protected readonly faXmark = faXmark;
 }

@@ -17,12 +17,12 @@
         @if (successMessage){
           <div class="p-4 bg-green-50/80 dark:bg-green-500/10 border-l-4 border-green-500 rounded-lg backdrop-blur-lg">
             <div class="flex items-center gap-3">
-              <fa-icon [icon]="['fas','check-circle']" class="text-green-600 dark:text-green-400 text-xl"></fa-icon>
+              <fa-icon [icon]="faCheckCircle" class="text-green-600 dark:text-green-400 text-xl"></fa-icon>
               <div class="flex-1">
                 <p class="text-green-800 dark:text-green-300 font-semibold text-sm">{{ successMessage }}</p>
               </div>
               <button type="button" class="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300" (click)="successMessage=''">
-                <fa-icon [icon]="['fas','xmark']"></fa-icon>
+                <fa-icon [icon]="faXmark"></fa-icon>
               </button>
             </div>
           </div>
@@ -32,12 +32,12 @@
         @if (errorMessage){
           <div class="p-4 bg-red-50/80 dark:bg-red-500/10 border-l-4 border-red-500 rounded-lg backdrop-blur-lg">
             <div class="flex items-center gap-3">
-              <fa-icon [icon]="['fas','exclamation-circle']" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
+              <fa-icon [icon]="faExclamationCircle" class="text-red-600 dark:text-red-400 text-xl"></fa-icon>
               <div class="flex-1">
                 <p class="text-red-800 dark:text-red-300 font-semibold text-sm">{{ errorMessage }}</p>
               </div>
               <button type="button" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300" (click)="errorMessage=''">
-                <fa-icon [icon]="['fas','xmark']"></fa-icon>
+                <fa-icon [icon]="faXmark"></fa-icon>
               </button>
             </div>
           </div>

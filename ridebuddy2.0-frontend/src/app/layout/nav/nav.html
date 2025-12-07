@@ -25,14 +25,14 @@
         aria-label="Toggle dark mode"
         title="Toggle dark mode"
       >
-        @if (!isDarkMode) {
+        @if (isDarkMode) {
           <fa-icon
-            [icon]="faMoon"
+            [icon]="faSun"
             class="text-slate-700 dark:text-slate-100 transition-all"
           ></fa-icon>
         } @else {
           <fa-icon
-            [icon]="faSun"
+            [icon]="faMoon"
             class="text-slate-700 dark:text-slate-100 transition-all"
           ></fa-icon>
         }
@@ -56,9 +56,9 @@
               <div class="p-3 border-b border-gray-200 bg-gradient-to-r from-indigo-50 to-purple-50 dark:border-slate-800 dark:from-slate-900 dark:to-slate-900">
                 <div class="text-xs font-bold text-gray-900 dark:text-gray-100">{{ (user$ | async)?.displayName || (user$ | async)?.email }}</div>
                 <div class="text-xs text-gray-600 mt-1">
-                  <span class="inline-block mt-1 px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
-                    {{ (user$ | async)?.role || 'Member' }}
-                  </span>
+                <span class="inline-block mt-1 px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full font-semibold text-xs">
+                  {{ (user$ | async)?.role || 'Member' }}
+                </span>
                 </div>
               </div>
 
