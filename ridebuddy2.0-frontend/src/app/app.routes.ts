@@ -36,6 +36,6 @@ export const routes: Routes = [
       { path: 'reservations/history', component: PassengerReservationsHistory },
     ]
   },
-  { path: '**', redirectTo: '/'},
   { path: 'contact' , loadComponent: () => import('./features/contact/contact').then(m => m.Contact)},
+  { path: '**', redirectTo: '/'},
 ];
