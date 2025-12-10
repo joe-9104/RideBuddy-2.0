@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {collection, collectionData, doc, docData, Firestore, query, updateDoc, where} from '@angular/fire/firestore';
+import {addDoc, collection, collectionData, doc, Firestore, query, updateDoc, where} from '@angular/fire/firestore';
 import {map, Observable, take} from 'rxjs';
 
 
@@ -23,8 +23,24 @@ export class ReservationService {
     );
   }
 
-  evaluateConductor(uid: string, rating: number) {
+  async createReservation(reservationData: {
+    rideId: string;
+    userId: string;
+    reservedPlaces: number;
+    status: string;
+  }) {
+    const reservationsCollection = collection(this.firestore, 'reservations');
+    return await addDoc(reservationsCollection, {
+      ...reservationData,
+      createdAt: new Date(),
+      conductorRating: null
+    });
+  }
+
+  async evaluateConductor(uid: string, rating: number): Promise<void> {
     const ref = doc(this.firestore, 'reservations', uid);
-    updateDoc(ref, {conductorRating: rating});
+    return await updateDoc(ref, { conductorRating: rating });
   }
 }
+
+
