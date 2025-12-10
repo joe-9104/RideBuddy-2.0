@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FaIconComponent, IconDefinition } from '@fortawesome/angular-fontawesome';
 import { RouterLink } from '@angular/router';
@@ -13,6 +13,7 @@ import {
   faWaveSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { faFacebookF, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
 interface FeatureCard {
   title: string;
@@ -61,7 +62,9 @@ interface SocialLink {
   imports: [CommonModule, FaIconComponent, RouterLink],
   templateUrl: './landing-page.html',
 })
-export class LandingPage {
+export class LandingPage implements OnInit {
+  protected isDarkMode = false;
+
   readonly features: FeatureCard[] = [
     {
       title: 'Nearby by design',
@@ -159,6 +162,21 @@ export class LandingPage {
     { label: 'Twitter', icon: faTwitter, url: 'https://twitter.com' },
   ];
 
+  ngOnInit() {
+    this.isDarkMode = document.documentElement.classList.contains('dark');
+  }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    if (this.isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }
+
   protected readonly currentYear = new Date().getFullYear();
   protected readonly faWaveSquare = faWaveSquare;
   protected readonly faMapMarkedAlt = faMapMarkedAlt;
@@ -167,4 +185,6 @@ export class LandingPage {
   protected readonly faPaperPlane = faPaperPlane;
   protected readonly faRoute = faRoute;
   protected readonly faEnvelope = faEnvelope;
+  protected readonly faMoon = faMoon;
+  protected readonly faSun = faSun;
 }
