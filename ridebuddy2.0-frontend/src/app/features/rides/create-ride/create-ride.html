@@ -33,9 +33,11 @@
                 formControlName="departureLocation"
                 class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
-              <div *ngIf="isInvalid('departureLocation')" class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
-                <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon> Departure location is required.
-              </div>
+              @if (isInvalid('departureLocation')){
+                <div class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon> Departure location is required.
+                </div>
+              }
             </div>
 
             <div>
@@ -49,9 +51,11 @@
                   <option [value]="gov">{{ gov }}</option>
                 }
               </select>
-              <div *ngIf="isInvalid('startGovernorate')" class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
-                <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon> Start governorate is required.
-              </div>
+              @if (isInvalid('startGovernorate')){
+                <div class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon> Start governorate is required.
+                </div>
+              }
             </div>
           </div>
 
@@ -64,10 +68,11 @@
                 formControlName="departureDate"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
               />
-              <div *ngIf="isInvalid('departureDate')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i> Please select a valid date.
-              </div>
-            </div>
+              @if (isInvalid('departureDate')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon> Please select a valid date.
+                </div>
+              }
 
             <div>
               <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Departure Time</label>
@@ -76,9 +81,11 @@
                 formControlName="departureTime"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
               />
-              <div *ngIf="isInvalid('departureTime')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i> Please select a valid time.
-              </div>
+              @if (isInvalid('departureTime')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon> Please select a valid time.
+                </div>
+              }
             </div>
           </div>
 
@@ -91,9 +98,11 @@
                 formControlName="destination"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
               />
-              <div *ngIf="isInvalid('destination')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i> Destination is required.
-              </div>
+              @if (isInvalid('destination')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon> Destination is required.
+                </div>
+              }
             </div>
 
             <div>
@@ -107,9 +116,11 @@
                   <option [value]="gov">{{ gov }}</option>
                 }
               </select>
-              <div *ngIf="isInvalid('endGovernorate')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i> End governorate is required.
-              </div>
+              @if (isInvalid('endGovernorate')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon> End governorate is required.
+                </div>
+              }
             </div>
           </div>
 
@@ -122,10 +133,12 @@
                 formControlName="availablePlaces"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
               />
-              <div *ngIf="isInvalid('availablePlaces')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i>
-                Enter the number of available places (at least 1).
-              </div>
+              @if (isInvalid('availablePlaces')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon>
+                  Enter the number of available places (at least 1).
+                </div>
+              }
             </div>
 
             <div>
@@ -135,10 +148,12 @@
                 formControlName="pricePerSeat"
                 class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
               />
-              <div *ngIf="isInvalid('pricePerSeat')" class="text-red-600 text-sm mt-2 flex items-center gap-1">
-                <i class="bi bi-exclamation-circle"></i>
-                Enter a valid price.
-              </div>
+              @if (isInvalid('pricePerSeat')){
+                <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
+                  <fa-icon [class]="faExclamationCircle"></fa-icon>
+                  Enter a valid price.
+                </div>
+              }
             </div>
           </div>
 
@@ -177,7 +192,7 @@
           >
             Create Ride
           </button>
-
+    </div>
         </form>
       </div>
 

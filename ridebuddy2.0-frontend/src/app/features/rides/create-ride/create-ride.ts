@@ -8,6 +8,7 @@ import {AuthService} from '../../../core/services/auth.service';
 import {filter} from 'rxjs';
 import {Governorate} from '../../../app.models';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-ride',
@@ -131,4 +132,5 @@ export class CreateRide implements OnInit, AfterViewInit {
       });
   }
 
+  protected readonly faExclamationCircle = faExclamationCircle;
 }

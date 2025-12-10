@@ -1,17 +1,17 @@
 import {Component, inject} from '@angular/core';
 import {collection, collectionData, doc, Firestore, query, setDoc, where} from '@angular/fire/firestore';
 import {Auth, user} from '@angular/fire/auth';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {AsyncPipe, NgClass, CommonModule} from '@angular/common';
+import {AsyncPipe, CommonModule} from '@angular/common';
 import {Ride} from '../../../app.models';
 import {ReservationService} from '../../../core/services/reservations.service';
 import {RideCardComponent} from '../ride-card/ride-card';
 
 @Component({
   selector: 'app-rides-list-passenger',
-  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, CommonModule, RideCardComponent],
+  imports: [AsyncPipe, FormsModule, CommonModule, RideCardComponent],
   templateUrl: './rides-list-passenger.html',
 })
 export class RidesListPassenger {
