@@ -25,7 +25,6 @@ import {PassengerStatsService} from '../../core/services/passengerStats.service'
     FaIconComponent,
   ],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
   conductorStatsService = inject(ConductorStatsService);

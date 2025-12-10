@@ -15,7 +15,6 @@ import {faBell, faEnvelope, faGear, faUser, faMoon, faSun} from '@fortawesome/fr
     FaIconComponent,
   ],
   templateUrl: './nav.html',
-  styleUrl: './nav.css',
 })
 export class Nav implements OnInit {
   user$: BehaviorSubject<User | null>;

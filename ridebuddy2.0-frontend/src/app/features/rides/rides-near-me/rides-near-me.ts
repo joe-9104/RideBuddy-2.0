@@ -20,9 +20,8 @@ interface NearbyRide {
 
 @Component({
   selector: 'app-rides-near-me',
-  imports: [NgForOf, NgIf, RouterLink, FaIconComponent, DecimalPipe],
+  imports: [RouterLink, FaIconComponent, DecimalPipe],
   templateUrl: './rides-near-me.html',
-  styleUrl: './rides-near-me.css',
 })
 export class RidesNearMe implements OnInit, OnDestroy {
   selectedRadius = 25;

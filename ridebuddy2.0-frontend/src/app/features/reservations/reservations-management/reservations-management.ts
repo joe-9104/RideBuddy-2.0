@@ -12,7 +12,6 @@ import {AsyncPipe, NgClass} from '@angular/common';
     NgClass
   ],
   templateUrl: './reservations-management.html',
-  styleUrl: './reservations-management.scss',
 })
 export class ReservationsManagement implements OnInit {
   private firestore = inject(Firestore);

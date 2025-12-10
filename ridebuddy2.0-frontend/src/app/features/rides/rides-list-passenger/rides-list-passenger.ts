@@ -2,17 +2,16 @@ import {Component, inject} from '@angular/core';
 import {collection, collectionData, doc, Firestore, query, setDoc, where} from '@angular/fire/firestore';
 import {Auth, user} from '@angular/fire/auth';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {BehaviorSubject, map, Observable, of, switchMap} from 'rxjs';
+import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {AsyncPipe, NgClass} from '@angular/common';
 import {Ride} from '../../../app.models';
 import {ReservationService} from '../../../core/services/reservations.service';
 
 @Component({
   selector: 'app-rides-list-passenger',
-  imports: [NgForOf, NgIf, NgClass, AsyncPipe, FormsModule, RouterLink, FormsModule, NgForOf, AsyncPipe],
+  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, FormsModule, AsyncPipe],
   templateUrl: './rides-list-passenger.html',
-  styleUrl: './rides-list-passenger.css',
 })
 export class RidesListPassenger {
 private firestore = inject(Firestore);

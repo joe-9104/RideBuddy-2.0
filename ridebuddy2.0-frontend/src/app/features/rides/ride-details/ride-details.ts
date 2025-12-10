@@ -14,7 +14,6 @@ import {ReservationService} from '../../../core/services/reservations.service';
     NgClass
   ],
   templateUrl: './ride-details.html',
-  styleUrl: './ride-details.css',
 })
 export class RideDetails implements OnInit {
 

@@ -5,7 +5,6 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
   selector: 'app-footer',
   imports: [FaIconComponent],
   templateUrl: './footer.html',
-  styleUrl: './footer.css',
 })
 export class Footer {
   currentYear = new Date().getFullYear();

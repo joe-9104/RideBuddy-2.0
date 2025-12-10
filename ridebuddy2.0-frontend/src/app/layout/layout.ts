@@ -13,7 +13,6 @@ import {Footer} from './footer/footer';
     Footer,
   ],
   templateUrl: './layout.html',
-  styleUrl: './layout.css',
 })
 export class Layout {
 

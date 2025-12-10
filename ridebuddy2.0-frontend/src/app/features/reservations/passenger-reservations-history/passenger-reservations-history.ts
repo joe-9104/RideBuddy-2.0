@@ -3,19 +3,16 @@ import {collection, collectionData, doc, Firestore, getDoc, query, updateDoc, wh
 import {Auth, user} from '@angular/fire/auth';
 import {combineLatest, from, map, Observable, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {AsyncPipe, NgClass, NgForOf, NgIf} from '@angular/common';
+import {AsyncPipe, NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-passenger-reservations-history',
   imports: [
     FormsModule,
-    NgIf,
-    NgForOf,
     AsyncPipe,
     NgClass
   ],
   templateUrl: './passenger-reservations-history.html',
-  styleUrl: './passenger-reservations-history.css',
 })
 export class PassengerReservationsHistory implements OnInit {
 
@@ -54,7 +51,6 @@ export class PassengerReservationsHistory implements OnInit {
         return combineLatest(enriched$);
       })
     )
-    this.reservations$.subscribe(res => console.log(res));
   }
 
   applyFilter(list: any[]) {

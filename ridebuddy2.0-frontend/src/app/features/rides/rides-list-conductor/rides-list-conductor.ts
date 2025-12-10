@@ -5,24 +5,20 @@ import { Firestore, collection, collectionData, doc, updateDoc, query, where } f
 import { Auth, user } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AsyncPipe, NgClass, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {faMapLocation} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rides-list-conductor',
   templateUrl: './rides-list-conductor.html',
-  styleUrls: ['./rides-list-conductor.css'],
   imports: [
     FormsModule,
     RouterLink,
-    NgForOf,
-    NgIf,
     AsyncPipe,
     NgClass,
     FaIconComponent
   ],
-  standalone: true
 })
 export class RidesListConductor {
   protected filterColumn: string = '';
