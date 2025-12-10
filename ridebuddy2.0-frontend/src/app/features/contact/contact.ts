@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-contact',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './contact.html',
-  styleUrl: './contact.scss',
 })
 export class Contact {
   contactFrom :  FormGroup<{
@@ -17,6 +18,7 @@ export class Contact {
   }>;
   loading = false;
   errorMessage = '';
+  currentYear = new Date().getFullYear();
 
   constructor(private readonly fb: FormBuilder) {
     this.contactFrom = new FormGroup({

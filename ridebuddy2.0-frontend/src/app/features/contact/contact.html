@@ -1,38 +1,78 @@
-<header class="text-white text-center py-3">
-  <h1 class="header-logo">RideBuddy</h1>
-  <nav class="nav justify-content-center">
-    <a class="nav-link" href="/">Home</a>
-    <a class="nav-link" href="/rides">Find Rides</a>
-    <a class="nav-link" href="/contact">Contact Us</a>
-    <a class="nav-link" href="/login">Login</a>
-  </nav>
-</header>
+<nav class="w-full bg-white/90 dark:bg-slate-900/80 text-slate-900 dark:text-slate-100 shadow-lg border-b border-emerald-200/60 dark:border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between">
+    <a href="/" class="flex items-center font-extrabold text-base tracking-wider hover:opacity-90 transition-opacity">
+      <img src="assets/ridebuddy.png" alt="RideBuddy Logo" class="mr-2 h-8 rounded-md shadow-md" />
+      <span class="uppercase text-sm">RideBuddy</span>
+    </a>
 
-<main class="container my-5">
-  <h2 class="text-center mb-4">Contact Us</h2>
-  <p class="text-center">Have questions or feedback? Use the form below, and we’ll get back to you shortly.</p>
-
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <form [formGroup]="contactFrom" (ngSubmit)="onSubmit()" class="border p-4 shadow rounded bg-light">
-        <div class="mb-3">
-          <label for="name" class="form-label text-muted">Name</label>
-          <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" formControlName="name" required>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label text-muted">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" formControlName="email" required>
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label text-muted">Message</label>
-          <textarea id="message" name="message" class="form-control" rows="5" placeholder="Write your message here..." formControlName="message" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Send Message</button>
-      </form>
+    <div class="flex items-center space-x-4">
+      <a routerLink="/contact" class="text-sm text-slate-700 dark:text-slate-200 hover:underline">Contact</a>
+      <a routerLink="/about" class="text-sm text-slate-700 dark:text-slate-200 hover:underline">About</a>
+      <div class="flex items-center gap-2 ml-3 pl-3 border-l border-white/30">
+        <a routerLink="/register" class="px-3 py-1.5 bg-white/20 hover:bg-white/30 rounded-lg text-white text-xs font-semibold transition-all">Register</a>
+        <a routerLink="/login" class="px-3 py-1.5 bg-white text-indigo-700 rounded-lg text-xs font-bold hover:shadow-lg transition-all">Login</a>
+      </div>
     </div>
   </div>
-</main>
+</nav>
 
-<footer class="text-white text-center py-3 mt-5">
-  <p class="mb-0">&copy; 2024 RideBuddy. All rights reserved.</p>
+<div class="landing-root min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+      <div class="absolute -left-32 top-16 h-72 w-72 rounded-full bg-emerald-400/40 blur-[140px] dark:bg-emerald-500/30"></div>
+      <div class="absolute -right-16 bottom-10 h-72 w-72 rounded-full bg-cyan-500/30 blur-[120px]"></div>
+      <div class="absolute inset-y-0 left-[30%] w-1/2 bg-linear-to-r from-white/70 to-transparent blur-3xl opacity-70"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-4xl px-4 py-16">
+      <div class="nearby-panel mx-auto flex flex-col gap-6 rounded-3xl border border-slate-200/80 bg-white/90 p-6 shadow-2xl shadow-slate-900/30 dark:border-slate-800 dark:bg-slate-900/70">
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-[0.46em] text-slate-500 dark:text-slate-400">Contact</p>
+            <h3 class="text-2xl font-semibold text-slate-900 dark:text-white">Get in touch</h3>
+          </div>
+          <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-300">We reply fast</span>
+        </div>
+
+        <div class="bg-white/80 dark:bg-slate-900/60 rounded-2xl border border-slate-200/70 dark:border-slate-800 p-6 shadow-sm">
+          <p class="text-sm text-slate-600 dark:text-slate-400">Have questions, suggestions, or feedback? Send us a message and we'll get back to you shortly.</p>
+
+          <form [formGroup]="contactFrom" (ngSubmit)="onSubmit()" class="mt-6 grid gap-4">
+            <div>
+              <label for="name" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Name</label>
+              <input type="text" id="name" name="name" formControlName="name" required
+                class="mt-1 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent px-4 py-2 transition" placeholder="Your full name">
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Email</label>
+              <input type="email" id="email" name="email" formControlName="email" required
+                class="mt-1 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent px-4 py-2 transition" placeholder="you@domain.com">
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-200">Message</label>
+              <textarea id="message" name="message" formControlName="message" rows="5" required
+                class="mt-1 block w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent px-4 py-3 transition" placeholder="Write your message here..."></textarea>
+            </div>
+
+            <div class="flex gap-3 mt-2">
+              <button type="submit" class="flex-1 inline-flex justify-center items-center gap-2 px-4 py-3 bg-linear-to-r from-emerald-500 to-cyan-500 hover:from-emerald-600 hover:to-cyan-600 text-white font-semibold rounded-2xl shadow-lg focus:outline-none focus:ring-4 focus:ring-emerald-300 dark:focus:ring-emerald-700 transition">Send Message</button>
+              <button type="reset" class="inline-flex items-center gap-2 px-4 py-3 border rounded-2xl text-sm text-slate-700 dark:text-slate-200">Reset</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="mt-2 text-sm text-slate-500 dark:text-slate-400">Prefer email? <a href="mailto:hello%40ridebuddy.com" class="text-emerald-500 underline">hello&#64;ridebuddy.com</a></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer class="footer-section bg-slate-950/90 text-slate-100 px-4 pt-12 pb-8">
+  <div class="mx-auto flex max-w-6xl flex-col gap-8 text-center">
+    <p class="text-lg font-semibold">RideBuddy</p>
+    <p class="text-sm text-slate-300 max-w-2xl mx-auto">RideBuddy keeps the nearby feel flowing from landing to ride-ready. Reach out with questions or feedback — we're here to help.</p>
+    <div class="mt-6 text-xs text-slate-400">© {{ currentYear }} RideBuddy · All rights reserved.</div>
+  </div>
 </footer>
