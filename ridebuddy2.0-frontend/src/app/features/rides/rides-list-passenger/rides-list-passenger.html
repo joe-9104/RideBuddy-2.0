@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
   <!-- Header Section -->
   <div class="max-w-7xl mx-auto px-4 py-8">
-    <div class="bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-8 rounded-3xl mb-8 border border-emerald-200/40 dark:border-emerald-500/20">
+    <div class="bg-linear-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-8 rounded-3xl mb-8 border border-emerald-200/40 dark:border-emerald-500/20">
       <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Available Rides</h1>
       <p class="text-lg text-slate-600 dark:text-slate-400">Discover and reserve rides from verified drivers</p>
     </div>
@@ -47,7 +47,7 @@
         <div class="flex items-end gap-3">
           <button
             (click)="applyFilter()"
-            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50"
+            class="flex-1 px-4 py-2.5 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50"
           >
             Apply
           </button>
@@ -67,137 +67,14 @@
         @if (rides && rides.length > 0) {
           <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             @for (ride of rides; track ride.id) {
-            <article
-              class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg hover:shadow-xl overflow-hidden transition duration-300"
-              [ngClass]="{ 'ring-2 ring-emerald-500 shadow-emerald-500/30': ride.id === highlightRideId }"
-            >
-              <!-- Card Header -->
-              <div class="p-4 border-b border-slate-200 dark:border-slate-800">
-                <div class="flex items-start justify-between gap-2">
-                  <div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-0.5">
-                      {{ ride.departureLocation }} → {{ ride.destination }}
-                    </h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400">
-                      <span class="font-semibold">Driver:</span> {{ ride.conductorName || 'Unknown' }}
-                    </p>
-                  </div>
-
-                  <!-- Status Badge -->
-                  <span
-                    class="px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
-                    [ngClass]="{
-                      'bg-emerald-200 dark:bg-emerald-500/30 text-emerald-800 dark:text-emerald-300': ride.status === 'over',
-                      'bg-red-200 dark:bg-red-500/30 text-red-800 dark:text-red-300': ride.status === 'canceled',
-                      'bg-blue-200 dark:bg-blue-500/30 text-blue-800 dark:text-blue-300': ride.status === 'in-progress',
-                      'bg-yellow-200 dark:bg-yellow-500/30 text-yellow-800 dark:text-yellow-300': !ride.status || ride.status === 'pending'
-                    }"
-                  >
-                    {{ ride.status || 'In Progress' }}
-                  </span>
-                </div>
-              </div>
-
-              <!-- Ride Details Grid -->
-              <div class="px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50 grid grid-cols-2 gap-4">
-                <!-- Departure Time -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Departure</p>
-                  <p class="text-xs font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureDate }}</p>
-                  <p class="text-xs text-slate-600 dark:text-slate-400">{{ ride.departureTime }}</p>
-                </div>
-
-                <!-- Available Seats -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Available Seats</p>
-                  <p class="text-xl font-bold text-emerald-600 dark:text-emerald-400">{{ ride.availablePlaces }}</p>
-                </div>
-
-                <!-- Price -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Price Per Seat</p>
-                  <p class="text-xl font-bold text-cyan-600 dark:text-cyan-400">{{ ride.pricePerSeat }} TND</p>
-                </div>
-
-                <!-- Comments -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Notes</p>
-                  <p class="text-xs text-slate-600 dark:text-slate-400">{{ ride.comments || 'No notes' }}</p>
-                </div>
-              </div>
-
-              <!-- Map Container -->
-              <div class="mx-4 my-3 h-32 bg-slate-200 dark:bg-slate-800 rounded-2xl border border-slate-300 dark:border-slate-700 overflow-hidden">
-                <!-- This will render the map when the ride-detail map component is added -->
-                <div class="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-500">
-                  <div class="text-center">
-                    <p class="text-xs font-medium mb-0.5">Route Map</p>
-                    <p class="text-xs">{{ ride.departureLocation }} to {{ ride.destination }}</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Action Buttons -->
-              <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-                <!-- Already Reserved -->
-                @if (userReservations.includes(ride.id)) {
-                  <div class="flex gap-2">
-                    <a
-                      [routerLink]="['/reservations/manage']"
-                      [queryParams]="{ rideId: ride.id }"
-                      class="flex-1 px-3 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-semibold rounded-lg transition shadow-md text-center"
-                    >
-                      Manage
-                    </a>
-                    <button
-                      (click)="openRideDetails(ride)"
-                      class="flex-1 px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
-                    >
-                      Details
-                    </button>
-                  </div>
-                }
-
-                <!-- Not Reserved -->
-                @if (!userReservations.includes(ride.id)) {
-                  @if (ride.status === 'in-progress' && ride.availablePlaces > 0) {
-                    <div class="flex gap-2 flex-col">
-                      <select
-                        #places
-                        class="px-2 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
-                      >
-                        @for (idx of [].constructor(ride.availablePlaces); track $index) {
-                          <option [value]="$index + 1">
-                            {{ $index + 1 }} {{ $index + 1 === 1 ? 'seat' : 'seats' }}
-                          </option>
-                        }
-                      </select>
-                      <button
-                        (click)="reserve(ride, +places.value)"
-                        class="w-full px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white text-sm font-semibold rounded-lg transition shadow-lg shadow-emerald-500/30"
-                      >
-                        Reserve
-                      </button>
-                      <button
-                        (click)="openRideDetails(ride)"
-                        class="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
-                      >
-                        Details
-                      </button>
-                    </div>
-                  }
-                  @if (ride.status !== 'in-progress' || ride.availablePlaces <= 0) {
-                    <button
-                      (click)="openRideDetails(ride)"
-                      class="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
-                    >
-                      View Details
-                    </button>
-                  }
-                }
-              </div>
-            </article>
-          }
+              <app-ride-card
+                [ride]="ride"
+                [highlightRideId]="highlightRideId"
+                [isReserved]="userReservations.includes(ride.id)"
+                (reserve)="reserve($event)"
+                (viewDetails)="openRideDetails($event)"
+              ></app-ride-card>
+            }
           </div>
         } @else {
           <div class="text-center py-16">
@@ -211,7 +88,7 @@
           </div>
         }
       }
-
+    </div>
   </div>
 </div>
-</div>
+

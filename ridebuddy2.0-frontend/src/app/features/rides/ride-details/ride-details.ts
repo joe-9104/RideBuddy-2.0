@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MapService} from '../../../core/services/map.service';
 import {Ride, User} from '../../../app.models';
 import {RidesService} from '../../../core/services/rides.service';
-import {UserService} from '../../../core/services/user.service';
 import {LatLng} from 'leaflet';
 import {NgClass} from '@angular/common';
 import {ReservationService} from '../../../core/services/reservations.service';
@@ -19,7 +18,6 @@ export class RideDetails implements OnInit {
 
   private route = inject(ActivatedRoute);
   private rideService = inject(RidesService);
-  private userService = inject(UserService)
   private mapService = inject(MapService);
   private reservationService = inject(ReservationService);
 
@@ -38,9 +36,6 @@ export class RideDetails implements OnInit {
     const nav = this.router.currentNavigation();
     if (nav?.extras.state?.['hasReservation'] !== undefined) {
       this.hasReservation = nav.extras.state['hasReservation'];
-      console.log("hasReservation extracted:", this.hasReservation);
-    } else {
-      console.log("no hasReservation");
     }
 
     if(nav?.extras.state?.['conductorRating'] !== undefined) {
@@ -54,18 +49,16 @@ export class RideDetails implements OnInit {
   }
 
   private loadRide() {
-    this.rideService.getRide(this.rideId).subscribe(ride => {
-      console.log(ride);
-      this.ride = ride;
-
-      if (ride?.conductorId) {
-        this.userService.getUserByUid(ride.conductorId).subscribe(user => {
-          console.log(user);
-          this.conductor = user;
-        });
+    this.rideService.getRideWithConductor(this.rideId).subscribe({
+      next: result => {
+        this.ride = result?.ride
+        this.conductor = result?.conductor!!
+      },
+      error: err => {
+        console.error('Could not load ride details:', err);
       }
-      setTimeout(() => this.initMapIfReady(), 1000);
-    });
+    })
+    setTimeout(() => this.initMapIfReady(), 100);
   }
 
   private initMapIfReady() {

@@ -7,14 +7,15 @@ import {FormsModule} from '@angular/forms';
 import {AsyncPipe, NgClass, CommonModule} from '@angular/common';
 import {Ride} from '../../../app.models';
 import {ReservationService} from '../../../core/services/reservations.service';
+import {RideCardComponent} from '../ride-card/ride-card';
 
 @Component({
   selector: 'app-rides-list-passenger',
-  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, CommonModule],
+  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, CommonModule, RideCardComponent],
   templateUrl: './rides-list-passenger.html',
 })
 export class RidesListPassenger {
-private firestore = inject(Firestore);
+  private firestore = inject(Firestore);
   private auth = inject(Auth);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -94,14 +95,14 @@ private firestore = inject(Firestore);
   }
 
   // Create new reservation
-  async reserve(ride: any, places: number) {
+  async reserve(rideData: { ride: Ride; places: number }) {
     const currentUser = this.auth.currentUser;
     if (!currentUser) return;
 
     await setDoc(doc(collection(this.firestore, 'reservations')), {
-      rideId: ride.id,
+      rideId: rideData.ride.id,
       userId: currentUser.uid,
-      reservedPlaces: places,
+      reservedPlaces: rideData.places,
       createdAt: new Date(),
       status: 'PENDING'
     });
@@ -130,3 +131,4 @@ private firestore = inject(Firestore);
     });
   }
 }
+
