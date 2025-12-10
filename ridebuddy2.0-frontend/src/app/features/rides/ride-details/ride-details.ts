@@ -8,12 +8,17 @@ import {NgClass, CommonModule} from '@angular/common';
 import {ReservationService} from '../../../core/services/reservations.service';
 import {parseCoordinates} from '../../../utils/coordinates-parser';
 import {AuthService} from '../../../core/services/auth.service';
+import {collection, collectionData, query, where} from '@angular/fire/firestore';
+import {map, take} from 'rxjs';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-ride-details',
   imports: [
     NgClass,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    FormsModule
   ],
   templateUrl: './ride-details.html',
 })
@@ -31,6 +36,7 @@ export class RideDetails implements OnInit {
   conductor: User | null = null;
 
   hasReservation : string | null = null;
+  selectedSeats: number = 1;
 
   rating: number = 0;
   isEvaluating : boolean = false;
@@ -75,6 +81,9 @@ export class RideDetails implements OnInit {
             this.conductor = result?.conductor || null;
             this.isLoading = false;
 
+            // Check if user has an existing reservation for this ride
+            this.checkExistingReservation();
+
             // Initialize map after ride data is loaded
             setTimeout(() => this.initMapIfReady(), 500);
           });
@@ -87,6 +96,41 @@ export class RideDetails implements OnInit {
           });
         }
       });
+    });
+  }
+
+  private checkExistingReservation() {
+    const currentUser = this.authService.userSubject.value;
+    if (!currentUser || !this.ride?.id) {
+      this.hasReservation = null;
+      return;
+    }
+
+    // Query for existing reservations by this user for this ride
+    const db = this.rideService['firestore']; // Access firestore from service
+    const reservationsRef = collection(db, 'reservations');
+    const q = query(
+      reservationsRef,
+      where('userId', '==', currentUser.uid),
+      where('rideId', '==', this.ride.id)
+    );
+
+    collectionData(q, { idField: 'id' }).pipe(
+      take(1),
+      map((reservations: any[]) => {
+        // Find any non-rejected reservation
+        return reservations.find(r => r.status !== 'REJECTED') || null;
+      })
+    ).subscribe({
+      next: (reservation) => {
+        this.hasReservation = reservation?.id || null;
+        if (reservation) {
+          this.rating = reservation.conductorRating || 0;
+        }
+      },
+      error: (err) => {
+        console.error('Error checking existing reservation:', err);
+      }
     });
   }
 
@@ -137,7 +181,7 @@ export class RideDetails implements OnInit {
     }
   }
 
-  async makeReservation(seatsToReserve: number = 1): Promise<void> {
+  async reserveSeats(): Promise<void> {
     const currentUser = this.authService.userSubject.value;
     if (!currentUser || !this.ride) {
       console.error('Cannot make reservation: User not authenticated or ride not loaded');
@@ -145,7 +189,7 @@ export class RideDetails implements OnInit {
       return;
     }
 
-    if (seatsToReserve < 1 || seatsToReserve > (this.ride.availablePlaces || 0)) {
+    if (this.selectedSeats < 1 || this.selectedSeats > (this.ride.availablePlaces || 0)) {
       console.error('Invalid number of seats selected');
       alert('Please select a valid number of seats');
       return;
@@ -157,13 +201,16 @@ export class RideDetails implements OnInit {
       const reservationRef = await this.reservationService.createReservation({
         rideId: this.ride.id!!,
         userId: currentUser.uid,
-        reservedPlaces: seatsToReserve,
+        reservedPlaces: this.selectedSeats,
         status: 'PENDING'
       });
 
       this.hasReservation = reservationRef.id;
       console.log('Reservation created successfully:', reservationRef.id);
-      alert('✓ Reservation created successfully!');
+      alert(`✓ Reservation created successfully! You reserved ${this.selectedSeats} seat(s).`);
+
+      // Reset seat selection
+      this.selectedSeats = 1;
     } catch (error) {
       console.error('Reservation error:', error);
       alert('Failed to create reservation. Please try again.');

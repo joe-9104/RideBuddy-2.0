@@ -64,8 +64,10 @@
                 @if (res.ride?.status === 'in-progress' && res.status === 'PENDING') {
 
                   <button
-                    class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition"
+                    class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
                     (click)="acceptReservation(res.id!)"
+                    [disabled]="res.ride?.availablePlaces <= 0"
+                    [title]="res.ride?.availablePlaces <= 0 ? 'No available seats' : 'Accept this reservation'"
                   >
                     Accept
                   </button>

@@ -10,7 +10,7 @@
   }
 
   body {
-    @apply min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-emerald-50 text-slate-900 dark:bg-gradient-to-br dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 dark:text-slate-100 font-sans transition-colors duration-300 leading-relaxed;
+    @apply min-h-screen bg-linear-to-br from-slate-50 via-sky-50 to-emerald-50 text-slate-900 dark:bg-linear-to-br dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 dark:text-slate-100 font-sans transition-colors duration-300 leading-relaxed;
   }
 }
 

@@ -109,7 +109,6 @@ export class RidesListPassenger {
   }
 
   openRideDetails(ride: Ride) {
-    console.log(ride);
     this.reservationService.findReservationByRideId(ride.id!!).subscribe({
       next: r => {
         this.router.navigate(
