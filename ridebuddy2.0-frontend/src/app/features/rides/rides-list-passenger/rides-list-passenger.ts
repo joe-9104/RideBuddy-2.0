@@ -4,13 +4,13 @@ import {Auth, user} from '@angular/fire/auth';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {BehaviorSubject, Observable, of, switchMap} from 'rxjs';
 import {FormsModule} from '@angular/forms';
-import {AsyncPipe, NgClass} from '@angular/common';
+import {AsyncPipe, NgClass, CommonModule} from '@angular/common';
 import {Ride} from '../../../app.models';
 import {ReservationService} from '../../../core/services/reservations.service';
 
 @Component({
   selector: 'app-rides-list-passenger',
-  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, FormsModule, AsyncPipe],
+  imports: [NgClass, AsyncPipe, FormsModule, RouterLink, CommonModule],
   templateUrl: './rides-list-passenger.html',
 })
 export class RidesListPassenger {

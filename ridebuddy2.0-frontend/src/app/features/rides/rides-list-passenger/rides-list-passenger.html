@@ -1,179 +1,217 @@
-<div class="max-w-7xl mx-5 my-7">
-  <!-- Card -->
-  <div class="u-card-glass">
-
-    <!-- Header -->
-    <div class="bg-linear-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-6 rounded-2xl mb-6">
-      <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Available Rides</h2>
-      <p class="text-slate-600 dark:text-slate-400 text-sm">Filter, reserve, and explore rides easily</p>
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950">
+  <!-- Header Section -->
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-8 rounded-3xl mb-8 border border-emerald-200/40 dark:border-emerald-500/20">
+      <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Available Rides</h1>
+      <p class="text-lg text-slate-600 dark:text-slate-400">Discover and reserve rides from verified drivers</p>
     </div>
 
     <!-- Filter Section -->
-    <div class="p-6 border-b border-white/20 dark:border-white/10">
+    <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 mb-8">
+      <h3 class="text-sm font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-4">Filter Options</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-        <!-- Column -->
+        <!-- Column Selector -->
         <div>
-          <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-slate-100">Choose Column</label>
+          <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-slate-200">Filter By</label>
           <select
             [(ngModel)]="filterColumn"
             (change)="filterValue = ''"
-            class="w-full px-4 py-2 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg text-sm text-slate-900 dark:text-slate-100
-                   focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 transition"
+            class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
           >
-            <option value="">-- Select Column --</option>
+            <option value="">-- All Rides --</option>
             <option value="departureLocation">Departure Location</option>
             <option value="destination">Destination</option>
             <option value="departureTime">Departure Time</option>
-            <option value="availablePlaces">Available Places</option>
+            <option value="availablePlaces">Available Seats</option>
             <option value="pricePerSeat">Price</option>
             <option value="status">Status</option>
             <option value="conductorName">Conductor</option>
           </select>
         </div>
 
-        <!-- Value -->
+        <!-- Value Selector -->
         <div>
-          <label class="block mb-1 text-sm font-medium text-slate-900 dark:text-slate-100">Choose Value</label>
+          <label class="block mb-2 text-sm font-medium text-slate-700 dark:text-slate-200">Select Value</label>
           <select
             [(ngModel)]="filterValue"
-            class="w-full px-4 py-2 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg text-sm text-slate-900 dark:text-slate-100
-                   focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 transition"
+            class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
           >
-            <option value="">-- Select Value --</option>
+            <option value="">-- All Values --</option>
             @for (v of getDistinctValuesForColumn(filterColumn); track $index){
               <option [value]="v">{{ v }}</option>
             }
           </select>
         </div>
 
-        <!-- Buttons -->
+        <!-- Action Buttons -->
         <div class="flex items-end gap-3">
           <button
-            class="px-4 py-2 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white rounded-lg text-sm font-semibold hover:shadow-lg hover:shadow-emerald-500/30 transition"
             (click)="applyFilter()"
+            class="flex-1 px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-lg transition shadow-lg shadow-emerald-500/30 hover:shadow-emerald-500/50"
           >
             Apply
           </button>
-
           <button
-            class="px-4 py-2 bg-slate-600 dark:bg-slate-700 hover:bg-slate-700 dark:hover:bg-slate-600 text-white rounded-lg text-sm font-semibold transition"
             (click)="resetFilter()"
+            class="flex-1 px-4 py-2.5 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 font-semibold rounded-lg transition"
           >
             Reset
           </button>
         </div>
-
       </div>
     </div>
 
-    <!-- Table -->
-    <div class="overflow-x-auto">
-      <table class="min-w-full text-sm">
-        <thead>
-        <tr class="bg-white/50 dark:bg-white/5 border-b border-white/20 dark:border-white/10">
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">#</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Departure</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Destination</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Departure Time</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Available</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Price</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Status</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Comments</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Actions</th>
-          <th class="px-4 py-3 text-left font-semibold text-slate-900 dark:text-slate-100">Details</th>
-        </tr>
-        </thead>
-
-        <tbody>
-          @for (ride of rides$ | async; track $index){
-            <tr
-              class="border-b border-white/10 dark:border-white/5 hover:bg-emerald-500/10 dark:hover:bg-emerald-500/10 transition duration-200 text-slate-900 dark:text-slate-100"
-              [ngClass]="{ 'bg-emerald-100/50 dark:bg-emerald-500/20': ride.id === highlightRideId }"
+    <!-- Rides Grid - Cards -->
+    <div>
+      @if (rides$ | async; as rides) {
+        @if (rides && rides.length > 0) {
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            @for (ride of rides; track ride.id) {
+            <article
+              class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg hover:shadow-xl overflow-hidden transition duration-300"
+              [ngClass]="{ 'ring-2 ring-emerald-500 shadow-emerald-500/30': ride.id === highlightRideId }"
             >
-              <td class="px-4 py-3">{{ $index + 1 }}</td>
-              <td class="px-4 py-3">{{ ride.departureLocation }}</td>
-              <td class="px-4 py-3">{{ ride.destination }}</td>
-              <td class="px-4 py-3">{{ ride.departureDate }} {{ ride.departureTime }}</td>
-              <td class="px-4 py-3">{{ ride.availablePlaces }}</td>
-              <td class="px-4 py-3">{{ ride.pricePerSeat }} TND</td>
-
-              <!-- Status Badge -->
-              <td class="px-4 py-3">
-              <span
-                class="px-2 py-1 rounded-full text-xs font-semibold"
-                [ngClass]="{
-                  'bg-emerald-200 dark:bg-emerald-500/30 text-emerald-800 dark:text-emerald-300': ride.status === 'over',
-                  'bg-red-200 dark:bg-red-500/30 text-red-800 dark:text-red-300': ride.status === 'canceled',
-                  'bg-yellow-200 dark:bg-yellow-500/30 text-yellow-800 dark:text-yellow-300': ride.status === 'in-progress'
-                }"
-              >
-                {{ ride.status || 'in-progress' }}
-              </span>
-              </td>
-
-              <td class="px-4 py-3">{{ ride.comments }}</td>
-
-              <!-- Actions -->
-              <td class="px-4 py-3">
-                <!-- Already reserved -->
-                @if (userReservations.includes(ride.id)) {
-                  <a
-                    [routerLink]="['/reservations/manage']"
-                    [queryParams]="{ rideId: ride.id }"
-                    class="inline-block px-3 py-1 bg-yellow-500 hover:bg-yellow-600 dark:bg-yellow-600 dark:hover:bg-yellow-700 text-white rounded-lg text-xs font-semibold transition"
-                  >
-                    Manage
-                  </a>
-                }
-
-                <!-- Reserve -->
-                @if (!userReservations.includes(ride.id)) {
+              <!-- Card Header -->
+              <div class="p-4 border-b border-slate-200 dark:border-slate-800">
+                <div class="flex items-start justify-between gap-2">
                   <div>
-                    @if (ride.status === 'in-progress') {
-                      <div class="flex gap-2">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-0.5">
+                      {{ ride.departureLocation }} → {{ ride.destination }}
+                    </h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">
+                      <span class="font-semibold">Driver:</span> {{ ride.conductorName || 'Unknown' }}
+                    </p>
+                  </div>
 
-                        <select #places class="border-2 border-slate-200 dark:border-white/20 bg-white/50 dark:bg-white/5 text-slate-900 dark:text-slate-100 rounded px-2 py-1 text-sm focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 transition">
-                          @for (idx of [].constructor(ride.avaiblablePlaces); track $index) {
-                            <option [value]="$index + 1">
-                              {{ $index + 1 }}
-                            </option>
-                          }
-                        </select>
+                  <!-- Status Badge -->
+                  <span
+                    class="px-2 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
+                    [ngClass]="{
+                      'bg-emerald-200 dark:bg-emerald-500/30 text-emerald-800 dark:text-emerald-300': ride.status === 'over',
+                      'bg-red-200 dark:bg-red-500/30 text-red-800 dark:text-red-300': ride.status === 'canceled',
+                      'bg-blue-200 dark:bg-blue-500/30 text-blue-800 dark:text-blue-300': ride.status === 'in-progress',
+                      'bg-yellow-200 dark:bg-yellow-500/30 text-yellow-800 dark:text-yellow-300': !ride.status || ride.status === 'pending'
+                    }"
+                  >
+                    {{ ride.status || 'In Progress' }}
+                  </span>
+                </div>
+              </div>
 
-                        <button
-                          class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition"
-                          (click)="reserve(ride, +places.value)"
-                        >
-                          Reserve
-                        </button>
+              <!-- Ride Details Grid -->
+              <div class="px-6 py-4 bg-slate-50/50 dark:bg-slate-800/50 grid grid-cols-2 gap-4">
+                <!-- Departure Time -->
+                <div>
+                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Departure</p>
+                  <p class="text-xs font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureDate }}</p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">{{ ride.departureTime }}</p>
+                </div>
 
-                      </div>
-                    }
+                <!-- Available Seats -->
+                <div>
+                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Available Seats</p>
+                  <p class="text-xl font-bold text-emerald-600 dark:text-emerald-400">{{ ride.availablePlaces }}</p>
+                </div>
+
+                <!-- Price -->
+                <div>
+                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Price Per Seat</p>
+                  <p class="text-xl font-bold text-cyan-600 dark:text-cyan-400">{{ ride.pricePerSeat }} TND</p>
+                </div>
+
+                <!-- Comments -->
+                <div>
+                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-0.5">Notes</p>
+                  <p class="text-xs text-slate-600 dark:text-slate-400">{{ ride.comments || 'No notes' }}</p>
+                </div>
+              </div>
+
+              <!-- Map Container -->
+              <div class="mx-4 my-3 h-32 bg-slate-200 dark:bg-slate-800 rounded-2xl border border-slate-300 dark:border-slate-700 overflow-hidden">
+                <!-- This will render the map when the ride-detail map component is added -->
+                <div class="w-full h-full flex items-center justify-center text-slate-400 dark:text-slate-500">
+                  <div class="text-center">
+                    <p class="text-xs font-medium mb-0.5">Route Map</p>
+                    <p class="text-xs">{{ ride.departureLocation }} to {{ ride.destination }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
+                <!-- Already Reserved -->
+                @if (userReservations.includes(ride.id)) {
+                  <div class="flex gap-2">
+                    <a
+                      [routerLink]="['/reservations/manage']"
+                      [queryParams]="{ rideId: ride.id }"
+                      class="flex-1 px-3 py-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white text-sm font-semibold rounded-lg transition shadow-md text-center"
+                    >
+                      Manage
+                    </a>
+                    <button
+                      (click)="openRideDetails(ride)"
+                      class="flex-1 px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
+                    >
+                      Details
+                    </button>
                   </div>
                 }
-              </td>
 
-              <!-- Details -->
-              <td class="px-4 py-3">
-                <button
-                  (click)="openRideDetails(ride)"
-                  class="inline-block px-3 py-1 bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-700 dark:hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition"
-                >
-                  View
-                </button>
-              </td>
-
-            </tr>
+                <!-- Not Reserved -->
+                @if (!userReservations.includes(ride.id)) {
+                  @if (ride.status === 'in-progress' && ride.availablePlaces > 0) {
+                    <div class="flex gap-2 flex-col">
+                      <select
+                        #places
+                        class="px-2 py-1.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 transition"
+                      >
+                        @for (idx of [].constructor(ride.availablePlaces); track $index) {
+                          <option [value]="$index + 1">
+                            {{ $index + 1 }} {{ $index + 1 === 1 ? 'seat' : 'seats' }}
+                          </option>
+                        }
+                      </select>
+                      <button
+                        (click)="reserve(ride, +places.value)"
+                        class="w-full px-3 py-2 bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white text-sm font-semibold rounded-lg transition shadow-lg shadow-emerald-500/30"
+                      >
+                        Reserve
+                      </button>
+                      <button
+                        (click)="openRideDetails(ride)"
+                        class="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
+                      >
+                        Details
+                      </button>
+                    </div>
+                  }
+                  @if (ride.status !== 'in-progress' || ride.availablePlaces <= 0) {
+                    <button
+                      (click)="openRideDetails(ride)"
+                      class="w-full px-3 py-2 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 text-sm font-semibold rounded-lg transition"
+                    >
+                      View Details
+                    </button>
+                  }
+                }
+              </div>
+            </article>
           }
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Footer -->
-    <div class="px-6 py-4 bg-white/50 dark:bg-white/5 border-t border-white/20 dark:border-white/10 text-center text-sm text-slate-600 dark:text-slate-400">
-      Explore and reserve rides effortlessly 🚗✨
-    </div>
+          </div>
+        } @else {
+          <div class="text-center py-16">
+            <p class="text-lg text-slate-600 dark:text-slate-400 mb-4">No rides found matching your filters</p>
+            <button
+              (click)="resetFilter()"
+              class="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition"
+            >
+              Clear Filters
+            </button>
+          </div>
+        }
+      }
 
   </div>
+</div>
 </div>
