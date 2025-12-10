@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import {
   Auth,
-  createUserWithEmailAndPassword, onAuthStateChanged,
-  signInWithEmailAndPassword, signInWithPopup,
-  signOut, updateProfile, GoogleAuthProvider, OAuthProvider
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+  GoogleAuthProvider,
+  OAuthProvider,
+  User as FirebaseUser
 } from '@angular/fire/auth';
-import {BehaviorSubject} from 'rxjs';
-import {doc, Firestore, getDoc, setDoc} from '@angular/fire/firestore';
-import {User} from '../../app.models';
+import { BehaviorSubject } from 'rxjs';
+import { doc, Firestore, getDoc, setDoc, updateDoc } from '@angular/fire/firestore';
+import { User } from '../../app.models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -19,37 +25,40 @@ export class AuthService {
 
   constructor(private auth: Auth, private firestore: Firestore) {
     onAuthStateChanged(this.auth, async (firebaseUser) => {
-      if (!firebaseUser) {
-        this.userSubject.next(null);
-        this.initializedSubject.next(true);
-        return;
-      }
-
-      const ref = doc(this.firestore, `users/${firebaseUser.uid}`);
-      const snap = await getDoc(ref);
-
-      if (snap.exists()) {
-        const data = snap.data() as Partial<User>;
-        this.userSubject.next({
-          uid: firebaseUser.uid,
-          email: firebaseUser.email!,
-          displayName: firebaseUser.displayName ?? '',
-          role: (data.role as 'CONDUCTOR' | 'PASSENGER') || 'PASSENGER',
-          completedRides: data.completedRides || 0,
-          averageRating: data.averageRating || 0,
-          totalEarnings: data.totalEarnings || 0
-        });
-      } else {
-        // fallback si le document n'existe pas
-        this.userSubject.next({
-          uid: firebaseUser.uid,
-          email: firebaseUser.email!,
-          displayName: firebaseUser.displayName ?? '',
-          role: 'PASSENGER'
-        });
-      }
+      await this.emitUserFromFirebase(firebaseUser);
       this.initializedSubject.next(true);
     });
+  }
+
+  private async emitUserFromFirebase(firebaseUser: FirebaseUser | null) {
+    if (!firebaseUser) {
+      this.userSubject.next(null);
+      return;
+    }
+
+    const ref = doc(this.firestore, `users/${firebaseUser.uid}`);
+    const snap = await getDoc(ref);
+
+    if (snap.exists()) {
+      const data = snap.data() as Partial<User>;
+      this.userSubject.next({
+        uid: firebaseUser.uid,
+        email: firebaseUser.email ?? '',
+        displayName: firebaseUser.displayName ?? data.displayName ?? '',
+        role: (data.role as User['role']) || 'PASSENGER',
+        completedRides: data.completedRides || 0,
+        averageRating: data.averageRating || 0,
+        totalEarnings: data.totalEarnings || 0,
+        createdAt: data.createdAt
+      });
+    } else {
+      this.userSubject.next({
+        uid: firebaseUser.uid,
+        email: firebaseUser.email ?? '',
+        displayName: firebaseUser.displayName ?? '',
+        role: 'PASSENGER'
+      });
+    }
   }
 
   async register(email: string, password: string, profile: any) {
@@ -100,12 +109,37 @@ export class AuthService {
     return result;
   }
 
-  async googleSignIn() { return this.oauthSignIn(new GoogleAuthProvider()); }
+  async googleSignIn() {
+    return this.oauthSignIn(new GoogleAuthProvider());
+  }
 
-  async microsoftSignIn() { return this.oauthSignIn(new OAuthProvider('microsoft.com')); }
+  async microsoftSignIn() {
+    return this.oauthSignIn(new OAuthProvider('microsoft.com'));
+  }
 
   async logout() {
     await signOut(this.auth);
     return this.userSubject.next(null);
+  }
+
+  async updateDisplayName(newName: string) {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('User is not authenticated');
+    }
+
+    await updateProfile(currentUser, { displayName: newName });
+    await setDoc(doc(this.firestore, 'users', currentUser.uid), { displayName: newName }, { merge: true });
+    await this.emitUserFromFirebase(currentUser);
+  }
+
+  async updateUserRole(role: User['role']) {
+    const currentUser = this.auth.currentUser;
+    if (!currentUser) {
+      throw new Error('User is not authenticated');
+    }
+
+    await updateDoc(doc(this.firestore, 'users', currentUser.uid), { role });
+    await this.emitUserFromFirebase(currentUser);
   }
 }

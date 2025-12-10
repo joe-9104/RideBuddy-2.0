@@ -1,9 +1,9 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 p-6">
+<div class="min-h-screen bg-linear-to-br from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 p-6">
   <div class="max-w-4xl mx-auto">
 
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-4xl font-bold bg-gradient-to-r from-emerald-600 via-cyan-600 to-blue-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-2">My Profile</h1>
+      <h1 class="text-4xl font-bold bg-linear-to-r from-emerald-600 via-cyan-600 to-blue-600 dark:from-emerald-400 dark:via-cyan-400 dark:to-blue-400 bg-clip-text text-transparent mb-2">My Profile</h1>
       <p class="text-slate-600 dark:text-slate-400">Manage your personal information and preferences</p>
     </div>
 
@@ -13,17 +13,17 @@
       <div class="lg:col-span-1">
         <div class="u-card-glass sticky top-6">
           <!-- Profile Header with Gradient -->
-          <div class="relative h-32 bg-gradient-to-r from-emerald-500/40 via-cyan-500/40 to-blue-500/40 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-t-2xl">
+          <div class="relative h-32 bg-linear-to-r from-emerald-500/40 via-cyan-500/40 to-blue-500/40 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-t-2xl">
             <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
               <div class="relative">
                 <div class="w-24 h-24 rounded-full bg-white dark:bg-slate-800 p-1 shadow-2xl">
-                  <div class="w-full h-full rounded-full bg-gradient-to-br from-emerald-100 dark:from-emerald-900 to-cyan-100 dark:to-cyan-900 flex items-center justify-center">
+                  <div class="w-full h-full rounded-full bg-linear-to-br from-emerald-100 dark:from-emerald-900 to-cyan-100 dark:to-cyan-900 flex items-center justify-center">
                     <span class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
                       {{ ((user$ | async)?.displayName || 'U')[0] | uppercase }}
                     </span>
                   </div>
                 </div>
-                <div class="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-600 border-4 border-white dark:border-slate-800 flex items-center justify-center">
+                <div class="absolute -bottom-1 -right-1 w-10 h-10 rounded-full bg-linear-to-r from-emerald-500 to-cyan-600 border-4 border-white dark:border-slate-800 flex items-center justify-center">
                   <fa-icon [icon]="faCheck" class="text-white text-sm"></fa-icon>
                 </div>
               </div>
@@ -52,7 +52,7 @@
             </div>
 
             <!-- Account Status -->
-            <div class="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 rounded-xl p-4 border border-emerald-400/30 dark:border-emerald-400/20">
+            <div class="bg-linear-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 rounded-xl p-4 border border-emerald-400/30 dark:border-emerald-400/20">
               <div class="flex items-center gap-3">
                 <div class="p-2 bg-emerald-500/20 dark:bg-emerald-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
                   <fa-icon [icon]="faShieldCheck" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
@@ -88,15 +88,62 @@
             <!-- Name Field -->
             <div class="group">
               <label class="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">Full Name</label>
-              <div class="flex items-center gap-4">
+              <div class="flex flex-wrap gap-4 items-start">
                 <div class="flex-1">
-                  <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors">
-                    <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.displayName || 'Not set' }}</p>
+                  <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors min-h-12 flex items-center">
+                    @if (editingName){
+                      <input
+                        [(ngModel)]="nameDraft"
+                        type="text"
+                        class="w-full bg-transparent outline-none border-none text-slate-900 dark:text-slate-200 placeholder:text-slate-400"
+                        placeholder="Enter your name"
+                      />
+                    } @else {
+                      <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.displayName || 'Not set' }}</p>
+                    }
                   </div>
+                  @if (nameError){
+                    <p class="text-xs text-rose-500 mt-1">{{ nameError }}</p>
+                  }
+                  @if (nameStatus === 'success'){
+                    <p class="text-xs text-emerald-500 mt-1">Name updated successfully.</p>
+                  }
+                  @if (nameStatus === 'saving'){
+                    <p class="text-xs text-slate-500 mt-1">Updating name…</p>
+                  }
                 </div>
-                <button class="px-4 py-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors">
-                  Edit
-                </button>
+                <div class="flex flex-wrap gap-2 items-center">
+                  @if(!editingName) {
+                    <button
+                      type="button"
+                      (click)="startEditingName()"
+                      class="px-4 py-2 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-colors"
+                    >
+                      Edit
+                    </button>
+                  } @else {
+                    <button
+                      type="button"
+                      (click)="saveNameEdit()"
+                      [disabled]="nameStatus === 'saving'"
+                      class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg disabled:opacity-60 disabled:cursor-not-allowed hover:bg-emerald-500 transition-colors"
+                    >
+                      @if (nameStatus === 'saving'){
+                        <span>Saving…</span>
+                      } @else {
+                        <span>Save</span>
+                      }
+
+                    </button>
+                    <button
+                      type="button"
+                      (click)="cancelNameEdit()"
+                      class="px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-slate-400 dark:hover:border-slate-500 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  }
+                </div>
               </div>
             </div>
 
@@ -121,16 +168,37 @@
             <!-- Role Field -->
             <div class="group">
               <label class="block text-sm font-medium text-slate-900 dark:text-slate-100 mb-2">Account Type</label>
-              <div class="flex items-center gap-4">
+              <div class="flex flex-wrap gap-4 items-start">
                 <div class="flex-1">
                   <div class="bg-white/50 dark:bg-white/5 rounded-xl px-4 py-3 border-2 border-slate-200 dark:border-white/20 group-hover:border-emerald-500 dark:group-hover:border-emerald-400 transition-colors">
                     <div class="flex items-center gap-3">
                       <fa-icon [icon]="getRoleIcon()" class="text-emerald-600 dark:text-emerald-400"></fa-icon>
                       <p class="text-slate-900 dark:text-slate-100">{{ (user$ | async)?.role || 'USER' }}</p>
-                      <span class="text-xs text-slate-500 dark:text-slate-400">(Cannot be changed)</span>
+                      <span class="text-xs text-slate-500 dark:text-slate-400">Current selection</span>
                     </div>
                   </div>
+                  @if (roleSwitchError){
+                    <p class="text-xs text-rose-500 mt-1">{{ roleSwitchError }}</p>
+                  }
+                  @if (roleSwitchState === 'success'){
+                    <p class="text-xs text-emerald-500 mt-1">Role switched to {{ nextRoleLabel }}.</p>
+                  }
+                  @if (roleSwitchState === 'saving'){
+                    <p class="text-xs text-slate-500 mt-1">Switching role…</p>
+                  }
                 </div>
+                <button
+                  type="button"
+                  (click)="switchRole()"
+                  [disabled]="roleSwitchState === 'saving'"
+                  class="px-4 py-2 text-sm font-semibold rounded-lg border border-white/30 dark:border-white/10 bg-slate-900 dark:bg-slate-800 text-white hover:bg-slate-800 dark:hover:bg-slate-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  @if (roleSwitchState === 'saving'){
+                    <span>Switching…</span>
+                  } @else {
+                    <span>Switch to {{ nextRoleLabel }}</span>
+                  }
+                </button>
               </div>
             </div>
           </div>
@@ -153,19 +221,26 @@
           <div class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <!-- Switch Role Action -->
-              <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-emerald-400 dark:hover:border-emerald-400 bg-white/50 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+              <button
+                type="button"
+                (click)="switchRole()"
+                [disabled]="roleSwitchState === 'saving'"
+                class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-emerald-400 dark:hover:border-emerald-400 bg-white/50 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 transition-all duration-300"
+              >
+                <div class="p-3 bg-linear-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/20 dark:to-cyan-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
                   <fa-icon [icon]="faSync" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
-                  <h4 class="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300">Switch Mode</h4>
-                  <p class="text-sm text-slate-600 dark:text-slate-400">Change between driver/passenger</p>
+                  <h4 class="font-semibold text-slate-900 dark:text-slate-100">Switch to {{ nextRoleLabel }}</h4>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">
+                    {{ roleSwitchState === 'saving' ? 'Applying role change…' : 'Change between driver/passenger' }}
+                  </p>
                 </div>
               </button>
 
               <!-- Security Action -->
               <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-cyan-400 dark:hover:border-cyan-400 bg-white/50 dark:bg-white/5 hover:bg-cyan-500/20 dark:hover:bg-cyan-500/20 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 dark:from-cyan-500/20 dark:to-blue-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-lg">
+                <div class="p-3 bg-linear-to-r from-cyan-500/20 to-blue-500/20 dark:from-cyan-500/20 dark:to-blue-500/20 border border-cyan-400/50 dark:border-cyan-400/30 rounded-lg">
                   <fa-icon [icon]="faShield" class="text-cyan-600 dark:text-cyan-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
@@ -176,7 +251,7 @@
 
               <!-- Notifications Action -->
               <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-emerald-400 dark:hover:border-emerald-400 bg-white/50 dark:bg-white/5 hover:bg-emerald-500/20 dark:hover:bg-emerald-500/20 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
+                <div class="p-3 bg-linear-to-r from-emerald-500/20 to-teal-500/20 dark:from-emerald-500/20 dark:to-teal-500/20 border border-emerald-400/50 dark:border-emerald-400/30 rounded-lg">
                   <fa-icon [icon]="faBell" class="text-emerald-600 dark:text-emerald-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
@@ -187,7 +262,7 @@
 
               <!-- Help Action -->
               <button class="group flex items-center gap-4 p-4 rounded-xl border-2 border-white/20 dark:border-white/10 hover:border-blue-400 dark:hover:border-blue-400 bg-white/50 dark:bg-white/5 hover:bg-blue-500/20 dark:hover:bg-blue-500/20 transition-all duration-300">
-                <div class="p-3 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 dark:from-blue-500/20 dark:to-indigo-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-lg">
+                <div class="p-3 bg-linear-to-r from-blue-500/20 to-indigo-500/20 dark:from-blue-500/20 dark:to-indigo-500/20 border border-blue-400/50 dark:border-blue-400/30 rounded-lg">
                   <fa-icon [icon]="faQuestionCircle" class="text-blue-600 dark:text-blue-400 text-xl"></fa-icon>
                 </div>
                 <div class="text-left">
@@ -200,7 +275,7 @@
         </div>
 
         <!-- Statistics Card -->
-        <div class="bg-gradient-to-br from-emerald-500/30 via-cyan-500/30 to-blue-500/30 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-2xl shadow-xl overflow-hidden border border-white/20 dark:border-white/10 backdrop-blur-lg">
+        <div class="bg-linear-to-br from-emerald-500/30 via-cyan-500/30 to-blue-500/30 dark:from-emerald-500/20 dark:via-cyan-500/20 dark:to-blue-500/20 rounded-2xl shadow-xl overflow-hidden border border-white/20 dark:border-white/10 backdrop-blur-lg">
           <div class="p-6 text-slate-900 dark:text-slate-100">
             <div class="flex items-center justify-between mb-6">
               <div>
@@ -234,7 +309,7 @@
         </div>
 
         <!-- Danger Zone -->
-        <div class="bg-gradient-to-br from-red-500/30 to-rose-500/30 dark:from-red-500/20 dark:to-rose-500/20 rounded-2xl shadow-xl overflow-hidden border border-red-400/30 dark:border-red-400/20 backdrop-blur-lg">
+        <div class="bg-linear-to-br from-red-500/30 to-rose-500/30 dark:from-red-500/20 dark:to-rose-500/20 rounded-2xl shadow-xl overflow-hidden border border-red-400/30 dark:border-red-400/20 backdrop-blur-lg">
           <div class="border-b border-red-400/30 dark:border-red-400/20 p-6">
             <div class="flex items-center justify-between">
               <div>
