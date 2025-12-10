@@ -47,7 +47,7 @@ export class Nav implements OnInit {
 
   logout() {
     this.auth.logout()
-      .then(() => this.router.navigate(["/login"]))
+      .then(() => this.router.navigate(["/"]))
       .catch((err) => console.error(err));
   }
 
