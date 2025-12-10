@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, NgZone} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MapService} from '../../../core/services/map.service';
 import {Ride, User} from '../../../app.models';
@@ -7,7 +7,6 @@ import {LatLng} from 'leaflet';
 import {NgClass, CommonModule} from '@angular/common';
 import {ReservationService} from '../../../core/services/reservations.service';
 import {parseCoordinates} from '../../../utils/coordinates-parser';
-import {Auth} from '@angular/fire/auth';
 import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
@@ -25,6 +24,8 @@ export class RideDetails implements OnInit {
   private mapService = inject(MapService);
   private reservationService = inject(ReservationService);
   private authService = inject(AuthService);
+  private ngZone = inject(NgZone);
+  private router = inject(Router);
 
   ride: Ride | undefined = undefined;
   conductor: User | null = null;
@@ -35,11 +36,13 @@ export class RideDetails implements OnInit {
   isEvaluating : boolean = false;
   finishedRating: boolean = false;
   isReserving: boolean = false;
+  isLoading: boolean = true;
+  loadingError: string | null = null;
 
   private rideId!: string;
   private mapInitialized = false;
 
-  constructor(private router: Router) {
+  constructor() {
     const nav = this.router.currentNavigation();
     if (nav?.extras.state?.['hasReservation'] !== undefined) {
       this.hasReservation = nav.extras.state['hasReservation'];
@@ -52,35 +55,57 @@ export class RideDetails implements OnInit {
 
   ngOnInit() {
     this.rideId = this.route.snapshot.paramMap.get('id')!;
+    if (!this.rideId) {
+      this.loadingError = 'No ride ID provided';
+      this.isLoading = false;
+      return;
+    }
     this.loadRide();
   }
 
   private loadRide() {
-    this.rideService.getRideWithConductor(this.rideId).subscribe({
-      next: result => {
-        this.ride = result?.ride
-        this.conductor = result?.conductor!!
-        // Initialize map after ride data is loaded
-        setTimeout(() => this.initMapIfReady(), 500);
-      },
-      error: err => {
-        console.error('Could not load ride details:', err);
-      }
-    })
+    this.isLoading = true;
+    this.loadingError = null;
+
+    this.ngZone.run(() => {
+      this.rideService.getRideWithConductor(this.rideId).subscribe({
+        next: result => {
+          this.ngZone.run(() => {
+            this.ride = result?.ride;
+            this.conductor = result?.conductor || null;
+            this.isLoading = false;
+
+            // Initialize map after ride data is loaded
+            setTimeout(() => this.initMapIfReady(), 500);
+          });
+        },
+        error: err => {
+          this.ngZone.run(() => {
+            console.error('Could not load ride details:', err);
+            this.loadingError = 'Failed to load ride details. Please try again.';
+            this.isLoading = false;
+          });
+        }
+      });
+    });
   }
 
   private initMapIfReady() {
     if (this.mapInitialized || !this.ride?.startCoordinate || !this.ride?.endCoordinate) return;
 
-    this.mapService.initMap('map');
+    try {
+      this.mapService.initMap('map');
 
-    const startCoords = parseCoordinates(this.ride.startCoordinate);
-    this.mapService.setMarker(startCoords as LatLng, true);
+      const startCoords = parseCoordinates(this.ride.startCoordinate);
+      this.mapService.setMarker(startCoords as LatLng, true);
 
-    const endCoords = parseCoordinates(this.ride.endCoordinate);
-    this.mapService.setMarker(endCoords as LatLng, false);
+      const endCoords = parseCoordinates(this.ride.endCoordinate);
+      this.mapService.setMarker(endCoords as LatLng, false);
 
-    this.mapInitialized = true;
+      this.mapInitialized = true;
+    } catch (error) {
+      console.error('Error initializing map:', error);
+    }
   }
 
   setRating(star: number) {
@@ -147,5 +172,3 @@ export class RideDetails implements OnInit {
     }
   }
 }
-
-
