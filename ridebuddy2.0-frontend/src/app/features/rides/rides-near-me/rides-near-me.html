@@ -1,37 +1,37 @@
-<div class="min-h-screen bg-linear-to-b from-slate-950 to-indigo-900 text-white py-12 px-6">
+<div class="min-h-screen bg-linear-to-b from-indigo-50 via-white to-slate-100 text-slate-900 dark:bg-linear-to-b dark:from-slate-950 dark:via-slate-950 dark:to-indigo-900 dark:text-white py-12 px-6 transition-colors duration-300">
   <div class="max-w-6xl mx-auto space-y-10">
-    <section class="rounded-3xl bg-white/5 border border-white/20 backdrop-blur-lg p-8 shadow-2xl">
+    <section class="rounded-3xl bg-white/90 border border-slate-200 text-slate-900 backdrop-blur-lg p-8 shadow-2xl dark:bg-white/5 dark:border-white/20 dark:text-white transition-colors duration-300">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="space-y-1">
-          <p class="text-sm uppercase tracking-widest text-slate-300">Nearby Rides</p>
-          <h1 class="text-3xl font-semibold text-white">Rides close to you</h1>
-          <p class="text-slate-300">Showing rides within <span class="font-bold text-emerald-300">{{ selectedRadius }} km</span> of your current location.</p>
+          <p class="text-sm uppercase tracking-widest text-slate-500 dark:text-slate-300">Nearby Rides</p>
+          <h1 class="text-3xl font-semibold text-slate-900 dark:text-white">Rides close to you</h1>
+          <p class="text-slate-600 dark:text-slate-300">Showing rides within <span class="font-bold text-emerald-600 dark:text-emerald-300">{{ selectedRadius }} km</span> of your current location.</p>
         </div>
-        <div class="flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-4 py-2">
-          <fa-icon [icon]="faLocationDot" class="text-emerald-300"></fa-icon>
-          <span class="text-sm text-slate-200">Radius</span>
-          <input type="range" min="5" max="100" step="5" [value]="selectedRadius" (input)="updateRadius($event.target.value)" class="w-32 accent-emerald-400" />
-          <span class="text-xs text-slate-400">{{ selectedRadius }} km</span>
+        <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-full px-4 py-2 text-slate-600 shadow-sm dark:bg-white/10 dark:border-white/20 dark:text-slate-200 transition-colors duration-300">
+          <fa-icon [icon]="faLocationDot" class="text-emerald-500 dark:text-emerald-300"></fa-icon>
+          <span class="text-sm text-slate-600 dark:text-slate-200">Radius</span>
+          <input type="range" min="5" max="100" step="5" [value]="selectedRadius" (input)="updateRadius($event.target.value)" class="w-32 accent-emerald-500 bg-transparent text-slate-900 dark:text-white" />
+          <span class="text-xs text-slate-500 dark:text-slate-400">{{ selectedRadius }} km</span>
         </div>
       </div>
-      <div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-300">
+      <div class="mt-6 flex flex-wrap gap-3 text-sm text-slate-600 dark:text-slate-300">
         @if (loading) {
           <p>Fetching your location…</p>
         }
 
         @if (!loading && currentLocation) {
-          <p class="flex items-center gap-1">
-            <fa-icon [icon]="faLocationDot"></fa-icon>
+          <p class="flex items-center gap-1 text-slate-700 dark:text-slate-200">
+            <fa-icon [icon]="faLocationDot" class="text-emerald-500 dark:text-emerald-300"></fa-icon>
             Approx. {{ currentLocation.lat | number:'1.2-2' }}, {{ currentLocation.lng | number:'1.2-2' }}
           </p>
         }
 
         @if (errorMessage) {
-          <p class="text-rose-300">{{ errorMessage }}</p>
+          <p class="text-rose-500 dark:text-rose-300">{{ errorMessage }}</p>
         }
 
         @if (!loading && !nearbyRides.length) {
-          <p class="text-yellow-200">No rides within the radius yet.</p>
+          <p class="text-amber-500 dark:text-yellow-200">No rides within the radius yet.</p>
         }
       </div>
     </section>
@@ -39,27 +39,30 @@
     <section class="grid lg:grid-cols-[2fr,1fr] gap-6">
       <div class="space-y-6">
         @if (heroRide) {
-          <article class="bg-linear-to-r from-emerald-500/40 to-cyan-500/30 border border-emerald-400/50 rounded-3xl p-6 shadow-2xl">
+          <article
+            class="bg-linear-to-r from-emerald-100 via-cyan-50 to-white border border-emerald-200 rounded-3xl p-6 text-slate-900 shadow-2xl dark:bg-linear-to-r dark:from-emerald-500/40 dark:via-emerald-500/40 dark:to-cyan-500/30 dark:border-emerald-400/50 dark:text-white transition hover:shadow-emerald-400/30 hover:-translate-y-0.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            [routerLink]="['/dashboard/rides/details', heroRide.ride.id]"
+          >
             <div class="flex items-center justify-between">
               <div class="space-y-1">
-                <p class="text-xs uppercase text-emerald-200 tracking-wider">Closest ride</p>
-                <h2 class="text-2xl font-semibold">{{ heroRide.ride.departureLocation }} → {{ heroRide.ride.destination }}</h2>
+                <p class="text-xs uppercase text-emerald-600 tracking-wider dark:text-emerald-200">Closest ride</p>
+                <h2 class="text-2xl font-semibold text-slate-900 dark:text-white">{{ heroRide.ride.departureLocation }} → {{ heroRide.ride.destination }}</h2>
               </div>
-              <span class="text-sm text-emerald-100 font-semibold">{{ heroRide.distanceKm }} km away</span>
+              <span class="text-sm text-emerald-700 font-semibold dark:text-emerald-100">{{ heroRide.distanceKm }} km away</span>
             </div>
-            <div class="mt-4 grid grid-cols-2 gap-4 text-sm text-white/80">
-              <div class="rounded-2xl bg-white/10 p-4">
-                <p class="text-xs uppercase text-slate-200 tracking-wider">Seats</p>
-                <p class="text-lg font-bold">{{ heroRide.ride.availablePlaces }}</p>
+            <div class="mt-4 grid grid-cols-2 gap-4 text-sm text-slate-600 dark:text-white/80">
+              <div class="rounded-2xl bg-white/80 p-4 dark:bg-white/10">
+                <p class="text-xs uppercase text-slate-500 tracking-wider dark:text-slate-200">Seats</p>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">{{ heroRide.ride.availablePlaces }}</p>
               </div>
-              <div class="rounded-2xl bg-white/10 p-4">
-                <p class="text-xs uppercase text-slate-200 tracking-wider">Price</p>
-                <p class="text-lg font-bold">{{ heroRide.ride.pricePerSeat }} TND</p>
+              <div class="rounded-2xl bg-white/80 p-4 dark:bg-white/10">
+                <p class="text-xs uppercase text-slate-500 tracking-wider dark:text-slate-200">Price</p>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">{{ heroRide.ride.pricePerSeat }} TND</p>
               </div>
             </div>
             <div class="mt-6 flex items-center justify-between">
-              <p class="text-sm text-slate-200 flex items-center gap-1"><fa-icon [icon]="faClock"></fa-icon> {{ heroRide.ride.departureDate }} at {{ heroRide.ride.departureTime }}</p>
-              <a [routerLink]="['/dashboard/rides/all-rides']" class="flex items-center gap-2 text-xs uppercase tracking-wider text-emerald-100 font-semibold hover:text-white transition">
+              <p class="text-sm text-slate-600 flex items-center gap-1 dark:text-slate-200"><fa-icon [icon]="faClock"></fa-icon> {{ heroRide.ride.departureDate }} at {{ heroRide.ride.departureTime }}</p>
+              <a [routerLink]="['/dashboard/rides/all-rides']" class="flex items-center gap-2 text-xs uppercase tracking-wider text-emerald-600 font-semibold hover:text-emerald-700 transition dark:text-emerald-100 dark:hover:text-white">
                 View more
                 <fa-icon [icon]="faArrowRightLong"></fa-icon>
               </a>
@@ -69,18 +72,21 @@
 
         <div class="grid md:grid-cols-2 gap-4">
           @for (item of nearbyRides; track item.ride.id) { <!-- Assuming 'item.ride.id' is a unique identifier. -->
-            <article class="bg-white/5 border border-white/10 rounded-3xl p-5 shadow-lg hover:border-emerald-300/70 hover:shadow-2xl transition">
+            <article
+              class="bg-white border border-slate-200 rounded-3xl p-5 shadow-lg hover:border-emerald-300/70 hover:shadow-2xl transition text-slate-900 dark:bg-white/5 dark:border-white/10 dark:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-400"
+              [routerLink]="['/dashboard/rides/details', item.ride.id]"
+            >
               <header class="flex items-center justify-between">
                 <div>
-                  <p class="text-sm uppercase tracking-widest text-slate-300">{{ item.ride.startGovernorate }}</p>
-                  <h3 class="text-lg font-semibold text-white">{{ item.ride.departureLocation }} → {{ item.ride.destination }}</h3>
+                  <p class="text-sm uppercase tracking-widest text-slate-500 dark:text-slate-300">{{ item.ride.startGovernorate }}</p>
+                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white">{{ item.ride.departureLocation }} → {{ item.ride.destination }}</h3>
                 </div>
-                <span class="text-sm text-emerald-300 font-semibold">{{ item.distanceKm }} km</span>
+                <span class="text-sm text-emerald-600 font-semibold dark:text-emerald-300">{{ item.distanceKm }} km</span>
               </header>
-              <p class="text-sm text-slate-400 mt-2">{{ item.ride.comments || 'No notes from the driver yet.' }}</p>
-              <div class="mt-4 flex items-center justify-between text-xs uppercase tracking-wider text-slate-300">
-                <span class="flex items-center gap-1"><fa-icon [icon]="faUsers"></fa-icon> {{ item.ride.availablePlaces }} seats</span>
-                <span class="text-emerald-200 font-semibold">{{ item.ride.pricePerSeat }} TND</span>
+              <p class="text-sm text-slate-500 mt-2 dark:text-slate-400">{{ item.ride.comments || 'No notes from the driver yet.' }}</p>
+              <div class="mt-4 flex items-center justify-between text-xs uppercase tracking-wider text-slate-500 dark:text-slate-300">
+                <span class="flex items-center gap-1"><fa-icon [icon]="faUsers" class="text-slate-600 dark:text-slate-200"></fa-icon> {{ item.ride.availablePlaces }} seats</span>
+                <span class="text-emerald-600 font-semibold dark:text-emerald-200">{{ item.ride.pricePerSeat }} TND</span>
               </div>
             </article>
           }
@@ -88,11 +94,11 @@
       </div>
 
       <aside class="space-y-4">
-        <div class="bg-white/5 border border-white/10 rounded-3xl p-5 shadow-lg">
-          <h3 class="text-sm uppercase tracking-widest text-slate-300">Snapshot</h3>
-          <p class="mt-2 text-3xl font-bold text-emerald-300">{{ nearbyRides.length }}</p>
-          <p class="text-xs text-slate-400">Rides in {{ selectedRadius }} km</p>
-          <div class="mt-4 text-xs text-slate-300">
+        <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-lg text-slate-900 dark:bg-white/5 dark:border-white/10 dark:text-white">
+          <h3 class="text-sm uppercase tracking-widest text-slate-500 dark:text-slate-300">Snapshot</h3>
+          <p class="mt-2 text-3xl font-bold text-emerald-600 dark:text-emerald-300">{{ nearbyRides.length }}</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Rides in {{ selectedRadius }} km</p>
+          <div class="mt-4 text-xs text-slate-500 dark:text-slate-300">
             @if (averageDistance) {
               <p>Avg. distance: {{ averageDistance | number:'1.1-1' }} km</p>
             }
@@ -101,9 +107,9 @@
             }
           </div>
         </div>
-        <div class="bg-white/5 border border-white/10 rounded-3xl p-5 shadow-lg space-y-3">
-          <p class="text-xs uppercase tracking-widest text-slate-300">Need help?</p>
-          <p class="text-sm text-slate-300">Reach out to our support team anytime via the chat bubble.</p>
+        <div class="bg-white border border-slate-200 rounded-3xl p-5 shadow-lg space-y-3 text-slate-900 dark:bg-white/5 dark:border-white/10 dark:text-white">
+          <p class="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-300">Need help?</p>
+          <p class="text-sm text-slate-600 dark:text-slate-300">Reach out to our support team anytime via the chat bubble.</p>
           <button class="w-full rounded-2xl bg-linear-to-r from-emerald-500 to-cyan-500 text-xs font-semibold uppercase tracking-widest py-3 text-white shadow-lg">Chat with support</button>
         </div>
       </aside>
