@@ -1,2 +1,15 @@
 /* Using only Bootstrap utilities - no component-level CSS */
+.layout-shell {
+  min-height: 100vh;
+}
 
+.layout-body {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+
+.layout-side,
+.layout-main {
+  align-self: stretch;
+}
