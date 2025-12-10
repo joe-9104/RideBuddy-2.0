@@ -20,6 +20,11 @@ export class PassengerStatsService {
     );
   }
 
+  // make a public wrapper so other services can request stats for an arbitrary passenger id
+  getStatsForPassenger(passengerId: string) {
+    return this.loadStatsForPassenger(passengerId);
+  }
+
   private loadStatsForPassenger(passengerId: string) {
     const reservationsRef = collection(this.firestore, 'reservations');
     const reservationsQuery = query(reservationsRef, where('userId', '==', passengerId));

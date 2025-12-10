@@ -14,8 +14,7 @@ import {
   faPlusCircle, faSearch,
   faStarHalfStroke
 } from '@fortawesome/free-solid-svg-icons';
-import {ConductorStatsService} from '../../core/services/conductorStats.service';
-import {PassengerStatsService} from '../../core/services/passengerStats.service';
+import { CombinedStatsService } from '../../core/services/combinedStats.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,8 +27,7 @@ import {PassengerStatsService} from '../../core/services/passengerStats.service'
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
-  conductorStatsService = inject(ConductorStatsService);
-  passengerStatsService = inject(PassengerStatsService);
+  combinedStatsService = inject(CombinedStatsService);
 
   stats$!: Observable<any>;
 
@@ -40,10 +38,11 @@ export class Dashboard implements OnInit {
   }
 
   async ngOnInit() {
-    this.user$.subscribe(user => {
-      if(user?.role === 'CONDUCTOR') this.stats$ = this.conductorStatsService.getConductorStats();
-      else if (user?.role === 'PASSENGER') this.stats$ = this.passengerStatsService.getPassengerStats();
-    })
+    // subscribe to unified stats for current user (includes conductor + passenger where available)
+    this.stats$ = this.combinedStatsService.getUnifiedStats();
+
+    // keep for backward compatibility - not used for stats selection anymore
+    this.user$.subscribe();
 
   }
 

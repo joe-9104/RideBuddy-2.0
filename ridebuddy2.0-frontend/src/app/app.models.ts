@@ -23,10 +23,7 @@ export interface Reservation {
   status: 'PENDING' | 'ACCEPTED' | 'REJECTED' | 'CANCELED';
   userId: string;
   ride?: Ride | null;
-  user?: {
-    displayName?: string;
-    email?: string;
-  };
+  conductorRating?: number; //from 1 to 5 : exists if the ride is over and the passenger rated the conductor
 }
 
 export interface User {
