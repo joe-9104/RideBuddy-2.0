@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { User } from '../../app.models';
 import { AuthService } from '../../core/services/auth.service';
 import {
@@ -18,6 +18,7 @@ import {
 import {AsyncPipe, UpperCasePipe} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { CombinedStatsService, UnifiedStats } from '../../core/services/combinedStats.service';
 
 type AsyncState = 'idle' | 'saving' | 'success' | 'error';
 
@@ -33,6 +34,7 @@ type AsyncState = 'idle' | 'saving' | 'success' | 'error';
 })
 export class ProfileComponent implements OnDestroy {
   user$: BehaviorSubject<User | null>;
+  readonly stats$: Observable<UnifiedStats | null>;
 
   editingName = false;
   nameDraft = '';
@@ -57,8 +59,9 @@ export class ProfileComponent implements OnDestroy {
   private nameStatusTimeout?: ReturnType<typeof setTimeout>;
   private roleSwitchTimeout?: ReturnType<typeof setTimeout>;
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private combinedStats: CombinedStatsService) {
     this.user$ = this.auth.userSubject;
+    this.stats$ = this.combinedStats.getUnifiedStats();
   }
 
   startEditingName() {
@@ -142,6 +145,31 @@ export class ProfileComponent implements OnDestroy {
       return faUserCircle;
     }
     return faUserCircle;
+  }
+
+  getPrimaryRideCount(stats: UnifiedStats | null) {
+    if (!stats) return 0;
+    if (stats.conductor?.completedRides) return stats.conductor.completedRides;
+    if (stats.passenger?.ridesTaken) return stats.passenger.ridesTaken;
+    return stats.shared?.totalActivityCount ?? 0;
+  }
+
+  getAverageRating(stats: UnifiedStats | null) {
+    const rating = stats?.conductor?.averageRating;
+    return typeof rating === 'number' ? rating.toFixed(1) : 'N/A';
+  }
+
+  getTotalActivity(stats: UnifiedStats | null) {
+    return stats?.shared?.totalActivityCount ?? 0;
+  }
+
+  getAcceptedReservations(stats: UnifiedStats | null) {
+    return stats?.passenger?.acceptedReservations ?? 0;
+  }
+
+  getAcceptanceRate(stats: UnifiedStats | null) {
+    const rate = stats?.passenger?.acceptanceRate;
+    return typeof rate === 'number' ? `${Math.round(rate * 100)}%` : 'N/A';
   }
 
   ngOnDestroy() {

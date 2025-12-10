@@ -1,3 +1,4 @@
+@let stats = stats$ | async;
 <div class="min-h-screen bg-linear-to-br from-slate-50 via-sky-50 to-emerald-50 dark:from-slate-950 dark:via-blue-950 dark:to-slate-950 p-6">
   <div class="max-w-4xl mx-auto">
 
@@ -42,11 +43,11 @@
             <!-- Stats Mini -->
             <div class="grid grid-cols-2 gap-4 mb-6">
               <div class="text-center">
-                <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ getPrimaryRideCount(stats) }}</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Rides</p>
               </div>
               <div class="text-center">
-                <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">4.8</p>
+                <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{{ getAverageRating(stats) }}</p>
                 <p class="text-xs text-slate-500 dark:text-slate-400">Rating</p>
               </div>
             </div>
@@ -289,16 +290,16 @@
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
-                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">{{ (user$ | async)?.completedRides || 0 }}</p>
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">{{ getTotalActivity(stats) }}</p>
                 <p class="text-sm text-slate-600 dark:text-slate-400">Total Rides</p>
               </div>
               <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
-                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">4.8</p>
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">{{ getAverageRating(stats) }}</p>
                 <p class="text-sm text-slate-600 dark:text-slate-400">Avg Rating</p>
               </div>
               <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
-                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">98%</p>
-                <p class="text-sm text-slate-600 dark:text-slate-400">Reliability</p>
+                <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">{{ getAcceptedReservations(stats) }}</p>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Accepted Reservations</p>
               </div>
               <div class="text-center p-4 bg-white/10 dark:bg-white/5 rounded-xl backdrop-blur-sm border border-white/20 dark:border-white/10">
                 <p class="text-3xl font-bold text-slate-900 dark:text-slate-100">12</p>
