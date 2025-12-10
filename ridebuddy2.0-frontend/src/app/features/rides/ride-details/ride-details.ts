@@ -8,6 +8,7 @@ import {NgClass, CommonModule} from '@angular/common';
 import {ReservationService} from '../../../core/services/reservations.service';
 import {parseCoordinates} from '../../../utils/coordinates-parser';
 import {Auth} from '@angular/fire/auth';
+import {AuthService} from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-ride-details',
@@ -23,7 +24,7 @@ export class RideDetails implements OnInit {
   private rideService = inject(RidesService);
   private mapService = inject(MapService);
   private reservationService = inject(ReservationService);
-  private auth = inject(Auth);
+  private authService = inject(AuthService);
 
   ride: Ride | undefined = undefined;
   conductor: User | null = null;
@@ -112,7 +113,7 @@ export class RideDetails implements OnInit {
   }
 
   async makeReservation(seatsToReserve: number = 1): Promise<void> {
-    const currentUser = this.auth.currentUser;
+    const currentUser = this.authService.userSubject.value;
     if (!currentUser || !this.ride) {
       console.error('Cannot make reservation: User not authenticated or ride not loaded');
       alert('Please log in to make a reservation');
