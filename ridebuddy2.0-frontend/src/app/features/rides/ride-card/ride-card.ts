@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Ride } from '../../../app.models';
 import * as L from 'leaflet';
 import {UserService} from '../../../core/services/user.service';
+import {parseCoordinates} from '../../../utils/coordinates-parser';
 
 @Component({
   selector: 'app-ride-card',
@@ -76,8 +77,8 @@ export class RideCardComponent implements AfterViewInit {
 
     // Draw route if coordinates exist
     if (this.ride?.startCoordinate && this.ride?.endCoordinate) {
-      const startCoords = this.parseCoordinates(this.ride.startCoordinate);
-      const endCoords = this.parseCoordinates(this.ride.endCoordinate);
+      const startCoords = parseCoordinates(this.ride.startCoordinate);
+      const endCoords = parseCoordinates(this.ride.endCoordinate);
       this.drawRoute(map, startCoords, endCoords);
     }
   }
@@ -113,26 +114,6 @@ export class RideCardComponent implements AfterViewInit {
       [endCoords.lat, endCoords.lng]
     ]);
     map.fitBounds(bounds, { padding: [50, 50] });
-  }
-
-  private parseCoordinates(coordinates: any): { lat: number; lng: number } {
-    // Case 1: coordinate is a string "lng,lat"
-    if (typeof coordinates === 'string') {
-      const [lng, lat] = coordinates.split(',').map(Number);
-      return { lat, lng };
-    }
-
-    // Case 2: coordinate is an array [lng, lat]
-    if (Array.isArray(coordinates)) {
-      return { lat: coordinates[1], lng: coordinates[0] };
-    }
-
-    // Case 3: coordinate is already { lat, lng }
-    if ('lat' in coordinates && 'lng' in coordinates) {
-      return { lat: coordinates.lat, lng: coordinates.lng };
-    }
-
-    throw new Error('Invalid coordinate format');
   }
 
   onReserve(places: number) {
