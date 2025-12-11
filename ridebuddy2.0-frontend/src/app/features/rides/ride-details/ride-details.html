@@ -1,240 +1,243 @@
-<div class="min-h-screen bg-slate-50 dark:bg-slate-950">
-  <div class="max-w-6xl mx-auto px-4 py-8">
+@if (isLoading){
+  <p>Loading...</p>
+} @else {
+  <div class="min-h-screen bg-slate-50 dark:bg-slate-950">
+    <div class="max-w-6xl mx-auto px-4 py-8">
 
-    <!-- Header Section -->
-    <div class="bg-linear-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-8 rounded-3xl mb-8 border border-emerald-200/40 dark:border-emerald-500/20">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Ride Details</h1>
-          <p class="text-lg text-slate-600 dark:text-slate-400">Complete information about this ride</p>
-        </div>
-        <!-- Status Badge -->
-        @if (ride) {
-          <span
-            class="px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap"
-            [ngClass]="{
+      <!-- Header Section -->
+      <div class="bg-linear-to-r from-emerald-500/30 to-cyan-500/30 dark:from-emerald-500/20 dark:to-cyan-500/20 p-8 rounded-3xl mb-8 border border-emerald-200/40 dark:border-emerald-500/20">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">Ride Details</h1>
+            <p class="text-lg text-slate-600 dark:text-slate-400">Complete information about this ride</p>
+          </div>
+          <!-- Status Badge -->
+          @if (ride) {
+            <span
+              class="px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap"
+              [ngClass]="{
               'bg-emerald-200 dark:bg-emerald-500/30 text-emerald-800 dark:text-emerald-300': ride.status === 'over',
               'bg-blue-200 dark:bg-blue-500/30 text-blue-800 dark:text-blue-300': ride.status === 'in-progress',
               'bg-red-200 dark:bg-red-500/30 text-red-800 dark:text-red-300': ride.status === 'canceled'
             }"
-          >
+            >
             {{ ride.status || 'In Progress' }}
           </span>
-        }
-      </div>
-    </div>
-
-    @if (ride && conductor) {
-      <!-- Main Content Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-
-        <!-- Left Column: Route & Details -->
-        <div class="lg:col-span-2 space-y-6">
-
-          <!-- Route Card -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
-            <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
-              <h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Route Information</h2>
-              <div class="flex items-center justify-between">
-                <div class="flex-1">
-                  <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">From</p>
-                  <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureLocation }}</p>
-                  <p class="text-sm text-slate-500 dark:text-slate-400">{{ ride.startGovernorate }}</p>
-                </div>
-                <div class="mx-4 shrink-0">
-                  <div class="w-12 h-12 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-lg font-bold">→</div>
-                </div>
-                <div class="flex-1 text-right">
-                  <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">To</p>
-                  <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ ride.destination }}</p>
-                  <p class="text-sm text-slate-500 dark:text-slate-400">{{ ride.endGovernorate }}</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Map Container -->
-            <div class="h-64 bg-slate-200 dark:bg-slate-800 relative">
-              <div id="map" class="w-full h-full"></div>
-            </div>
-          </div>
-
-          <!-- Ride Details Card -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6">Ride Details</h3>
-
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-                <!-- Departure Date/Time -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Departure</p>
-                  <p class="text-base font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureDate }}</p>
-                  <p class="text-sm text-slate-600 dark:text-slate-400">{{ ride.departureTime }}</p>
-                </div>
-
-                <!-- Available Seats -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Available Seats</p>
-                  <div class="flex items-end gap-2">
-                    <p class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{{ ride.availablePlaces }}</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">seats</p>
-                  </div>
-                </div>
-
-                <!-- Price Per Seat -->
-                <div>
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Price per Seat</p>
-                  <div class="flex items-end gap-1">
-                    <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{{ ride.pricePerSeat }}</p>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">TND</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Comments Section -->
-              @if (ride.comments) {
-                <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800">
-                  <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-3">Driver's Notes</p>
-                  <p class="text-slate-700 dark:text-slate-300 bg-slate-50/50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
-                    {{ ride.comments }}
-                  </p>
-                </div>
-              }
-            </div>
-          </div>
-
+          }
         </div>
+      </div>
 
-        <!-- Right Column: Driver & Actions -->
-        <div class="space-y-6">
+      @if (ride && conductor) {
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
 
-          <!-- Driver Card -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
-            <div class="p-6 bg-linear-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/10 dark:to-cyan-500/10 border-b border-slate-200 dark:border-slate-800">
-              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Driver</h3>
-            </div>
-            <div class="p-6 space-y-4">
-              <!-- Driver Avatar -->
-              <div class="flex flex-col items-center">
-                <div class="w-16 h-16 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
-                  {{ conductor.displayName.charAt(0).toUpperCase() }}
+          <!-- Left Column: Route & Details -->
+          <div class="lg:col-span-2 space-y-6">
+
+            <!-- Route Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+              <div class="p-6 border-b border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Route Information</h2>
+                <div class="flex items-center justify-between">
+                  <div class="flex-1">
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">From</p>
+                    <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureLocation }}</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">{{ ride.startGovernorate }}</p>
+                  </div>
+                  <div class="mx-4 shrink-0">
+                    <div class="w-12 h-12 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-lg font-bold">→</div>
+                  </div>
+                  <div class="flex-1 text-right">
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">To</p>
+                    <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">{{ ride.destination }}</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">{{ ride.endGovernorate }}</p>
+                  </div>
                 </div>
-                <p class="mt-3 text-lg font-semibold text-slate-900 dark:text-slate-100 text-center">{{ conductor.displayName }}</p>
-                <p class="text-sm text-slate-600 dark:text-slate-400">{{ conductor.role.toLowerCase() }}</p>
               </div>
 
-              <!-- Driver Stats -->
-              <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-                <div class="text-center">
-                  <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ conductor.completedRides || 0 }}</p>
-                  <p class="text-xs text-slate-600 dark:text-slate-400">Completed Rides</p>
-                </div>
-                <div class="text-center">
-                  <p class="text-2xl font-bold text-yellow-500">{{ conductor.averageRating?.toFixed(1) || 'N/A' }}</p>
-                  <p class="text-xs text-slate-600 dark:text-slate-400">Rating</p>
-                </div>
+              <!-- Map Container -->
+              <div class="h-64 bg-slate-200 dark:bg-slate-800 relative">
+                <div id="map" class="w-full h-full"></div>
               </div>
             </div>
-          </div>
 
-          <!-- Reservation Status Card -->
-          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
-            <div class="p-6">
-              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">Reservation Status</h3>
-              @if (hasReservation) {
-                <div class="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg p-4">
-                  <p class="text-sm font-semibold text-emerald-800 dark:text-emerald-200">✓ You have a reservation</p>
-                  <p class="text-xs text-emerald-700 dark:text-emerald-300 mt-1">You can evaluate this ride after completion</p>
+            <!-- Ride Details Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+              <div class="p-6">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6">Ride Details</h3>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                  <!-- Departure Date/Time -->
+                  <div>
+                    <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Departure</p>
+                    <p class="text-base font-semibold text-slate-900 dark:text-slate-100">{{ ride.departureDate }}</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">{{ ride.departureTime }}</p>
+                  </div>
+
+                  <!-- Available Seats -->
+                  <div>
+                    <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Available Seats</p>
+                    <div class="flex items-end gap-2">
+                      <p class="text-3xl font-bold text-emerald-600 dark:text-emerald-400">{{ ride.availablePlaces }}</p>
+                      <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">seats</p>
+                    </div>
+                  </div>
+
+                  <!-- Price Per Seat -->
+                  <div>
+                    <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-2">Price per Seat</p>
+                    <div class="flex items-end gap-1">
+                      <p class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{{ ride.pricePerSeat }}</p>
+                      <p class="text-sm text-slate-600 dark:text-slate-400 mb-1">TND</p>
+                    </div>
+                  </div>
                 </div>
-              } @else {
-                <div class="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4">
-                  <p class="text-sm font-semibold text-blue-800 dark:text-blue-200">No reservation yet</p>
-                  <p class="text-xs text-blue-700 dark:text-blue-300 mt-1">You haven't reserved a seat on this ride</p>
-                </div>
-              }
-            </div>
-          </div>
 
-          <!-- Make Reservation Section -->
-          @if (!hasReservation && ride.status === 'in-progress' && ride.availablePlaces > 0) {
-            <div class="space-y-3">
-              <!-- Seat Selection Dropdown -->
-              <div>
-                <label for="seats" class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
-                  Select Number of Seats
-                </label>
-                <select
-                  id="seats"
-                  [(ngModel)]="selectedSeats"
-                  class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-                >
-                  @for (i of [].constructor(ride.availablePlaces); track $index) {
-                    <option [value]="$index + 1">
-                      {{ $index + 1 }} {{ $index + 1 === 1 ? 'seat' : 'seats' }}
-                    </option>
-                  }
-                </select>
-              </div>
-
-              <!-- Reserve Button -->
-              <button
-                (click)="reserveSeats()"
-                [disabled]="isReserving"
-                class="w-full px-6 py-3 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                @if (isReserving) {
-                  <span>Reserving...</span>
-                } @else {
-                  <span>Reserve {{ selectedSeats }} {{ selectedSeats === 1 ? 'Seat' : 'Seats' }}</span>
+                <!-- Comments Section -->
+                @if (ride.comments) {
+                  <div class="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+                    <p class="text-xs uppercase tracking-wider font-semibold text-slate-500 dark:text-slate-400 mb-3">Driver's Notes</p>
+                    <p class="text-slate-700 dark:text-slate-300 bg-slate-50/50 dark:bg-slate-800/50 p-4 rounded-lg border border-slate-200 dark:border-slate-700">
+                      {{ ride.comments }}
+                    </p>
+                  </div>
                 }
-              </button>
+              </div>
             </div>
-          }
 
-          <!-- Unavailable Message -->
-          @if (ride.status !== 'in-progress' || ride.availablePlaces <= 0) {
-            <div class="bg-slate-100 dark:bg-slate-800 rounded-xl p-4 border border-slate-300 dark:border-slate-700 text-center">
-              @if (ride.status !== 'in-progress') {
-                <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">This ride is {{ ride.status }}</p>
-              } @else {
-                <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">No seats available</p>
-              }
+          </div>
+
+          <!-- Right Column: Driver & Actions -->
+          <div class="space-y-6">
+
+            <!-- Driver Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+              <div class="p-6 bg-linear-to-r from-emerald-500/20 to-cyan-500/20 dark:from-emerald-500/10 dark:to-cyan-500/10 border-b border-slate-200 dark:border-slate-800">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Driver</h3>
+              </div>
+              <div class="p-6 space-y-4">
+                <!-- Driver Avatar -->
+                <div class="flex flex-col items-center">
+                  <div class="w-16 h-16 rounded-full bg-linear-to-r from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+                    {{ conductor.displayName.charAt(0).toUpperCase() }}
+                  </div>
+                  <p class="mt-3 text-lg font-semibold text-slate-900 dark:text-slate-100 text-center">{{ conductor.displayName }}</p>
+                  <p class="text-sm text-slate-600 dark:text-slate-400">{{ conductor.role.toLowerCase() }}</p>
+                </div>
+
+                <!-- Driver Stats -->
+                <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                  <div class="text-center">
+                    <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">{{ conductor.completedRides || 0 }}</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Completed Rides</p>
+                  </div>
+                  <div class="text-center">
+                    <p class="text-2xl font-bold text-yellow-500">{{ conductor.averageRating?.toFixed(1) || 'N/A' }}</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400">Rating</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          }
+
+            <!-- Reservation Status Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+              <div class="p-6">
+                <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">Reservation Status</h3>
+                @if (hasReservation) {
+                  <div class="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg p-4">
+                    <p class="text-sm font-semibold text-emerald-800 dark:text-emerald-200">✓ You have a reservation</p>
+                    <p class="text-xs text-emerald-700 dark:text-emerald-300 mt-1">You can evaluate this ride after completion</p>
+                  </div>
+                } @else {
+                  <div class="bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/30 rounded-lg p-4">
+                    <p class="text-sm font-semibold text-blue-800 dark:text-blue-200">No reservation yet</p>
+                    <p class="text-xs text-blue-700 dark:text-blue-300 mt-1">You haven't reserved a seat on this ride</p>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <!-- Make Reservation Section -->
+            @if (!hasReservation && ride.status === 'in-progress' && ride.availablePlaces > 0) {
+              <div class="space-y-3">
+                <!-- Seat Selection Dropdown -->
+                <div>
+                  <label for="seats" class="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
+                    Select Number of Seats
+                  </label>
+                  <select
+                    id="seats"
+                    [(ngModel)]="selectedSeats"
+                    class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
+                  >
+                    @for (i of [].constructor(ride.availablePlaces); track $index) {
+                      <option [value]="$index + 1">
+                        {{ $index + 1 }} {{ $index + 1 === 1 ? 'seat' : 'seats' }}
+                      </option>
+                    }
+                  </select>
+                </div>
+
+                <!-- Reserve Button -->
+                <button
+                  (click)="reserveSeats()"
+                  [disabled]="isReserving"
+                  class="w-full px-6 py-3 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  @if (isReserving) {
+                    <span>Reserving...</span>
+                  } @else {
+                    <span>Reserve {{ selectedSeats }} {{ selectedSeats === 1 ? 'Seat' : 'Seats' }}</span>
+                  }
+                </button>
+              </div>
+            }
+
+            <!-- Unavailable Message -->
+            @if (ride.status !== 'in-progress' || ride.availablePlaces <= 0) {
+              <div class="bg-slate-100 dark:bg-slate-800 rounded-xl p-4 border border-slate-300 dark:border-slate-700 text-center">
+                @if (ride.status !== 'in-progress') {
+                  <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">This ride is {{ ride.status }}</p>
+                } @else {
+                  <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">No seats available</p>
+                }
+              </div>
+            }
+
+          </div>
 
         </div>
 
-      </div>
+        <!-- Evaluation Section -->
+        @if (hasReservation) {
+          <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
+            <div class="p-6 bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Rate Your Driver</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Share your experience with other passengers</p>
+            </div>
 
-      <!-- Evaluation Section -->
-      @if (hasReservation) {
-        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden">
-          <div class="p-6 bg-slate-50/50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800">
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Rate Your Driver</h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Share your experience with other passengers</p>
-          </div>
-
-          <div class="p-8">
-            <!-- Star Rating -->
-            <div class="flex items-center justify-center gap-4 mb-8">
-              <div class="flex gap-3">
-                @for (star of [1, 2, 3, 4, 5]; track star) {
-                  <button
-                    (click)="setRating(star)"
-                    class="group relative transition-transform hover:scale-110"
-                  >
-                    <svg
-                      class="w-12 h-12 cursor-pointer transition-all duration-200"
-                      [ngClass]="{
+            <div class="p-8">
+              <!-- Star Rating -->
+              <div class="flex items-center justify-center gap-4 mb-8">
+                <div class="flex gap-3">
+                  @for (star of [1, 2, 3, 4, 5]; track star) {
+                    <button
+                      (click)="setRating(star)"
+                      class="group relative transition-transform hover:scale-110"
+                    >
+                      <svg
+                        class="w-12 h-12 cursor-pointer transition-all duration-200"
+                        [ngClass]="{
                         'text-yellow-400 drop-shadow-lg': star <= rating,
                         'text-slate-300 dark:text-slate-600': star > rating
                       }"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
-                    </svg>
-                    <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-semibold text-slate-700 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/>
+                      </svg>
+                      <span class="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-semibold text-slate-700 dark:text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                       @switch(star) {
                         @case(1) { Poor }
                         @case(2) { Fair }
@@ -243,85 +246,86 @@
                         @case(5) { Excellent }
                       }
                     </span>
-                  </button>
+                    </button>
+                  }
+                </div>
+                @if (rating > 0) {
+                  <span class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ rating }}/5</span>
                 }
               </div>
+
+              <!-- Rating Label -->
               @if (rating > 0) {
-                <span class="text-2xl font-bold text-slate-900 dark:text-slate-100">{{ rating }}/5</span>
+                <div class="text-center mb-8">
+                  <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">
+                    @switch(rating) {
+                      @case(1) { Poor Experience }
+                      @case(2) { Fair Experience }
+                      @case(3) { Good Experience }
+                      @case(4) { Very Good Experience }
+                      @case(5) { Excellent Experience }
+                    }
+                  </p>
+                </div>
+              }
+
+              <!-- Submit Button -->
+              <div class="flex gap-4">
+                <button
+                  (click)="submitRating()"
+                  [disabled]="!rating || isEvaluating"
+                  class="flex-1 px-6 py-3 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  @if (isEvaluating) {
+                    <span>Submitting...</span>
+                  } @else {
+                    <span>Submit Rating</span>
+                  }
+                </button>
+                <button
+                  (click)="setRating(0)"
+                  [disabled]="rating === 0"
+                  class="px-6 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 font-semibold rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Clear
+                </button>
+              </div>
+
+              <!-- Success Message -->
+              @if (finishedRating && !isEvaluating) {
+                <div class="mt-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg">
+                  <p class="text-center text-sm font-semibold text-emerald-800 dark:text-emerald-200">✓ Your rating has been saved successfully!</p>
+                </div>
               }
             </div>
+          </div>
+        }
 
-            <!-- Rating Label -->
-            @if (rating > 0) {
-              <div class="text-center mb-8">
-                <p class="text-lg font-semibold text-slate-900 dark:text-slate-100">
-                  @switch(rating) {
-                    @case(1) { Poor Experience }
-                    @case(2) { Fair Experience }
-                    @case(3) { Good Experience }
-                    @case(4) { Very Good Experience }
-                    @case(5) { Excellent Experience }
-                  }
-                </p>
-              </div>
-            }
-
-            <!-- Submit Button -->
-            <div class="flex gap-4">
-              <button
-                (click)="submitRating()"
-                [disabled]="!rating || isEvaluating"
-                class="flex-1 px-6 py-3 bg-linear-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-500/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                @if (isEvaluating) {
-                  <span>Submitting...</span>
-                } @else {
-                  <span>Submit Rating</span>
-                }
-              </button>
-              <button
-                (click)="setRating(0)"
-                [disabled]="rating === 0"
-                class="px-6 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 text-slate-900 dark:text-slate-100 font-semibold rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Clear
-              </button>
-            </div>
-
-            <!-- Success Message -->
-            @if (finishedRating && !isEvaluating) {
-              <div class="mt-6 p-4 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded-lg">
-                <p class="text-center text-sm font-semibold text-emerald-800 dark:text-emerald-200">✓ Your rating has been saved successfully!</p>
-              </div>
-            }
+      } @else if (loadingError) {
+        <!-- Error State -->
+        <div class="flex items-center justify-center h-96">
+          <div class="text-center">
+            <div class="text-6xl mb-4">⚠️</div>
+            <p class="text-lg font-semibold text-red-600 dark:text-red-400 mb-2">{{ loadingError }}</p>
+            <button
+              (click)="ngOnInit()"
+              class="mt-4 px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      } @else {
+        <!-- Loading State -->
+        <div class="flex items-center justify-center h-96">
+          <div class="text-center">
+            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-500 mx-auto mb-4"></div>
+            <p class="text-slate-600 dark:text-slate-400">Loading ride details...</p>
           </div>
         </div>
       }
 
-    } @else if (loadingError) {
-      <!-- Error State -->
-      <div class="flex items-center justify-center h-96">
-        <div class="text-center">
-          <div class="text-6xl mb-4">⚠️</div>
-          <p class="text-lg font-semibold text-red-600 dark:text-red-400 mb-2">{{ loadingError }}</p>
-          <button
-            (click)="ngOnInit()"
-            class="mt-4 px-6 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition"
-          >
-            Try Again
-          </button>
-        </div>
-      </div>
-    } @else {
-      <!-- Loading State -->
-      <div class="flex items-center justify-center h-96">
-        <div class="text-center">
-          <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-emerald-500 mx-auto mb-4"></div>
-          <p class="text-slate-600 dark:text-slate-400">Loading ride details...</p>
-        </div>
-      </div>
-    }
-
+    </div>
   </div>
-</div>
+}
 

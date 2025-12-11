@@ -72,6 +72,7 @@ export class AuthService {
       email: user.email,
       firstName: profile.firstName,
       lastName: profile.lastName,
+      displayName: `${profile.firstName} ${profile.lastName}`,
       role: profile.role,
       createdAt: new Date().toISOString()
     });
