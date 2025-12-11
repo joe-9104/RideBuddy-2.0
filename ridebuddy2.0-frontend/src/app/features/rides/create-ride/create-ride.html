@@ -53,7 +53,7 @@
               </select>
               @if (isInvalid('startGovernorate')){
                 <div class="text-red-600 dark:text-red-400 text-sm mt-2 flex items-center gap-1">
-                  <fa-icon [icon]="['fas','exclamation-circle']"></fa-icon> Start governorate is required.
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon> Start governorate is required.
                 </div>
               }
             </div>
@@ -66,20 +66,21 @@
               <input
                 type="date"
                 formControlName="departureDate"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
               @if (isInvalid('departureDate')){
                 <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
                   <fa-icon [class]="faExclamationCircle"></fa-icon> Please select a valid date.
                 </div>
               }
+            </div>
 
             <div>
               <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">Departure Time</label>
               <input
                 type="time"
                 formControlName="departureTime"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
               @if (isInvalid('departureTime')){
                 <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
@@ -96,7 +97,7 @@
               <input
                 type="text"
                 formControlName="destination"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
               @if (isInvalid('destination')){
                 <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
@@ -109,7 +110,7 @@
               <label class="block text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">End Governorate</label>
               <select
                 formControlName="endGovernorate"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               >
                 <option value="" disabled>Select governorate</option>
                 @for(gov of governorates; track gov){
@@ -131,7 +132,7 @@
               <input
                 type="number"
                 formControlName="availablePlaces"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
               @if (isInvalid('availablePlaces')){
                 <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
@@ -146,7 +147,7 @@
               <input
                 type="number"
                 formControlName="pricePerSeat"
-                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+                class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
               />
               @if (isInvalid('pricePerSeat')){
                 <div class="text-red-600 text-sm mt-2 flex items-center gap-1">
@@ -163,24 +164,26 @@
             <textarea
               rows="3"
               formControlName="comments"
-              class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-indigo-600 focus:ring-2 focus:ring-indigo-100 transition"
+              class="w-full px-4 py-3 bg-white/50 dark:bg-white/5 border-2 border-slate-200 dark:border-white/20 rounded-lg focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-400 focus:ring-2 focus:ring-emerald-200 dark:focus:ring-emerald-500/30 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 transition"
             ></textarea>
           </div>
 
           <!-- Map -->
-          <div id="map" class="mb-3 u-map-400 rounded-lg overflow-hidden shadow"></div>
-          <p class="text-gray-600 text-sm">{{ instructions }}</p>
+          <div class="space-y-2">
+            <div id="map" class="h-80 w-full mb-3 u-map-400 rounded-lg overflow-hidden shadow"></div>
+            <p class="text-gray-600 text-sm">{{ instructions }}</p>
+          </div>
 
           <!-- Reset buttons -->
-          <div class="flex justify-between gap-3">
+          <div class="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
-              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
+              class="flex-1 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
               (click)="resetStart()"
             >Reset Start</button>
             <button
               type="button"
-              class="w-full py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
+              class="flex-1 py-2 bg-yellow-400 text-black rounded-lg font-semibold hover:bg-yellow-500 transition"
               (click)="resetEnd()"
             >Reset End</button>
           </div>
@@ -192,7 +195,6 @@
           >
             Create Ride
           </button>
-    </div>
         </form>
       </div>
 
